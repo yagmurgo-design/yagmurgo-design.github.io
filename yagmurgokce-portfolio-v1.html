@@ -1,0 +1,1485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yağmur Gökçe — Senior Lead UX Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ──────────────────────────────────────────────── */
+:root {
+  --bg:       #fafaf8;
+  --bg2:      #f2f1ee;
+  --bg3:      #e9e7e2;
+  --ink:      #141412;
+  --ink2:     #3a3a36;
+  --ink3:     #7a7a74;
+  --ink4:     #b0afa8;
+  --rule:     rgba(20,20,18,.10);
+  --tag-bg:   rgba(20,20,18,.05);
+  --serif:    'Fraunces', Georgia, serif;
+  --sans:     'DM Sans', system-ui, sans-serif;
+  --ease:     cubic-bezier(.16,1,.3,1);
+  --nav-w:    220px;
+}
+
+/* ─── RESET ────────────────────────────────────────────────── */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;font-size:16px}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);
+     font-weight:300;line-height:1.65;overflow-x:hidden;cursor:none}
+
+/* ─── CURSOR ───────────────────────────────────────────────── */
+#cur{position:fixed;width:6px;height:6px;background:var(--ink);
+     border-radius:50%;pointer-events:none;z-index:9999;
+     transform:translate(-50%,-50%);transition:width .15s,height .15s}
+#curR{position:fixed;width:28px;height:28px;
+      border:1px solid rgba(20,20,18,.2);border-radius:50%;
+      pointer-events:none;z-index:9998;transform:translate(-50%,-50%);
+      transition:width .12s,height .12s,border-color .12s}
+
+/* ─── SCROLL BAR ──────────────────────────────────────────── */
+#scrollBar{position:fixed;top:0;left:0;height:2px;background:var(--ink);
+           z-index:9999;transform-origin:left;transform:scaleX(0);
+           transition:transform .05s linear}
+
+/* ─── NAV ─────────────────────────────────────────────────── */
+.site-nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:24px 48px;
+  border-bottom:1px solid transparent;
+  transition:all .35s var(--ease);
+}
+.site-nav.scrolled{
+  background:rgba(250,250,248,.92);
+  border-bottom-color:var(--rule);
+  backdrop-filter:blur(16px);
+  padding:14px 48px;
+}
+.nav-logo{font-family:var(--serif);font-size:17px;font-weight:400;
+          color:var(--ink);text-decoration:none;cursor:none;
+          letter-spacing:-.01em}
+.nav-logo em{font-style:italic;color:var(--ink3)}
+.nav-right{display:flex;align-items:center;gap:10px}
+.nav-link{font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+          color:var(--ink3);text-decoration:none;cursor:none;
+          padding:7px 0;transition:color .2s}
+.nav-link:hover{color:var(--ink)}
+.nav-pill{font-size:12px;letter-spacing:.04em;text-transform:uppercase;
+          color:var(--ink);border:1px solid var(--rule);
+          padding:7px 18px;border-radius:100px;cursor:none;
+          text-decoration:none;transition:all .2s;background:transparent}
+.nav-pill:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.nav-divider{width:1px;height:14px;background:var(--rule);margin:0 6px}
+
+/* ─── PAGE SWITCHING ──────────────────────────────────────── */
+.page{display:none}
+.page.active{display:block}
+
+/* ════════════════════════════════════════════════════════════
+   LANDING PAGE
+════════════════════════════════════════════════════════════ */
+
+/* HERO */
+.lp-hero{
+  min-height:100svh;
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:0 48px 72px;
+  border-bottom:1px solid var(--rule);
+  position:relative;overflow:hidden;
+}
+.lp-hero-eyebrow{
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:28px;
+  display:flex;align-items:center;gap:12px;
+  opacity:0;animation:fadeUp .8s .1s var(--ease) forwards;
+}
+.lp-hero-eyebrow::before{content:'';width:24px;height:1px;background:var(--ink3)}
+.lp-hero-h1{
+  font-family:var(--serif);font-weight:400;
+  font-size:clamp(52px,9vw,136px);
+  line-height:.92;letter-spacing:-.035em;
+  margin-bottom:52px;
+  opacity:0;animation:fadeUp .8s .25s var(--ease) forwards;
+}
+.lp-hero-h1 em{font-style:italic;color:var(--ink3)}
+.lp-hero-bottom{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  opacity:0;animation:fadeUp .8s .4s var(--ease) forwards;
+}
+.lp-hero-desc{max-width:400px;color:var(--ink3);font-size:15px;line-height:1.75}
+.lp-scroll{display:flex;flex-direction:column;align-items:center;gap:8px;
+           color:var(--ink4);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.lp-scroll-line{width:1px;height:48px;
+  background:linear-gradient(to bottom,var(--ink),transparent);
+  animation:scrollPulse 2s ease-in-out infinite}
+
+/* EXP STRIP */
+.exp-strip{
+  display:flex;
+  border-bottom:1px solid var(--rule);
+  opacity:0;animation:fadeUp .7s .55s var(--ease) forwards;
+  overflow-x:auto;scrollbar-width:none;
+}
+.exp-strip::-webkit-scrollbar{display:none}
+.exp-item{
+  flex:1;min-width:180px;
+  padding:28px 32px;
+  border-right:1px solid var(--rule);
+  transition:background .2s;cursor:none;
+}
+.exp-item:last-child{border-right:none}
+.exp-item:hover{background:var(--bg2)}
+.exp-yr{font-size:10px;letter-spacing:.1em;color:var(--ink4);margin-bottom:6px;text-transform:uppercase}
+.exp-co{font-size:13px;font-weight:400;color:var(--ink);margin-bottom:2px}
+.exp-role{font-size:12px;color:var(--ink3)}
+
+/* SECTION LABEL */
+.sec-label{
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink4);margin-bottom:48px;
+  display:flex;align-items:center;gap:12px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+
+/* ─── WORK GRID ───────────────────────────────────────────── */
+#lp-work{padding:80px 48px}
+
+.work-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--rule)}
+
+.proj-card{
+  position:relative;overflow:hidden;background:var(--bg);
+  cursor:none;transition:background .25s;
+}
+.proj-card:hover{background:var(--bg2)}
+/* tall spanning */
+.proj-card.span-tall{grid-row:span 2}
+/* wide */
+.proj-card.span-wide{grid-column:span 2}
+
+.proj-inner{
+  padding:44px;min-height:340px;
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;z-index:1;
+}
+.proj-inner.tall{min-height:560px}
+.proj-inner.wide{flex-direction:row;align-items:center;min-height:180px;gap:48px}
+
+/* generative bg per card */
+.proj-bg{position:absolute;inset:0;opacity:.35;transition:opacity .4s}
+.proj-card:hover .proj-bg{opacity:.55}
+.bg-1{background:radial-gradient(ellipse 70% 60% at 80% 10%,rgba(180,160,120,.25) 0%,transparent 70%)}
+.bg-2{background:radial-gradient(ellipse 80% 50% at 20% 80%,rgba(160,200,180,.15) 0%,transparent 70%)}
+.bg-3{background:radial-gradient(ellipse 60% 70% at 90% 50%,rgba(200,180,140,.2) 0%,transparent 70%)}
+.bg-4{background:radial-gradient(ellipse 70% 60% at 20% 30%,rgba(150,160,200,.15) 0%,transparent 70%)}
+.bg-5{background:radial-gradient(ellipse 80% 50% at 60% 80%,rgba(180,150,120,.2) 0%,transparent 70%)}
+
+.proj-tag{
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:14px;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.proj-dot{width:4px;height:4px;border-radius:50%;background:var(--ink3)}
+.proj-h2{
+  font-family:var(--serif);font-size:clamp(20px,2.4vw,32px);
+  font-weight:400;line-height:1.15;letter-spacing:-.02em;
+  color:var(--ink);margin-bottom:10px;
+}
+.proj-desc{font-size:13px;color:var(--ink3);line-height:1.65;max-width:320px}
+.proj-bottom{display:flex;align-items:center;justify-content:space-between}
+.proj-meta{font-size:11px;color:var(--ink4);letter-spacing:.04em}
+.proj-arrow{
+  width:38px;height:38px;border:1px solid var(--rule);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .22s;flex-shrink:0;
+}
+.proj-card:hover .proj-arrow{border-color:var(--ink);background:var(--ink)}
+.proj-arrow svg{width:15px;height:15px;stroke:var(--ink3);transition:stroke .22s}
+.proj-card:hover .proj-arrow svg{stroke:var(--bg)}
+
+/* ─── ABOUT ────────────────────────────────────────────────── */
+#lp-about{
+  padding:100px 48px;
+  background:var(--bg2);
+  border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);
+}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.about-h2{
+  font-family:var(--serif);font-size:clamp(36px,5vw,68px);
+  font-weight:400;line-height:1.05;letter-spacing:-.03em;margin-bottom:28px;
+}
+.about-h2 em{font-style:italic;color:var(--ink3)}
+.about-p{font-size:15px;color:var(--ink3);line-height:1.8;margin-bottom:20px}
+.skills{display:flex;flex-wrap:wrap;gap:6px;margin-top:28px}
+.skill{
+  font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink3);border:1px solid var(--rule);
+  padding:5px 13px;border-radius:2px;transition:all .2s;cursor:none;
+}
+.skill:hover{border-color:var(--ink);color:var(--ink);background:var(--bg)}
+.about-stats{}
+.stat-row{padding:24px 0;border-bottom:1px solid var(--rule)}
+.stat-row:first-child{border-top:1px solid var(--rule)}
+.stat-num{
+  font-family:var(--serif);font-size:48px;font-weight:400;
+  letter-spacing:-.04em;color:var(--ink);line-height:1;margin-bottom:4px;
+}
+.stat-label{font-size:12px;color:var(--ink3)}
+
+/* ─── CONTACT ──────────────────────────────────────────────── */
+#lp-contact{
+  padding:140px 48px;
+  text-align:center;
+  border-bottom:1px solid var(--rule);
+}
+.contact-eye{
+  font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink4);margin-bottom:20px;
+}
+.contact-h2{
+  font-family:var(--serif);font-size:clamp(48px,9vw,112px);
+  font-weight:400;line-height:.92;letter-spacing:-.035em;margin-bottom:52px;
+}
+.contact-h2 em{font-style:italic;color:var(--ink3)}
+.contact-links{display:flex;align-items:center;justify-content:center;gap:28px;flex-wrap:wrap}
+.contact-a{
+  font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink3);text-decoration:none;cursor:none;transition:color .2s;
+}
+.contact-a:hover{color:var(--ink)}
+.contact-email{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(18px,2.5vw,28px);
+  color:var(--ink);text-decoration:none;cursor:none;
+  border-bottom:1px solid var(--ink);padding-bottom:3px;
+  transition:opacity .2s;
+}
+.contact-email:hover{opacity:.5}
+
+/* ─── FOOTER ───────────────────────────────────────────────── */
+site-footer,.site-footer{
+  padding:28px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:12px;color:var(--ink4);
+  border-top:1px solid var(--rule);
+}
+
+/* ════════════════════════════════════════════════════════════
+   CASE STUDY SHARED STYLES
+════════════════════════════════════════════════════════════ */
+
+/* back button */
+.cs-back{
+  position:fixed;top:24px;left:48px;z-index:600;
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12px;letter-spacing:.04em;text-transform:uppercase;
+  color:var(--ink3);text-decoration:none;cursor:none;
+  background:rgba(250,250,248,.85);backdrop-filter:blur(12px);
+  border:1px solid var(--rule);padding:8px 16px 8px 12px;border-radius:100px;
+  transition:all .2s;
+}
+.cs-back:hover{color:var(--ink);border-color:var(--ink)}
+.cs-back svg{width:14px;stroke:currentColor;fill:none;stroke-width:1.5}
+
+/* hero */
+.cs-hero{
+  padding:160px 48px 72px;
+  max-width:1100px;margin:0 auto;
+  border-bottom:1px solid var(--rule);
+}
+.cs-eyebrow{
+  font-size:10px;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink3);margin-bottom:28px;
+  display:inline-flex;align-items:center;gap:10px;
+}
+.cs-eyebrow::before{content:'';width:20px;height:1px;background:var(--ink3)}
+.cs-h1{
+  font-family:var(--serif);font-size:clamp(44px,7vw,96px);
+  font-weight:400;line-height:.94;letter-spacing:-.03em;margin-bottom:48px;
+}
+.cs-h1 em{font-style:italic}
+.cs-meta-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border:1px solid var(--rule);max-width:700px;
+}
+.cs-meta-cell{padding:18px 22px;border-right:1px solid var(--rule)}
+.cs-meta-cell:last-child{border-right:none}
+.cs-meta-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:5px}
+.cs-meta-val{font-size:13px;color:var(--ink2);line-height:1.4}
+
+/* two-col layout */
+.cs-layout{
+  display:grid;
+  grid-template-columns:var(--nav-w) 1fr;
+  max-width:1100px;margin:0 auto;
+  padding-bottom:120px;
+}
+
+/* sidenav */
+.cs-sidenav{position:sticky;top:80px;padding:56px 0 56px 40px;align-self:start}
+.cs-snav-list{list-style:none;display:flex;flex-direction:column}
+.cs-snav-item{
+  position:relative;padding:9px 0 9px 18px;
+  border-left:1px solid var(--rule);transition:border-color .25s;cursor:none;
+}
+.cs-snav-item.active{border-left-color:var(--ink)}
+.cs-snav-dot{
+  position:absolute;left:-3px;top:50%;
+  width:5px;height:5px;border-radius:50%;
+  background:var(--ink4);transform:translateY(-50%);transition:all .25s;
+}
+.cs-snav-item.active .cs-snav-dot{display:none}
+.cs-snav-item.active::before{
+  content:'';position:absolute;left:-4px;top:50%;
+  width:7px;height:7px;border-radius:50%;
+  background:var(--ink);transform:translateY(-50%);
+}
+.cs-snav-link{
+  font-size:12px;color:var(--ink4);text-decoration:none;
+  display:block;transition:color .2s;cursor:none;
+}
+.cs-snav-item.active .cs-snav-link{color:var(--ink)}
+.cs-snav-link:hover{color:var(--ink2)}
+
+/* content area */
+.cs-content{padding:56px 40px 0;border-left:1px solid var(--rule)}
+
+/* sections */
+.cs-sec{
+  padding:72px 0;border-bottom:1px solid var(--rule);
+  opacity:0;transform:translateY(20px);
+  transition:opacity .65s var(--ease),transform .65s var(--ease);
+}
+.cs-sec.visible{opacity:1;transform:translateY(0)}
+.cs-sec:last-child{border-bottom:none}
+
+.cs-sec-eye{
+  font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--ink4);margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+.cs-sec-eye::after{content:'';width:32px;height:1px;background:var(--rule)}
+
+.cs-h2{
+  font-family:var(--serif);font-size:clamp(26px,3.5vw,44px);
+  font-weight:400;line-height:1.1;letter-spacing:-.025em;
+  margin-bottom:22px;color:var(--ink);
+}
+.cs-h2 em{font-style:italic}
+.cs-h3{
+  font-family:var(--serif);font-size:clamp(17px,2vw,24px);
+  font-weight:400;line-height:1.2;letter-spacing:-.02em;
+  margin-bottom:10px;
+}
+.cs-h3 em{font-style:italic}
+.cs-p{font-size:15px;color:var(--ink2);line-height:1.8;max-width:680px;margin-bottom:18px}
+.cs-p:last-child{margin-bottom:0}
+
+/* tags */
+.cs-tags{display:flex;flex-wrap:wrap;gap:6px;margin:24px 0}
+.cs-tag{
+  font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink3);background:var(--tag-bg);
+  border:1px solid var(--rule);padding:5px 12px;border-radius:2px;
+}
+
+/* pullquote */
+.cs-quote{
+  border-left:2px solid var(--ink);padding:18px 26px;
+  margin:36px 0;background:var(--bg2);
+}
+.cs-quote-text{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(16px,2vw,21px);line-height:1.5;
+  color:var(--ink);margin-bottom:8px;
+}
+.cs-quote-attr{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4)}
+
+/* 2-col card grid */
+.cs-cards{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--rule);border:1px solid var(--rule);margin:28px 0;
+}
+.cs-card{background:var(--bg);padding:26px 22px;transition:background .2s}
+.cs-card:hover{background:var(--bg2)}
+.cs-card-num{
+  font-family:var(--serif);font-size:30px;font-weight:400;
+  color:var(--ink4);line-height:1;margin-bottom:10px;
+}
+.cs-card-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:6px}
+.cs-card-text{font-size:12px;color:var(--ink3);line-height:1.65}
+
+/* stats */
+.cs-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--rule);border:1px solid var(--rule);margin:36px 0;
+}
+.cs-stat{background:var(--bg2);padding:30px 22px}
+.cs-stat-num{
+  font-family:var(--serif);font-size:42px;font-weight:400;
+  letter-spacing:-.03em;color:var(--ink);line-height:1;margin-bottom:5px;
+}
+.cs-stat-label{font-size:12px;color:var(--ink3);line-height:1.4}
+
+/* process steps */
+.cs-steps{margin:28px 0}
+.cs-step{
+  display:grid;grid-template-columns:38px 1fr;gap:14px;
+  padding:18px 0;border-bottom:1px solid var(--rule);
+  opacity:0;transform:translateX(-10px);
+  transition:opacity .45s var(--ease),transform .45s var(--ease);
+}
+.cs-step.visible{opacity:1;transform:translateX(0)}
+.cs-step:last-child{border-bottom:none}
+.cs-step-num{font-family:var(--serif);font-size:13px;color:var(--ink4);padding-top:2px}
+.cs-step-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.cs-step-text{font-size:12px;color:var(--ink3);line-height:1.65}
+
+/* feature grid */
+.cs-feat-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--rule);border:1px solid var(--rule);margin:28px 0;
+}
+.cs-feat{background:var(--bg);padding:26px 22px;transition:background .2s}
+.cs-feat:hover{background:var(--bg2)}
+.cs-feat-icon{font-size:20px;margin-bottom:12px}
+.cs-feat-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:6px}
+.cs-feat-text{font-size:12px;color:var(--ink3);line-height:1.65}
+
+/* process timeline */
+.pt{position:relative;margin:32px 0}
+.pt::before{content:'';position:absolute;left:15px;top:0;bottom:0;width:1px;background:var(--rule)}
+.pt-item{
+  display:grid;grid-template-columns:32px 1fr;gap:18px;margin-bottom:28px;
+  opacity:0;transform:translateY(10px);
+  transition:opacity .45s var(--ease),transform .45s var(--ease);
+}
+.pt-item.visible{opacity:1;transform:translateY(0)}
+.pt-dot{
+  width:32px;height:32px;border-radius:50%;
+  background:var(--bg);border:1px solid var(--rule);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--ink3);z-index:1;flex-shrink:0;
+  transition:background .3s,border-color .3s,color .3s;
+}
+.pt-item.visible .pt-dot{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.pt-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:3px}
+.pt-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.pt-text{font-size:12px;color:var(--ink3);line-height:1.65}
+.pt-body{padding-top:6px}
+
+/* compare */
+.cs-compare{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--rule);border:1px solid var(--rule);margin:28px 0;
+}
+.cs-compare-pane{background:var(--bg2);padding:28px}
+.cs-compare-pane.after{background:var(--bg3)}
+.cs-compare-lbl{
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink4);margin-bottom:14px;display:flex;align-items:center;gap:6px;
+}
+.cs-compare-lbl .badge{
+  background:var(--ink);color:var(--bg);font-size:9px;
+  padding:2px 7px;border-radius:100px;
+}
+.cs-compare-lbl .badge-light{
+  background:var(--bg3);color:var(--ink3);font-size:9px;
+  padding:2px 7px;border-radius:100px;
+}
+.cs-compare-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.cs-compare-list li{
+  font-size:13px;color:var(--ink2);display:flex;align-items:flex-start;gap:8px;line-height:1.5;
+}
+.cs-compare-list li::before{content:'—';color:var(--ink4);flex-shrink:0}
+
+/* annotated */
+.cs-annotated{
+  background:var(--bg2);border:1px solid var(--rule);
+  padding:40px 36px;margin:28px 0;display:flex;flex-direction:column;gap:20px;
+}
+.cs-annot-row{display:flex;align-items:flex-start;gap:14px}
+.cs-annot-num{
+  width:26px;height:26px;border-radius:50%;
+  background:var(--ink);color:var(--bg);
+  font-size:11px;font-weight:500;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:2px;
+}
+.cs-annot-text{font-size:13px;color:var(--ink2);line-height:1.65}
+.cs-annot-text strong{color:var(--ink);font-weight:500}
+
+/* horizontal scroll */
+.cs-hscroll{overflow-x:auto;scrollbar-width:none;margin:28px 0}
+.cs-hscroll::-webkit-scrollbar{display:none}
+.cs-hscroll-inner{
+  display:flex;gap:1px;width:max-content;
+  background:var(--rule);border:1px solid var(--rule);
+}
+.cs-hscroll-card{background:var(--bg);width:240px;padding:26px 22px;flex-shrink:0}
+.cs-hscroll-card-tag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px}
+.cs-hscroll-card-title{font-size:13px;color:var(--ink);margin-bottom:6px}
+.cs-hscroll-card-body{font-size:12px;color:var(--ink3);line-height:1.65}
+
+/* two-col text */
+.cs-two-text{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin:28px 0}
+.cs-two-text-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px}
+.cs-two-text-body{font-size:13px;color:var(--ink2);line-height:1.7}
+
+/* split feature */
+.cs-split{
+  display:grid;grid-template-columns:1fr 1fr;gap:1px;
+  background:var(--rule);border:1px solid var(--rule);margin:28px 0;
+}
+.cs-split-l{background:var(--bg2);padding:32px}
+.cs-split-r{background:var(--bg3);padding:32px;display:flex;flex-direction:column;gap:12px}
+.cs-split-item{
+  background:var(--bg);border:1px solid var(--rule);padding:14px;
+  border-radius:2px;transition:all .2s;cursor:none;
+}
+.cs-split-item:hover{background:var(--bg2);transform:translateX(4px)}
+.cs-split-item-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:3px}
+.cs-split-item-val{font-size:13px;color:var(--ink2)}
+
+/* video */
+.cs-video-wrap{margin:32px 0;border:1px solid var(--rule);overflow:hidden;position:relative;background:var(--bg2)}
+.cs-video-wrap iframe{width:100%;aspect-ratio:16/9;display:block;border:none}
+.cs-vid-thumb{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--bg2);
+  transition:opacity .3s;cursor:none;
+}
+.cs-vid-thumb.gone{opacity:0;pointer-events:none}
+.cs-play-btn{
+  width:64px;height:64px;border-radius:50%;
+  background:var(--ink);display:flex;align-items:center;justify-content:center;
+  transition:transform .2s;cursor:none;margin-bottom:14px;
+}
+.cs-play-btn:hover{transform:scale(1.08)}
+.cs-play-btn svg{width:20px;height:20px;fill:var(--bg);margin-left:4px}
+.cs-vid-lbl{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.cs-vid-cap{
+  padding:11px 16px;font-size:11px;color:var(--ink4);
+  letter-spacing:.04em;border-top:1px solid var(--rule);background:var(--bg);
+}
+
+/* figma */
+.cs-figma-wrap{margin:32px 0;border:1px solid var(--rule);overflow:hidden;position:relative;background:var(--bg2)}
+.cs-figma-wrap iframe{width:100%;height:540px;border:none;display:block}
+.cs-figma-overlay{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;background:var(--bg2);
+  transition:opacity .4s;cursor:none;
+}
+.cs-figma-overlay.gone{opacity:0;pointer-events:none}
+.cs-figma-icon{
+  width:44px;height:44px;margin-bottom:14px;border:1px solid var(--rule);
+  border-radius:8px;background:var(--bg);display:flex;align-items:center;justify-content:center;
+}
+.cs-figma-icon svg{width:20px;height:20px}
+.cs-figma-sub{font-size:13px;color:var(--ink3);margin-bottom:16px;text-align:center}
+.cs-figma-btn{
+  font-size:12px;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--bg);background:var(--ink);border:none;
+  padding:10px 24px;border-radius:2px;cursor:none;transition:opacity .2s;
+}
+.cs-figma-btn:hover{opacity:.75}
+.cs-figma-cap{padding:11px 16px;font-size:11px;color:var(--ink4);letter-spacing:.04em;border-top:1px solid var(--rule);background:var(--bg)}
+
+/* reflection block */
+.cs-reflection{background:var(--ink);color:var(--bg);padding:56px;margin:56px 0 0}
+.cs-reflection-eye{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,250,248,.35);margin-bottom:18px}
+.cs-reflection-text{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2.5vw,28px);line-height:1.45;color:var(--bg)}
+
+/* next case */
+.cs-next{
+  border-top:1px solid var(--rule);padding:44px;margin:0 -40px;
+  display:flex;justify-content:space-between;align-items:center;
+  cursor:none;transition:background .22s;
+}
+.cs-next:hover{background:var(--bg2)}
+.cs-next-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px}
+.cs-next-title{font-family:var(--serif);font-size:clamp(20px,3vw,34px);font-weight:400;color:var(--ink);letter-spacing:-.02em}
+.cs-next-arrow{font-size:26px;color:var(--ink3);transition:transform .3s,color .3s}
+.cs-next:hover .cs-next-arrow{transform:translateX(8px);color:var(--ink)}
+
+/* live dot */
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+.live-dot{display:inline-block;width:6px;height:6px;background:#22c55e;
+          border-radius:50%;margin-right:5px;animation:livePulse 2s infinite}
+
+/* ─── KEYFRAMES ────────────────────────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scrollPulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+/* ─── MOBILE ───────────────────────────────────────────────── */
+@media(max-width:768px){
+  .site-nav,.site-nav.scrolled{padding:16px 20px}
+  .lp-hero{padding:0 20px 56px}
+  .exp-strip{flex-wrap:nowrap}
+  #lp-work{padding:56px 20px}
+  .work-grid{grid-template-columns:1fr}
+  .proj-card.span-tall,.proj-card.span-wide{grid-row:auto;grid-column:auto}
+  .proj-inner.wide{flex-direction:column}
+  #lp-about{padding:60px 20px}
+  .about-grid{grid-template-columns:1fr;gap:48px}
+  #lp-contact{padding:80px 20px}
+  .cs-hero{padding:110px 20px 56px}
+  .cs-meta-grid{grid-template-columns:1fr 1fr}
+  .cs-layout{grid-template-columns:1fr}
+  .cs-sidenav{display:none}
+  .cs-content{border-left:none;padding:36px 20px 0}
+  .cs-cards,.cs-stats,.cs-feat-grid,.cs-compare,.cs-two-text,.cs-split{grid-template-columns:1fr}
+  .cs-reflection{padding:36px 20px}
+  .cs-next{padding:32px 20px;margin:0 -20px}
+  .cs-back{left:20px;top:16px}
+  site-footer,.site-footer{padding:20px;flex-direction:column;gap:6px;text-align:center}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+<div id="curR"></div>
+<div id="scrollBar"></div>
+
+<!-- ══════════════════════════════════════════
+     GLOBAL NAV
+══════════════════════════════════════════ -->
+<nav class="site-nav" id="siteNav">
+  <a href="#" class="nav-logo" onclick="showPage('landing');return false">Yağmur Gökçe<em>.</em></a>
+  <div class="nav-right">
+    <a href="#" class="nav-link" onclick="showPage('landing');scrollLP('lp-work');return false">Work</a>
+    <div class="nav-divider"></div>
+    <a href="#" class="nav-link" onclick="showPage('landing');scrollLP('lp-about');return false">About</a>
+    <div class="nav-divider"></div>
+    <a href="mailto:yagmurgokce@gmail.com" class="nav-pill">Say hello →</a>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     LANDING PAGE
+══════════════════════════════════════════ -->
+<div class="page active" id="page-landing">
+
+  <!-- HERO -->
+  <section class="lp-hero">
+    <p class="lp-hero-eyebrow">Senior Lead UX Designer · Istanbul</p>
+    <h1 class="lp-hero-h1">
+      Designing<br>
+      <em>experiences</em><br>
+      that matter.
+    </h1>
+    <div class="lp-hero-bottom">
+      <p class="lp-hero-desc">I'm Yağmur — shaping human-centred AI products, leading design teams, and driving design excellence at scale across Turkey's largest digital platforms.</p>
+      <div class="lp-scroll">
+        <div class="lp-scroll-line"></div>
+        Scroll
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE STRIP -->
+  <div class="exp-strip">
+    <div class="exp-item">
+      <div class="exp-yr">2026 — Now</div>
+      <div class="exp-co">Commencis</div>
+      <div class="exp-role">Senior Lead UX Designer</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-yr">2024 — 2026</div>
+      <div class="exp-co">Commencis</div>
+      <div class="exp-role">UX Design Lead</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-yr">2024 — Now</div>
+      <div class="exp-co">Üretimhane</div>
+      <div class="exp-role">UXD Course Instructor</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-yr">2020 — 2021</div>
+      <div class="exp-co">Armut / HomeRun</div>
+      <div class="exp-role">Product Designer</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-yr">2015 — 2019</div>
+      <div class="exp-co">TU Delft · KUAR</div>
+      <div class="exp-role">Research & Interaction Design</div>
+    </div>
+  </div>
+
+  <!-- WORK -->
+  <section id="lp-work">
+    <p class="sec-label" style="padding:0 0 0 0">Selected Work</p>
+    <div class="work-grid">
+
+      <!-- 1 tall left — UserHear -->
+      <div class="proj-card span-tall" onclick="openCS('userhear')">
+        <div class="proj-bg bg-1"></div>
+        <div class="proj-inner tall">
+          <div>
+            <p class="proj-tag"><span class="proj-dot"></span>AI Product · Analytics</p>
+            <h2 class="proj-h2">UserHear — AI-powered app review analytics</h2>
+            <p class="proj-desc">End-to-end product vision for an AI platform that turns millions of app store reviews into design intelligence.</p>
+          </div>
+          <div class="proj-bottom">
+            <span class="proj-meta">Commencis · 2026 — Now</span>
+            <div class="proj-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10" stroke-width="1.5"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 top right — İşCep -->
+      <div class="proj-card" onclick="openCS('iscep')">
+        <div class="proj-bg bg-2"></div>
+        <div class="proj-inner">
+          <div>
+            <p class="proj-tag"><span class="proj-dot"></span>Banking · Mobile · Leadership</p>
+            <h2 class="proj-h2">İşCep — Turkey's largest private bank app</h2>
+            <p class="proj-desc">Led a team of 13 designers across research and design for the country's most-used mobile banking experience.</p>
+          </div>
+          <div class="proj-bottom">
+            <span class="proj-meta">Commencis · 2024 — 2026</span>
+            <div class="proj-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10" stroke-width="1.5"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 mid right — Armut -->
+      <div class="proj-card" onclick="openCS('armut')">
+        <div class="proj-bg bg-3"></div>
+        <div class="proj-inner">
+          <div>
+            <p class="proj-tag"><span class="proj-dot"></span>Marketplace · iOS · Android</p>
+            <h2 class="proj-h2">Armut — fulfillment redesign</h2>
+            <p class="proj-desc">Full design ownership of the Fulfillment & Satisfaction team — onboarding, earnings, tracking, referral — improving fulfillment rate by up to 9pp.</p>
+          </div>
+          <div class="proj-bottom">
+            <span class="proj-meta">Armut / HomeRun · 2020–2021</span>
+            <div class="proj-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10" stroke-width="1.5"/></svg></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 full-width — Research -->
+      <div class="proj-card span-wide" onclick="openCS('research')">
+        <div class="proj-bg bg-5"></div>
+        <div class="proj-inner wide">
+          <div style="flex:1">
+            <p class="proj-tag"><span class="proj-dot"></span>Academic Research · HCI · TU Delft · KUAR</p>
+            <h2 class="proj-h2">Interaction & social design research</h2>
+          </div>
+          <div style="flex:1">
+            <p class="proj-desc" style="max-width:none">Published HCI research on emotion-driven interaction for augmented environments; social design typology across 250+ theses at TU Delft.</p>
+          </div>
+          <div class="proj-arrow" style="flex-shrink:0"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10" stroke-width="1.5"/></svg></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="lp-about">
+    <div style="max-width:1100px;margin:0 auto">
+      <p class="sec-label">About</p>
+      <div class="about-grid">
+        <div>
+          <h2 class="about-h2">Design is how<br><em>thinking</em><br>becomes visible.</h2>
+          <p class="about-p">I'm Yağmur Gökçe, a Senior Lead UX Designer at Commencis with over 9 years spanning interaction design, UX research, and design leadership. I currently own the end-to-end product vision of UserHear — an AI-powered app review analytics platform — while leading design at Turkey's largest private bank app.</p>
+          <p class="about-p">I manage a team of 13 designers, shape scalable UX practices, and bridge user needs with business strategy and technical reality. I also teach UX design at Üretimhane and hold academic roots at TU Delft and Koç University's KUAR lab, with two published ACM papers.</p>
+          <div class="skills">
+            <span class="skill">UX Strategy</span>
+            <span class="skill">UX Research</span>
+            <span class="skill">Interaction Design</span>
+            <span class="skill">Design Leadership</span>
+            <span class="skill">Design Systems</span>
+            <span class="skill">AI Product Design</span>
+            <span class="skill">DesignOps</span>
+            <span class="skill">Usability Testing</span>
+            <span class="skill">Information Architecture</span>
+            <span class="skill">Figma</span>
+            <span class="skill">HCI Research</span>
+          </div>
+        </div>
+        <div class="about-stats">
+          <div class="stat-row"><div class="stat-num">9+</div><div class="stat-label">Years in UX design &amp; research</div></div>
+          <div class="stat-row"><div class="stat-num">13</div><div class="stat-label">Designers led at Commencis</div></div>
+          <div class="stat-row"><div class="stat-num">+9pp</div><div class="stat-label">Fulfillment rate improvement at Armut</div></div>
+          <div class="stat-row"><div class="stat-num">250+</div><div class="stat-label">Theses analysed at TU Delft</div></div>
+          <div class="stat-row"><div class="stat-num">2</div><div class="stat-label">ACM published HCI papers</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="lp-contact">
+    <p class="contact-eye">Let's work together</p>
+    <h2 class="contact-h2">Let's make<br><em>something</em><br>great.</h2>
+    <div class="contact-links">
+      <a href="https://www.linkedin.com/in/yagmurgokce/" target="_blank" class="contact-a">LinkedIn</a>
+      <a href="mailto:yagmurgokce@gmail.com" class="contact-email">yagmurgokce@gmail.com</a>
+      <a href="https://read.cv/yagmurgokce" target="_blank" class="contact-a">Read.cv</a>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <span>© 2025 Yağmur Gökçe. All rights reserved.</span>
+    <span>Istanbul, TR · Designed with intention</span>
+  </footer>
+
+</div><!-- /page-landing -->
+
+<!-- ══════════════════════════════════════════
+     CASE STUDY: USERHEAR
+══════════════════════════════════════════ -->
+<div class="page" id="page-userhear">
+  <a class="cs-back" href="#" onclick="closeCS();return false">
+    <svg viewBox="0 0 16 16"><path d="M13 8H3M3 8L8 3M3 8L8 13"/></svg>
+    All work
+  </a>
+
+  <header class="cs-hero">
+    <p class="cs-eyebrow">Commencis · AI Product · 2026 — Present</p>
+    <h1 class="cs-h1">UserHear — turning<br>reviews into <em>design<br>intelligence.</em></h1>
+    <div class="cs-meta-grid">
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Company</div><div class="cs-meta-val">Commencis</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Role</div><div class="cs-meta-val">Senior Lead UX Designer</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Timeline</div><div class="cs-meta-val">Feb 2026 — Present</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Skills</div><div class="cs-meta-val">AI UX · Product Strategy · Systems Design</div></div>
+    </div>
+  </header>
+
+  <div class="cs-layout">
+    <aside class="cs-sidenav">
+      <ul class="cs-snav-list" id="snav-userhear">
+        <li class="cs-snav-item active" data-sec="uh-overview"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#uh-overview">Overview</a></li>
+        <li class="cs-snav-item" data-sec="uh-problem"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#uh-problem">The Problem</a></li>
+        <li class="cs-snav-item" data-sec="uh-research"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#uh-research">Research</a></li>
+        <li class="cs-snav-item" data-sec="uh-strategy"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#uh-strategy">Strategy</a></li>
+        <li class="cs-snav-item" data-sec="uh-product"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#uh-product">The Product</a></li>
+        <li class="cs-snav-item" data-sec="uh-design"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#uh-design">Design Decisions</a></li>
+        <li class="cs-snav-item" data-sec="uh-outcomes"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#uh-outcomes">Outcomes</a></li>
+        <li class="cs-snav-item" data-sec="uh-reflection"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#uh-reflection">Reflection</a></li>
+      </ul>
+    </aside>
+    <div class="cs-content">
+
+      <section class="cs-sec" id="uh-overview">
+        <p class="cs-sec-eye">Overview</p>
+        <h2 class="cs-h2">What happens when product teams can't <em>hear their users?</em></h2>
+        <p class="cs-p">Product teams at large digital companies receive tens of thousands of app store reviews every month. Reading them is impossible. Acting on them is even harder. Most teams settle for star ratings and keyword counts — a signal so blunt it barely qualifies as insight.</p>
+        <p class="cs-p">UserHear is Commencis's answer: an AI-powered analytics platform that ingests reviews from the App Store, Google Play, and social channels, then surfaces structured, prioritised, actionable intelligence — with the emotional texture of the original feedback intact.</p>
+        <p class="cs-p">As Senior Lead UX Designer, I own the end-to-end product vision and roadmap, shaping both the strategic direction and the moment-to-moment design execution with my team.</p>
+        <div class="cs-tags">
+          <span class="cs-tag">AI Product Design</span><span class="cs-tag">Product Strategy</span>
+          <span class="cs-tag">Information Architecture</span><span class="cs-tag">Data Visualisation</span>
+          <span class="cs-tag">Explainable AI</span><span class="cs-tag">Roadmapping</span>
+        </div>
+        <div class="cs-video-wrap">
+          <div class="cs-vid-thumb" id="uh-thumb">
+            <div class="cs-play-btn" onclick="playVid('uh-vid','uh-thumb')">
+              <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+            </div>
+            <p class="cs-vid-lbl">Watch UserHear — Product Demo</p>
+          </div>
+          <iframe id="uh-vid" src="" data-src="https://www.youtube.com/embed/5LuXiQkCaDg?autoplay=1" allowfullscreen allow="autoplay"></iframe>
+        </div>
+        <p class="cs-vid-cap">UserHear product demo · Commencis AI · youtube.com/watch?v=5LuXiQkCaDg</p>
+      </section>
+
+      <section class="cs-sec" id="uh-problem">
+        <p class="cs-sec-eye">The Problem</p>
+        <h2 class="cs-h2">Reviews exist. <em>Understanding</em> them doesn't.</h2>
+        <p class="cs-p">Before UserHear, client teams were doing one of three things: ignoring reviews entirely, manually reading samples, or exporting CSVs into spreadsheets and hoping someone would draw conclusions. None of these worked at scale.</p>
+        <div class="cs-compare">
+          <div class="cs-compare-pane">
+            <p class="cs-compare-lbl">Before <span class="badge-light">Status quo</span></p>
+            <ul class="cs-compare-list">
+              <li>Manual review sampling — 2–3 hours per sprint</li>
+              <li>Star rating used as proxy for user sentiment</li>
+              <li>No connection between releases and feedback shifts</li>
+              <li>No feature-level visibility into what users talk about</li>
+              <li>PMs rely on intuition, not data, to prioritise backlog</li>
+            </ul>
+          </div>
+          <div class="cs-compare-pane after">
+            <p class="cs-compare-lbl">After <span class="badge">UserHear</span></p>
+            <ul class="cs-compare-list">
+              <li>Automated ingestion from App Store, Play, social</li>
+              <li>Feature-level sentiment tracked across time</li>
+              <li>Version impact: see what each release did to mood</li>
+              <li>AI-generated recommendations fed into roadmap</li>
+              <li>Full team alignment on what users actually experience</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cs-quote">
+          <p class="cs-quote-text">"I don't want to read 4,000 reviews. I want to know what to fix next sprint — and why."</p>
+          <p class="cs-quote-attr">— Product manager, discovery interview</p>
+        </div>
+        <p class="cs-p">Three core tensions shaped every design decision: signal vs. noise, confidence vs. humility (how do you show AI certainty without misleading?), and action vs. exploration.</p>
+      </section>
+
+      <section class="cs-sec" id="uh-research">
+        <p class="cs-sec-eye">Research</p>
+        <h2 class="cs-h2">How teams actually <em>process</em> feedback today</h2>
+        <p class="cs-p">We ran discovery sessions with product managers, UX leads, and data analysts at five enterprise client companies — mapping existing review-processing workflows before proposing any solutions.</p>
+        <div class="pt" id="uh-pt">
+          <div class="pt-item">
+            <div class="pt-dot">01</div>
+            <div class="pt-body"><p class="pt-lbl">Discovery</p><p class="pt-title">Stakeholder interviews across 5 companies</p><p class="pt-text">Semi-structured interviews with PMs, designers, and analysts. Goal: understand mental models around feedback, not pitch a solution.</p></div>
+          </div>
+          <div class="pt-item">
+            <div class="pt-dot">02</div>
+            <div class="pt-body"><p class="pt-lbl">Workflow Mapping</p><p class="pt-title">Current-state journey maps per team</p><p class="pt-text">Mapped every step from "review arrives" to "decision made." Found massive variation — all with the same failure mode: signal dies before reaching the roadmap.</p></div>
+          </div>
+          <div class="pt-item">
+            <div class="pt-dot">03</div>
+            <div class="pt-body"><p class="pt-lbl">Synthesis</p><p class="pt-title">Three user archetypes emerged</p><p class="pt-text">The Sampler, the Metric-Watcher, and the Avoider. Each needed a different entry point into UserHear — informing the information architecture from day one.</p></div>
+          </div>
+          <div class="pt-item">
+            <div class="pt-dot">04</div>
+            <div class="pt-body"><p class="pt-lbl">Validation</p><p class="pt-title">Concept testing with early prototypes</p><p class="pt-text">Brought wireframes back to participants. Watched where they went first, what confused them, and what made them say "I'd actually use this."</p></div>
+          </div>
+        </div>
+        <div class="cs-stats">
+          <div class="cs-stat"><div class="cs-stat-num">5</div><div class="cs-stat-label">Enterprise teams in discovery</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">3</div><div class="cs-stat-label">User archetypes for design targeting</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">40K+</div><div class="cs-stat-label">Reviews processed monthly</div></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="uh-strategy">
+        <p class="cs-sec-eye">Product Strategy</p>
+        <h2 class="cs-h2">Listen, understand, <em>act.</em></h2>
+        <p class="cs-p">The product strategy is organised around a three-stage intelligence loop. Each stage has a distinct design character — its own information density, interaction model, and visual language.</p>
+        <div class="cs-hscroll">
+          <div class="cs-hscroll-inner">
+            <div class="cs-hscroll-card"><p class="cs-hscroll-card-tag">01 · Listen</p><p class="cs-hscroll-card-title">Collect</p><p class="cs-hscroll-card-body">Ingest reviews from App Store, Google Play, and social channels — all in one place, refreshed automatically.</p></div>
+            <div class="cs-hscroll-card"><p class="cs-hscroll-card-tag">02 · Understand</p><p class="cs-hscroll-card-title">Analyse</p><p class="cs-hscroll-card-body">Feature attribution, multilingual sentiment, emotion detection, intent analysis — powered by top LLMs, optimised for Turkish.</p></div>
+            <div class="cs-hscroll-card"><p class="cs-hscroll-card-tag">03 · Deep Dive</p><p class="cs-hscroll-card-title">Correlate</p><p class="cs-hscroll-card-body">Track how each release affected sentiment. Pinpoint which product decisions drove changes.</p></div>
+            <div class="cs-hscroll-card"><p class="cs-hscroll-card-tag">04 · Uncover</p><p class="cs-hscroll-card-title">Recommend</p><p class="cs-hscroll-card-body">AI-generated improvement recommendations with reasoning and evidence — ready for the roadmap.</p></div>
+            <div class="cs-hscroll-card"><p class="cs-hscroll-card-tag">05 · AI Layer</p><p class="cs-hscroll-card-title">Explore</p><p class="cs-hscroll-card-body">Ask "Why did sentiment drop last month?" in natural language and get a structured, evidence-backed answer instantly.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="uh-product">
+        <p class="cs-sec-eye">The Product</p>
+        <h2 class="cs-h2">Five capabilities, <em>one intelligence layer.</em></h2>
+        <p class="cs-p">UserHear's feature set maps directly to the research gaps identified. Each capability answers a question that was previously unanswerable without days of manual work.</p>
+        <div class="cs-feat-grid">
+          <div class="cs-feat"><div class="cs-feat-icon">📊</div><p class="cs-feat-title">Sentiment Analysis</p><p class="cs-feat-text">Multilingual sentiment powered by top LLMs, optimised for Turkish — a language generic models frequently misclassify.</p></div>
+          <div class="cs-feat"><div class="cs-feat-icon">🔍</div><p class="cs-feat-title">Product & Attribute Analysis</p><p class="cs-feat-text">Track which features are mentioned and why sentiment around them is positive or negative. No more guessing which part of the app users are discussing.</p></div>
+          <div class="cs-feat"><div class="cs-feat-icon">🎯</div><p class="cs-feat-title">User Intent Analysis</p><p class="cs-feat-text">Detect churn signals, loyal-user patterns, bug reports, and feature requests — automatically classified, with drill-down to source reviews.</p></div>
+          <div class="cs-feat"><div class="cs-feat-icon">📈</div><p class="cs-feat-title">Version Impact Tracking</p><p class="cs-feat-text">Before/after release sentiment comparison. Pinpoint what changed, and what users started saying about it.</p></div>
+          <div class="cs-feat"><div class="cs-feat-icon">⚡</div><p class="cs-feat-title">Competitive Benchmarking</p><p class="cs-feat-text">Analyse competitor sentiment, feature gaps, and emerging trends across the category — all from the same interface.</p></div>
+          <div class="cs-feat"><div class="cs-feat-icon">🤖</div><p class="cs-feat-title">UserHear AI (Chat)</p><p class="cs-feat-text">Ask questions in natural language. Get structured answers with evidence chains. Create PRDs and generate design ideas through conversation.</p></div>
+        </div>
+        <div class="cs-annotated">
+          <p class="cs-sec-eye" style="margin-bottom:20px">Key UX decisions</p>
+          <div class="cs-annot-row"><div class="cs-annot-num">1</div><p class="cs-annot-text"><strong>Insight feed as home screen.</strong> The default view is not a chart dashboard — it's a prioritised feed of AI-generated insights, each anchored to a confidence level and drill-down to source reviews.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">2</div><p class="cs-annot-text"><strong>Confidence is shown, never hidden.</strong> Saying "based on 342 reviews, confidence: high" is actionable. Hiding uncertainty feels polished but erodes trust over time.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">3</div><p class="cs-annot-text"><strong>Progressive disclosure for depth.</strong> Every metric starts as a number → expands to a chart → drills into raw reviews — without ever losing context of where you started.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">4</div><p class="cs-annot-text"><strong>Turkish-language-first sentiment model.</strong> We evaluated and selected models specifically optimised for Turkish morphology and informality — a capability no global competitor offers out of the box.</p></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="uh-design">
+        <p class="cs-sec-eye">Design Decisions</p>
+        <h2 class="cs-h2">The hardest part of AI UX: <em>building trust.</em></h2>
+        <p class="cs-p">Designing for AI-generated output means doing something unusual: making the output feel authoritative enough to act on, and humble enough to question.</p>
+        <div class="cs-steps" id="uh-steps">
+          <div class="cs-step"><div class="cs-step-num">01</div><div><p class="cs-step-title">Evidence chains over black boxes</p><p class="cs-step-text">Every insight links to the specific reviews that generated it. Users can always ask "why?" and get a real answer — a decision that slows reading slightly but dramatically increases trust.</p></div></div>
+          <div class="cs-step"><div class="cs-step-num">02</div><div><p class="cs-step-title">Quantified confidence, not qualitative hedging</p><p class="cs-step-text">We always show the n. "Based on 342 reviews, confidence: high" is actionable; "high confidence AI analysis" is not.</p></div></div>
+          <div class="cs-step"><div class="cs-step-num">03</div><div><p class="cs-step-title">Sentiment as emotion, not just polarity</p><p class="cs-step-text">UserHear surfaces emotional texture — frustration, surprise, delight, confusion — because teams need to understand how users feel, not just which direction they feel it.</p></div></div>
+          <div class="cs-step"><div class="cs-step-num">04</div><div><p class="cs-step-title">AI chat as the power user's interface</p><p class="cs-step-text">The chat interface is a secondary mode, not the primary one. Research showed most users want structured views first — the chat accelerates experts who know what they're looking for.</p></div></div>
+          <div class="cs-step"><div class="cs-step-num">05</div><div><p class="cs-step-title">Shareable outputs for non-users</p><p class="cs-step-text">The most impactful insight often reaches someone who doesn't log in. Report and deck generation is core to the product — so insights can spread to stakeholders who will never open the app.</p></div></div>
+        </div>
+        <div class="cs-quote">
+          <p class="cs-quote-text">"The best AI interface is one where users feel smarter, not replaced."</p>
+          <p class="cs-quote-attr">— Design principle, UserHear</p>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="uh-outcomes">
+        <p class="cs-sec-eye">Outcomes</p>
+        <h2 class="cs-h2">What UserHear <em>enables.</em></h2>
+        <p class="cs-p">UserHear is live and actively used by enterprise product teams. The platform is becoming the foundation for Commencis's broader AI solutions practice.</p>
+        <div class="cs-cards">
+          <div class="cs-card"><div class="cs-card-num">01</div><p class="cs-card-title">Review-to-roadmap in one workflow</p><p class="cs-card-text">Teams that previously spent hours on manual review analysis now get prioritised, evidence-backed recommendations ready to enter sprint planning.</p></div>
+          <div class="cs-card"><div class="cs-card-num">02</div><p class="cs-card-title">Turkish-language accuracy at scale</p><p class="cs-card-text">The optimised Turkish sentiment model gives clients a capability no global competitor offers out of the box.</p></div>
+          <div class="cs-card"><div class="cs-card-num">03</div><p class="cs-card-title">AI design patterns for Commencis</p><p class="cs-card-text">Trust-building design patterns from UserHear are now the baseline for how Commencis approaches AI product design across its portfolio.</p></div>
+          <div class="cs-card"><div class="cs-card-num">04</div><p class="cs-card-title"><span class="live-dot"></span>Actively growing</p><p class="cs-card-text">Version impact tracking and competitive benchmarking are the two most-requested capabilities by existing clients — both in active development.</p></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="uh-reflection">
+        <p class="cs-sec-eye">Reflection</p>
+        <h2 class="cs-h2">What I'm still <em>learning.</em></h2>
+        <p class="cs-p">The hardest challenge has been calibrating user expectations — not the AI model itself. Early users either over-trusted the output (treating it as ground truth) or under-trusted it (verifying every insight before acting). The right level of epistemic humility in the interface is an ongoing experiment.</p>
+        <p class="cs-p">I've also learned that AI product design is unusually dependent on prompt quality and model selection. A designer who understands these layers — and can advocate for design decisions that affect them — is a different kind of designer than one who only works at the UI layer.</p>
+        <div class="cs-reflection">
+          <p class="cs-reflection-eye">Key takeaway</p>
+          <p class="cs-reflection-text">"The interface is the last mile of an AI system. But it's also the only mile users experience. Getting it right means understanding everything that comes before it."</p>
+        </div>
+        <div class="cs-next" onclick="openCS('iscep')">
+          <div><p class="cs-next-lbl">Next case study</p><p class="cs-next-title">İşCep — Turkey's largest private bank app</p></div>
+          <span class="cs-next-arrow">→</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div><!-- /page-userhear -->
+
+<!-- ══════════════════════════════════════════
+     CASE STUDY: İŞCEP
+══════════════════════════════════════════ -->
+<div class="page" id="page-iscep">
+  <a class="cs-back" href="#" onclick="closeCS();return false">
+    <svg viewBox="0 0 16 16"><path d="M13 8H3M3 8L8 3M3 8L8 13"/></svg>
+    All work
+  </a>
+
+  <header class="cs-hero">
+    <p class="cs-eyebrow">Commencis · Mobile Banking · 2024 — 2026</p>
+    <h1 class="cs-h1">İşCep — leading design<br>for <em>Turkey's largest</em><br>private bank app.</h1>
+    <div class="cs-meta-grid">
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Client</div><div class="cs-meta-val">İşbank via Commencis</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Role</div><div class="cs-meta-val">UX Design Lead</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Timeline</div><div class="cs-meta-val">Aug 2024 — Feb 2026</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Team</div><div class="cs-meta-val">13 designers across research &amp; design</div></div>
+    </div>
+  </header>
+
+  <div class="cs-layout">
+    <aside class="cs-sidenav">
+      <ul class="cs-snav-list" id="snav-iscep">
+        <li class="cs-snav-item active" data-sec="ic-overview"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-overview">Overview</a></li>
+        <li class="cs-snav-item" data-sec="ic-challenge"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-challenge">The Challenge</a></li>
+        <li class="cs-snav-item" data-sec="ic-leadership"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-leadership">Leading the Team</a></li>
+        <li class="cs-snav-item" data-sec="ic-process"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-process">Design Process</a></li>
+        <li class="cs-snav-item" data-sec="ic-work"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-work">Selected Work</a></li>
+        <li class="cs-snav-item" data-sec="ic-designops"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-designops">DesignOps</a></li>
+        <li class="cs-snav-item" data-sec="ic-outcomes"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-outcomes">Outcomes</a></li>
+        <li class="cs-snav-item" data-sec="ic-reflection"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-reflection">Reflection</a></li>
+      </ul>
+    </aside>
+    <div class="cs-content">
+
+      <section class="cs-sec" id="ic-overview">
+        <p class="cs-sec-eye">Overview</p>
+        <h2 class="cs-h2">Design leadership at the <em>largest scale</em> in Turkish banking.</h2>
+        <p class="cs-p">İşCep is the mobile banking application of İşbank — Turkey's largest private bank, with millions of daily active users. As UX Design Lead at Commencis, I oversaw the research and design stream through the most ambitious redesign period in the app's history: a refreshed information architecture, updated visual language, and an accelerated delivery pace, all simultaneously.</p>
+        <p class="cs-p">This wasn't a single project. It was 1.5 years of continuous design delivery — managing a team of 13, navigating complex stakeholder dynamics between Commencis and the bank's internal teams, and making design quality hold through every sprint.</p>
+        <div class="cs-tags">
+          <span class="cs-tag">Design Leadership</span><span class="cs-tag">Mobile Banking</span>
+          <span class="cs-tag">Team Management</span><span class="cs-tag">UX Strategy</span>
+          <span class="cs-tag">Stakeholder Management</span><span class="cs-tag">DesignOps</span>
+          <span class="cs-tag">iOS · Android</span>
+        </div>
+        <div class="cs-figma-wrap">
+          <div class="cs-figma-overlay" id="figma-overlay">
+            <div class="cs-figma-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#141412" stroke-width="1.5">
+                <path d="M8 3H16C17.1 3 18 3.9 18 5V7C18 8.1 17.1 9 16 9H8C6.9 9 6 8.1 6 7V5C6 3.9 6.9 3 8 3Z"/>
+                <path d="M6 9H10C11.1 9 12 9.9 12 11V13C12 14.1 11.1 15 10 15H8C6.9 15 6 14.1 6 13V9Z"/>
+                <path d="M12 9H16C17.1 9 18 9.9 18 11V13C18 14.1 17.1 15 16 15H14C12.9 15 12 14.1 12 13V9Z"/>
+                <path d="M6 15H10C11.1 15 12 15.9 12 17V19C12 20.1 11.1 21 10 21H8C6.9 21 6 20.1 6 19V15Z"/>
+                <circle cx="15" cy="18" r="3"/>
+              </svg>
+            </div>
+            <p class="cs-figma-sub">View İşCep design work in Figma</p>
+            <button class="cs-figma-btn" onclick="loadFigma()">Open Figma file</button>
+          </div>
+          <iframe id="figma-frame" src="" data-src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/design/gvlalc0cOQeIeiT1AFXMdl/Commencis_iscep_2024_sunumu?node-id=6090-18998" allowfullscreen></iframe>
+        </div>
+        <p class="cs-figma-cap">İşCep 2024 — Commencis design presentation · Figma</p>
+        <div class="cs-stats">
+          <div class="cs-stat"><div class="cs-stat-num">13</div><div class="cs-stat-label">Designers managed across both streams</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">#1</div><div class="cs-stat-label">Largest private bank mobile app in Turkey</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">1.5yr</div><div class="cs-stat-label">Continuous delivery at scale</div></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ic-challenge">
+        <p class="cs-sec-eye">The Challenge</p>
+        <h2 class="cs-h2">Banking design is never <em>just design.</em></h2>
+        <p class="cs-p">Mobile banking applications carry extraordinary user weight. Every interaction involves trust, money, and — for a significant portion of users — genuine anxiety. The bar for quality isn't just aesthetic: a confusing form field can mean a missed payment; an ambiguous error message can mean a panic call to customer support.</p>
+        <p class="cs-p">At the same time, İşCep was under pressure to modernise rapidly — matching the pace of fintech challengers while maintaining the reliability expectations of a 100-year-old institution. These are genuinely opposing forces.</p>
+        <div class="cs-cards">
+          <div class="cs-card"><div class="cs-card-num">↕</div><p class="cs-card-title">Speed vs. safety</p><p class="cs-card-text">Fintech apps ship weekly. İşbank has compliance, legal reviews, and a user base that includes elderly first-time smartphone users. Every decision had to reconcile both realities.</p></div>
+          <div class="cs-card"><div class="cs-card-num">⬡</div><p class="cs-card-title">Scale vs. craft</p><p class="cs-card-text">13 designers working in parallel on different features creates drift. Maintaining visual and experiential coherence required systemic thinking, not just design oversight.</p></div>
+          <div class="cs-card"><div class="cs-card-num">⇄</div><p class="cs-card-title">Client vs. agency</p><p class="cs-card-text">Commencis is an agency. İşbank is the client. Aligning across two organisations — with different risk tolerances and timelines — is a leadership challenge as much as a design one.</p></div>
+          <div class="cs-card"><div class="cs-card-num">∞</div><p class="cs-card-title">Legacy vs. future</p><p class="cs-card-text">İşCep has millions of users with established mental models. Every IA change had to account for who might break, and how many — a constraint that makes every decision weightier.</p></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ic-leadership">
+        <p class="cs-sec-eye">Leading the Team</p>
+        <h2 class="cs-h2">Building a team that <em>thinks</em>, not just executes.</h2>
+        <p class="cs-p">Managing 13 designers across research and design streams is fundamentally a communication and culture challenge. My approach rested on three pillars: shared language, visible quality standards, and genuine creative ownership for every designer.</p>
+        <div class="cs-two-text">
+          <div><p class="cs-two-text-lbl">Shared language</p><p class="cs-two-text-body">Weekly design principles sessions — not work reviews, but discussions. "What does 'trustworthy' mean in a mobile UI?" produced better decisions than pixel-pushing feedback.</p></div>
+          <div><p class="cs-two-text-lbl">Visible standards</p><p class="cs-two-text-body">Critique cadences with documented rubrics. Not "I don't like this" but "this fails the contrast accessibility check." Specificity enables accountability without creating fear.</p></div>
+          <div><p class="cs-two-text-lbl">Creative ownership</p><p class="cs-two-text-body">Designers were assigned feature areas, not tasks. They owned features from research through handoff — building product intuition, not just execution speed.</p></div>
+          <div><p class="cs-two-text-lbl">Roadmap contribution</p><p class="cs-two-text-body">Design had a seat at the roadmap table. I supported roadmap creation through design-led data — UX metrics, usability findings, competitive analysis — not just aesthetic preference.</p></div>
+        </div>
+        <div class="cs-quote">
+          <p class="cs-quote-text">"The best design managers protect two things: the team's time and the team's craft. Everything else is negotiable."</p>
+          <p class="cs-quote-attr">— Leadership principle, İşCep design team</p>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ic-process">
+        <p class="cs-sec-eye">Design Process</p>
+        <h2 class="cs-h2">From insight to <em>shipped screen.</em></h2>
+        <p class="cs-p">The process was adapted from double-diamond, pressure-tested for 13 designers working in parallel across multiple feature squads. The critical innovation was a "design checkpoint" system that kept quality consistent without creating bottlenecks.</p>
+        <div class="pt" id="ic-pt">
+          <div class="pt-item"><div class="pt-dot">01</div><div class="pt-body"><p class="pt-lbl">Discovery</p><p class="pt-title">Research sprints with the bank's CX team</p><p class="pt-text">User interviews, session recordings, and app store review analysis (powered by UserHear) formed the evidence base for every design initiative.</p></div></div>
+          <div class="pt-item"><div class="pt-dot">02</div><div class="pt-body"><p class="pt-lbl">Definition</p><p class="pt-title">Problem framing with PM and engineering</p><p class="pt-text">A shared problem statement, success criteria, and scope boundary — agreed by design, product, engineering, and client — before any design work begins. Single biggest time-saver.</p></div></div>
+          <div class="pt-item"><div class="pt-dot">03</div><div class="pt-body"><p class="pt-lbl">Ideation</p><p class="pt-title">Parallel concepting with structured critique</p><p class="pt-text">Multiple directions — not to increase volume, but to surface trade-offs early. "I like / I wish / what if" framework keeps feedback generative, not evaluative.</p></div></div>
+          <div class="pt-item"><div class="pt-dot">04</div><div class="pt-body"><p class="pt-lbl">Prototyping</p><p class="pt-title">High-fidelity in Figma, tested with real users</p><p class="pt-text">Prototypes tested with actual İşbank customers recruited through the bank's user panel. Think-aloud protocol. Specific, actionable findings.</p></div></div>
+          <div class="pt-item"><div class="pt-dot">05</div><div class="pt-body"><p class="pt-lbl">Delivery</p><p class="pt-title">Design checkpoint → engineering handoff</p><p class="pt-text">Mandatory gate: lead review, accessibility audit, component library compliance check before any handoff. Eliminated ~80% of revision loops.</p></div></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ic-work">
+        <p class="cs-sec-eye">Selected Work</p>
+        <h2 class="cs-h2">A few of the <em>initiatives</em> I led.</h2>
+        <p class="cs-p">İşCep work is under NDA. What follows describes the design challenges and decisions behind selected initiatives — not specific screens.</p>
+        <div class="cs-steps" id="ic-steps">
+          <div class="cs-step"><div class="cs-step-num">→</div><div><p class="cs-step-title">Information architecture redesign</p><p class="cs-step-text">The existing bottom navigation had 7 tabs accumulated over years of feature additions. Card sorting with 40 users, three competing IA proposals, all three tested in prototype. The winner reduced time-to-task on the five most common banking operations measurably.</p></div></div>
+          <div class="cs-step"><div class="cs-step-num">→</div><div><p class="cs-step-title">Money transfer flow simplification</p><p class="cs-step-text">The transfer flow — the app's most-used feature — had 6 screens. Analysis showed users abandoning at confirmation, nervously re-checking details. Redesigned around progressive disclosure: all details upfront, confirmation as a summary not a form. Abandonment at the confirmation step dropped.</p></div></div>
+          <div class="cs-step"><div class="cs-step-num">→</div><div><p class="cs-step-title">Accessibility uplift across core flows</p><p class="cs-step-text">Systematic audit found 38% of colour combinations failing WCAG AA contrast. Token-level audit of the design system, updated every out-of-compliance value, and built automated contrast checking into the Figma process going forward.</p></div></div>
+          <div class="cs-step"><div class="cs-step-num">→</div><div><p class="cs-step-title">Modular onboarding framework</p><p class="cs-step-text">Every new product launch (savings, insurance, investment) previously required onboarding designed from scratch. I created a modular onboarding system — reusable across product types — reducing design time for new product launches by ~60%.</p></div></div>
+        </div>
+        <div class="cs-split">
+          <div class="cs-split-l">
+            <p class="cs-sec-eye" style="margin-bottom:12px">Quality indicators</p>
+            <h3 class="cs-h3">The numbers <em>we cared about.</em></h3>
+            <p style="font-size:13px;color:var(--ink3);margin-top:10px;line-height:1.65">Banking UX success can't be measured only by aesthetic ratings. We tracked operational and experiential metrics that told a more honest story.</p>
+          </div>
+          <div class="cs-split-r">
+            <div class="cs-split-item"><p class="cs-split-item-lbl">Usability testing pass rate</p><p class="cs-split-item-val">Task completion on core flows before shipping</p></div>
+            <div class="cs-split-item"><p class="cs-split-item-lbl">Accessibility compliance</p><p class="cs-split-item-val">WCAG AA pass rate across all new components</p></div>
+            <div class="cs-split-item"><p class="cs-split-item-lbl">Design-to-dev revision rate</p><p class="cs-split-item-val">Tracked per sprint to measure handoff quality</p></div>
+            <div class="cs-split-item"><p class="cs-split-item-lbl">App store sentiment (UserHear)</p><p class="cs-split-item-val">UX-specific review sentiment tracked monthly</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ic-designops">
+        <p class="cs-sec-eye">DesignOps</p>
+        <h2 class="cs-h2">The systems that make <em>design work.</em></h2>
+        <p class="cs-p">With 13 designers working simultaneously, the biggest quality risk isn't individual skill — it's drift. Components used inconsistently. Accessibility standards applied selectively. Naming conventions that differ between teams. These small inconsistencies compound into a product that feels like it was designed by many different people, because it was.</p>
+        <p class="cs-p">I invested significantly in DesignOps as a force multiplier: building the systems, standards, and rituals that let the team maintain quality without requiring my review on every screen.</p>
+        <div class="cs-annotated">
+          <p class="cs-sec-eye" style="margin-bottom:18px">DesignOps interventions</p>
+          <div class="cs-annot-row"><div class="cs-annot-num">1</div><p class="cs-annot-text"><strong>Component library governance.</strong> Naming convention, contribution process, and deprecation policy for the Figma component library. Any designer can add a component; any addition goes through a review gate. The library grew without becoming chaotic.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">2</div><p class="cs-annot-text"><strong>Weekly design critique cadence.</strong> Rotating presenters. Structured rubric ("does this meet the accessibility standard?" not "do I like this?"). Reviews became a learning environment, not a judgment environment.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">3</div><p class="cs-annot-text"><strong>12-point handoff checklist.</strong> Mandatory before any design goes to engineering: contrast ratios, touch targets, error/loading/empty states, responsive breakpoints, copy review. Eliminated the most common sources of revision requests from engineering.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">4</div><p class="cs-annot-text"><strong>Research templates.</strong> Standardised interview guides, affinity mapping templates, and synthesis formats. Any designer could run a research sprint without reinventing the process. Reduced research setup time by ~50%.</p></div>
+        </div>
+        <div class="cs-quote">
+          <p class="cs-quote-text">"Good DesignOps is invisible — designers shouldn't notice the system, they should just find it easier to do great work."</p>
+          <p class="cs-quote-attr">— Design principle, Commencis</p>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ic-outcomes">
+        <p class="cs-sec-eye">Outcomes</p>
+        <h2 class="cs-h2">What <em>1.5 years</em> looks like.</h2>
+        <p class="cs-p">The outcomes are multidimensional — product quality, team capability, and organisational practice all improved in measurable ways. The most meaningful outcome is harder to quantify: a design team that got better at design over the course of the engagement, not just faster.</p>
+        <div class="cs-cards">
+          <div class="cs-card"><div class="cs-card-num">01</div><p class="cs-card-title">App store UX sentiment improved</p><p class="cs-card-text">Monthly UX-specific app store sentiment (tracked via UserHear) showed consistent improvement across the core banking flows redesigned by the team.</p></div>
+          <div class="cs-card"><div class="cs-card-num">02</div><p class="cs-card-title">Design velocity increased</p><p class="cs-card-text">With DesignOps systems in place, the team shipped more features per sprint without a proportional increase in revision requests — quality, not just speed.</p></div>
+          <div class="cs-card"><div class="cs-card-num">03</div><p class="cs-card-title">Team capability visibly grew</p><p class="cs-card-text">Designers who joined as mid-level practitioners were doing lead-level work within 6–8 months. The critique culture and ownership model accelerated growth.</p></div>
+          <div class="cs-card"><div class="cs-card-num">04</div><p class="cs-card-title">Design sat at strategy</p><p class="cs-card-text">By the end, design was contributing to roadmap decisions with data — not just being handed features to design. This shift took 12 deliberate months.</p></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ic-reflection">
+        <p class="cs-sec-eye">Reflection</p>
+        <h2 class="cs-h2">What leading at scale <em>actually taught me.</em></h2>
+        <p class="cs-p">I came into this role thinking design leadership was primarily about design decisions. I left understanding it's primarily about communication — between disciplines, between organisations, between levels of abstraction. The best design leader isn't the best designer in the room; it's the person who makes everyone in the room better at design.</p>
+        <p class="cs-p">The hardest moment was realising that protecting the team's creative energy sometimes meant absorbing stakeholder pressure myself — not passing it downstream. That's not heroism; it's what the role requires. And it's what builds trust with a team faster than anything else.</p>
+        <div class="cs-reflection">
+          <p class="cs-reflection-eye">Key takeaway</p>
+          <p class="cs-reflection-text">"Design quality at scale isn't a design problem. It's a culture problem that systems, rituals, and leadership can solve — but only if you treat it as seriously as any product problem."</p>
+        </div>
+        <div class="cs-next" onclick="openCS('userhear')">
+          <div><p class="cs-next-lbl">Previous case study</p><p class="cs-next-title">UserHear — AI-powered review analytics</p></div>
+          <span class="cs-next-arrow">←</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div><!-- /page-iscep -->
+
+<!-- ══════════════════════════════════════════
+     CASE STUDY: ARMUT (shorter)
+══════════════════════════════════════════ -->
+<div class="page" id="page-armut">
+  <a class="cs-back" href="#" onclick="closeCS();return false">
+    <svg viewBox="0 0 16 16"><path d="M13 8H3M3 8L8 3M3 8L8 13"/></svg>
+    All work
+  </a>
+  <header class="cs-hero">
+    <p class="cs-eyebrow">Armut / HomeRun · Marketplace · 2020 — 2021</p>
+    <h1 class="cs-h1">Armut — <em>fulfillment,</em><br>redesigned.</h1>
+    <div class="cs-meta-grid">
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Company</div><div class="cs-meta-val">Armut / HomeRun</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Role</div><div class="cs-meta-val">Product Designer</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Timeline</div><div class="cs-meta-val">Aug 2020 — Nov 2021</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Framework</div><div class="cs-meta-val">Scrumban · iOS · Android</div></div>
+    </div>
+  </header>
+  <div class="cs-layout">
+    <aside class="cs-sidenav">
+      <ul class="cs-snav-list" id="snav-armut">
+        <li class="cs-snav-item active" data-sec="ar-overview"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ar-overview">Overview</a></li>
+        <li class="cs-snav-item" data-sec="ar-research"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ar-research">Research</a></li>
+        <li class="cs-snav-item" data-sec="ar-work"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ar-work">What Was Built</a></li>
+        <li class="cs-snav-item" data-sec="ar-outcomes"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ar-outcomes">Outcomes</a></li>
+      </ul>
+    </aside>
+    <div class="cs-content">
+      <section class="cs-sec" id="ar-overview">
+        <p class="cs-sec-eye">Overview</p>
+        <h2 class="cs-h2">Full ownership of <em>Fulfillment &amp; Satisfaction</em> design.</h2>
+        <p class="cs-p">At Armut (rebranded as HomeRun internationally), Turkey's leading home services marketplace, I had full design and research ownership for the Fulfillment and Satisfaction product team. Working in a Scrumban framework alongside a PM and frontend, mobile, and backend engineers, I ran the full design cycle from exploratory research to shipped features.</p>
+        <div class="cs-tags"><span class="cs-tag">Product Design</span><span class="cs-tag">UX Research</span><span class="cs-tag">Usability Testing</span><span class="cs-tag">Interaction Design</span><span class="cs-tag">Design System</span><span class="cs-tag">Mobile</span></div>
+        <div class="cs-stats">
+          <div class="cs-stat"><div class="cs-stat-num">+9pp</div><div class="cs-stat-label">Fulfillment rate improvement</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">6+</div><div class="cs-stat-label">Major features shipped end-to-end</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">2-sided</div><div class="cs-stat-label">Both service providers &amp; customers</div></div>
+        </div>
+      </section>
+      <section class="cs-sec" id="ar-research">
+        <p class="cs-sec-eye">Research &amp; Process</p>
+        <h2 class="cs-h2">Exploratory research to <em>shipped features.</em></h2>
+        <p class="cs-p">I ran exploratory research including user interviews, expert reviews, and immersion sessions with both service providers and customers. Findings were translated into interactive solutions via user flows and prototypes, then validated through usability studies with think-aloud protocol. Stakeholder alignment was managed primarily through flowcharts — a practice I later wrote about publicly.</p>
+        <div class="cs-quote"><p class="cs-quote-text">"Working with flowcharts: bridging gaps between business, user, and development requirements."</p><p class="cs-quote-attr">— Published article by Yağmur Gökçe</p></div>
+      </section>
+      <section class="cs-sec" id="ar-work">
+        <p class="cs-sec-eye">What Was Built</p>
+        <h2 class="cs-h2">For providers <em>and</em> customers.</h2>
+        <div class="cs-cards">
+          <div class="cs-card"><div class="cs-card-num">↑</div><p class="cs-card-title">For service providers</p><p class="cs-card-text">Interactive onboarding redesign, earnings dashboard, referral program, security check flow — all aimed at improving provider quality and retention.</p></div>
+          <div class="cs-card"><div class="cs-card-num">↓</div><p class="cs-card-title">For customers</p><p class="cs-card-text">Onboarding simplifications, reservation tracking, cancellation policy redesign — reducing friction and improving trust in the marketplace experience.</p></div>
+        </div>
+        <p class="cs-p">In addition to feature work, I contributed to refactoring the platform's design system and introduced tracking of customer satisfaction through subjective UX measures — establishing a baseline for ongoing design quality monitoring.</p>
+      </section>
+      <section class="cs-sec" id="ar-outcomes">
+        <p class="cs-sec-eye">Outcomes</p>
+        <h2 class="cs-h2">Measurable <em>fulfillment</em> improvement.</h2>
+        <p class="cs-p">The combined work across service provider and customer-side features improved the platform's fulfillment rate by 4 to 9 percentage points — a direct product metric with clear business value. The design system contribution reduced inconsistency across the product and laid the groundwork for faster future development.</p>
+        <div class="cs-next" onclick="closeCS()">
+          <div><p class="cs-next-lbl">Back to</p><p class="cs-next-title">All work</p></div>
+          <span class="cs-next-arrow">→</span>
+        </div>
+      </section>
+    </div>
+  </div>
+</div><!-- /page-armut -->
+
+<!-- ══════════════════════════════════════════
+     CASE STUDY: RESEARCH
+══════════════════════════════════════════ -->
+<div class="page" id="page-research">
+  <a class="cs-back" href="#" onclick="closeCS();return false">
+    <svg viewBox="0 0 16 16"><path d="M13 8H3M3 8L8 3M3 8L8 13"/></svg>
+    All work
+  </a>
+  <header class="cs-hero">
+    <p class="cs-eyebrow">TU Delft · KUAR · Academic Research · 2015 — 2019</p>
+    <h1 class="cs-h1">Research at <em>the foundation.</em></h1>
+    <div class="cs-meta-grid">
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Institutions</div><div class="cs-meta-val">TU Delft · KUAR</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Roles</div><div class="cs-meta-val">Researcher · Interaction Designer · GSA</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Duration</div><div class="cs-meta-val">Nov 2015 — Aug 2019</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Output</div><div class="cs-meta-val">2 ACM publications</div></div>
+    </div>
+  </header>
+  <div class="cs-layout">
+    <aside class="cs-sidenav">
+      <ul class="cs-snav-list" id="snav-research">
+        <li class="cs-snav-item active" data-sec="re-kuar"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#re-kuar">KUAR Research</a></li>
+        <li class="cs-snav-item" data-sec="re-delft"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#re-delft">TU Delft</a></li>
+        <li class="cs-snav-item" data-sec="re-teaching"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#re-teaching">Teaching</a></li>
+      </ul>
+    </aside>
+    <div class="cs-content">
+      <section class="cs-sec" id="re-kuar">
+        <p class="cs-sec-eye">KUAR · Koç University · 2015 — 2017</p>
+        <h2 class="cs-h2">Emotion-driven interaction for <em>augmented environments.</em></h2>
+        <p class="cs-p">As an Interaction Designer at Koç University's KUAR research lab, I approached emotions as a primary data source — researching and designing communication through emotions for augmented environments. This work produced two peer-reviewed publications in the ACM digital library.</p>
+        <div class="cs-cards">
+          <div class="cs-card"><div class="cs-card-num">ACM</div><p class="cs-card-title">UIST 2017</p><p class="cs-card-text">Augmented environment interaction research. <br><span style="font-size:11px;color:var(--ink4)">dl.acm.org/doi/10.1145/3139131.3143417</span></p></div>
+          <div class="cs-card"><div class="cs-card-num">ACM</div><p class="cs-card-title">CHI 2018</p><p class="cs-card-text">Emotion-driven communication design. <br><span style="font-size:11px;color:var(--ink4)">dl.acm.org/doi/10.1145/3170427.3188691</span></p></div>
+        </div>
+      </section>
+      <section class="cs-sec" id="re-delft">
+        <p class="cs-sec-eye">TU Delft · 2018 — 2019</p>
+        <h2 class="cs-h2">Social design research &amp; <em>graduate teaching.</em></h2>
+        <p class="cs-p">At Delft, I ran an independent social design research project in collaboration with Asst. Prof. Nynke Tromp — a 10-month thematic analysis of over 250 master theses to define and deepen typologies of social design. Concurrently, I served as a Graduate Student Assistant for Design Research Methodology and Thing-Centred Design courses, supervising 150+ students through qualitative, quantitative, and mixed-methods research.</p>
+        <div class="cs-stats">
+          <div class="cs-stat"><div class="cs-stat-num">250+</div><div class="cs-stat-label">Master theses reviewed &amp; analysed</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">150+</div><div class="cs-stat-label">Students supervised in research methods</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">2</div><div class="cs-stat-label">ACM publications from KUAR work</div></div>
+        </div>
+      </section>
+      <section class="cs-sec" id="re-teaching">
+        <p class="cs-sec-eye">Teaching · Üretimhane · 2024 — Present</p>
+        <h2 class="cs-h2">Passing it <em>forward.</em></h2>
+        <p class="cs-p">Since December 2024, I've been a UXD Course Instructor at Üretimhane — an independent learning platform powered by Academy of Arts and Design London. I lecture on HCI and human-centred design, framing and ideation, user flows and wireframing, interaction design, information architecture, and UX metrics.</p>
+        <div class="cs-quote"><p class="cs-quote-text">"The goal is to give practitioners the conceptual and practical tools that took me years to develop, in a much shorter time."</p><p class="cs-quote-attr">— Yağmur Gökçe</p></div>
+        <div class="cs-next" onclick="closeCS()">
+          <div><p class="cs-next-lbl">Back to</p><p class="cs-next-title">All work</p></div>
+          <span class="cs-next-arrow">→</span>
+        </div>
+      </section>
+    </div>
+  </div>
+</div><!-- /page-research -->
+
+<script>
+// ── CURSOR ──────────────────────────────────────────────
+const cur=document.getElementById('cur'),curR=document.getElementById('curR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});
+(function tick(){
+  rx+=(mx-rx)*.1;ry+=(my-ry)*.1;
+  cur.style.cssText=`left:${mx}px;top:${my}px`;
+  curR.style.cssText=`left:${rx}px;top:${ry}px`;
+  requestAnimationFrame(tick);
+})();
+document.addEventListener('mouseleave',()=>{cur.style.opacity=curR.style.opacity='0'});
+document.addEventListener('mouseenter',()=>{cur.style.opacity=curR.style.opacity='1'});
+
+// ── SCROLL BAR ───────────────────────────────────────────
+const sBar=document.getElementById('scrollBar');
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  sBar.style.transform=`scaleX(${h.scrollTop/(h.scrollHeight-h.clientHeight)})`;
+},{passive:true});
+
+// ── NAV ──────────────────────────────────────────────────
+const nav=document.getElementById('siteNav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('scrolled',window.scrollY>40);
+},{passive:true});
+
+// ── PAGE MANAGEMENT ──────────────────────────────────────
+let currentPage='landing';
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  currentPage=id;
+  window.scrollTo({top:0,behavior:'instant'});
+}
+function scrollLP(id){
+  setTimeout(()=>{
+    const el=document.getElementById(id);
+    if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
+  },80);
+}
+function openCS(id){
+  showPage(id);
+  setTimeout(initObservers,120);
+}
+function closeCS(){
+  showPage('landing');
+  setTimeout(()=>{
+    const work=document.getElementById('lp-work');
+    if(work)work.scrollIntoView({behavior:'smooth',block:'start'});
+  },80);
+}
+
+// ── VIDEO ────────────────────────────────────────────────
+function playVid(frameId,thumbId){
+  const f=document.getElementById(frameId);
+  f.src=f.dataset.src;
+  document.getElementById(thumbId).classList.add('gone');
+}
+
+// ── FIGMA ────────────────────────────────────────────────
+function loadFigma(){
+  const f=document.getElementById('figma-frame');
+  f.src=f.dataset.src;
+  document.getElementById('figma-overlay').classList.add('gone');
+}
+
+// ── SIDENAV SMOOTH SCROLL ────────────────────────────────
+document.querySelectorAll('.cs-snav-link').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+});
+
+// ── INTERSECTION OBSERVERS ───────────────────────────────
+function initObservers(){
+  const page=document.querySelector('.page.active');
+  if(!page||page.id==='page-landing')return;
+
+  // Sections fade in
+  const secObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+  },{threshold:.07,rootMargin:'-40px 0px'});
+  page.querySelectorAll('.cs-sec').forEach(s=>secObs.observe(s));
+
+  // Steps / timeline items stagger
+  const stepObs=new IntersectionObserver(entries=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*75);
+    });
+  },{threshold:.1});
+  page.querySelectorAll('.cs-step,.pt-item').forEach(s=>stepObs.observe(s));
+
+  // Sidenav active state
+  const snavId=`snav-${page.id.replace('page-','')}`;
+  const items=document.getElementById(snavId)?.querySelectorAll('.cs-snav-item')??[];
+  const sections=page.querySelectorAll('.cs-sec[id]');
+  const sideObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        items.forEach(it=>it.classList.toggle('active',it.dataset.sec===e.target.id));
+      }
+    });
+  },{rootMargin:'-25% 0px -65% 0px'});
+  sections.forEach(s=>sideObs.observe(s));
+}
+
+// Landing page scroll animations
+function initLandingAnims(){
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.style.opacity='1';
+        e.target.style.transform='translateY(0)';
+      }
+    });
+  },{threshold:.08});
+  document.querySelectorAll('.proj-card,.about-grid,.stat-row,.skill').forEach(el=>{
+    el.style.opacity='0';
+    el.style.transform='translateY(16px)';
+    el.style.transition='opacity .6s var(--ease), transform .6s var(--ease)';
+    obs.observe(el);
+  });
+}
+
+// Run on load
+initLandingAnims();
+</script>
+</body>
+</html>
