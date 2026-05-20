@@ -1,1 +1,0 @@
-# yagmurgo-design.github.io
