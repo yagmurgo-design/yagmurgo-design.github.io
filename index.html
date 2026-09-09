@@ -3,6 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+// Restore the deep-linked path after the GitHub Pages 404 redirect (see 404.html).
+(function(){
+  var redirect = sessionStorage.redirect;
+  delete sessionStorage.redirect;
+  if(redirect && redirect !== location.href){
+    history.replaceState(null, null, redirect);
+  }
+})();
+</script>
 <title>Yağmur Gökçe — Senior Lead UX Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -703,11 +713,11 @@ site-footer,.site-footer{
      GLOBAL NAV
 ══════════════════════════════════════════ -->
 <nav class="site-nav" id="siteNav">
-  <a href="#" class="nav-logo" onclick="showPage('landing');return false">Yağmur Gökçe<em>.</em></a>
+  <a href="/" class="nav-logo" onclick="goHome();return false">Yağmur Gökçe<em>.</em></a>
   <div class="nav-right">
-    <a href="#" class="nav-link" onclick="showPage('landing');scrollLP('lp-work');return false">Work</a>
+    <a href="/" class="nav-link" onclick="goHome('lp-work');return false">Work</a>
     <div class="nav-divider"></div>
-    <a href="#" class="nav-link" onclick="showPage('landing');scrollLP('lp-about');return false">About</a>
+    <a href="/" class="nav-link" onclick="goHome('lp-about');return false">About</a>
     <div class="nav-divider"></div>
     <a href="mailto:me.yagmurgokce@gmail.com" class="nav-pill">Say hello →</a>
   </div>
@@ -891,7 +901,7 @@ site-footer,.site-footer{
      CASE STUDY: USERHEAR
 ══════════════════════════════════════════ -->
 <div class="page" id="page-userhear">
-  <a class="cs-back" href="#" onclick="closeCS();return false">
+  <a class="cs-back" href="/" onclick="closeCS();return false">
     <svg viewBox="0 0 16 16"><path d="M13 8H3M3 8L8 3M3 8L8 13"/></svg>
     All work
   </a>
@@ -1149,7 +1159,7 @@ site-footer,.site-footer{
      CASE STUDY: İŞCEP
 ══════════════════════════════════════════ -->
 <div class="page" id="page-iscep">
-  <a class="cs-back" href="#" onclick="closeCS();return false">
+  <a class="cs-back" href="/" onclick="closeCS();return false">
     <svg viewBox="0 0 16 16"><path d="M13 8H3M3 8L8 3M3 8L8 13"/></svg>
     All work
   </a>
@@ -1335,7 +1345,7 @@ site-footer,.site-footer{
      CASE STUDY: ARMUT (shorter)
 ══════════════════════════════════════════ -->
 <div class="page" id="page-armut">
-  <a class="cs-back" href="#" onclick="closeCS();return false">
+  <a class="cs-back" href="/" onclick="closeCS();return false">
     <svg viewBox="0 0 16 16"><path d="M13 8H3M3 8L8 3M3 8L8 13"/></svg>
     All work
   </a>
@@ -1402,7 +1412,7 @@ site-footer,.site-footer{
      CASE STUDY: RESEARCH
 ══════════════════════════════════════════ -->
 <div class="page" id="page-research">
-  <a class="cs-back" href="#" onclick="closeCS();return false">
+  <a class="cs-back" href="/" onclick="closeCS();return false">
     <svg viewBox="0 0 16 16"><path d="M13 8H3M3 8L8 3M3 8L8 13"/></svg>
     All work
   </a>
@@ -1486,12 +1496,31 @@ window.addEventListener('scroll',()=>{
 },{passive:true});
 
 // ── PAGE MANAGEMENT ──────────────────────────────────────
+const CS_PAGES=['userhear','iscep','armut','research'];
+const PAGE_TITLES={
+  landing: 'Yağmur Gökçe — Senior Lead UX Designer',
+  userhear: 'UserHear — Yağmur Gökçe',
+  iscep: 'İşCep — Yağmur Gökçe',
+  armut: 'Armut — Yağmur Gökçe',
+  research: 'Research — Yağmur Gökçe'
+};
 let currentPage='landing';
 function showPage(id){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.getElementById('page-'+id).classList.add('active');
   currentPage=id;
+  document.title=PAGE_TITLES[id]||PAGE_TITLES.landing;
   window.scrollTo({top:0,behavior:'instant'});
+}
+function pagePath(id){
+  return id==='landing' ? '/' : '/'+id;
+}
+function slugFromPath(path){
+  return path.replace(/^\/+|\/+$/g,'');
+}
+function setUrlForPage(id,replace){
+  const url=pagePath(id);
+  history[replace?'replaceState':'pushState']({page:id},'',url);
 }
 function scrollLP(id){
   setTimeout(()=>{
@@ -1501,15 +1530,28 @@ function scrollLP(id){
 }
 function openCS(id){
   showPage(id);
+  setUrlForPage(id,false);
   setTimeout(initObservers,120);
 }
 function closeCS(){
   showPage('landing');
+  setUrlForPage('landing',false);
   setTimeout(()=>{
     const work=document.getElementById('lp-work');
     if(work)work.scrollIntoView({behavior:'smooth',block:'start'});
   },80);
 }
+function goHome(scrollId){
+  showPage('landing');
+  setUrlForPage('landing',false);
+  if(scrollId)scrollLP(scrollId);
+}
+window.addEventListener('popstate',e=>{
+  const slug=e.state?e.state.page:slugFromPath(location.pathname);
+  const id=CS_PAGES.includes(slug)?slug:'landing';
+  showPage(id);
+  if(id!=='landing')setTimeout(initObservers,50);
+});
 
 // ── VIDEO ────────────────────────────────────────────────
 function playVid(frameId,thumbId){
@@ -1602,6 +1644,15 @@ function initLandingAnims(){
     obs.observe(el);
   });
 }
+
+// ── INITIAL ROUTE ────────────────────────────────────────
+(function initRoute(){
+  const slug=slugFromPath(location.pathname);
+  const id=CS_PAGES.includes(slug)?slug:'landing';
+  showPage(id);
+  setUrlForPage(id,true);
+  if(id!=='landing')setTimeout(initObservers,120);
+})();
 
 // Run on load
 initLandingAnims();
