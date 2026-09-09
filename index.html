@@ -566,6 +566,16 @@ site-footer,.site-footer{
   padding:11px 16px;font-size:11px;color:var(--ink4);
   letter-spacing:.04em;border-top:1px solid var(--rule);background:var(--bg);
 }
+.cs-article-link{
+  display:inline-flex;align-items:center;gap:8px;margin-top:8px;
+  font-size:13px;letter-spacing:.01em;
+  color:var(--ink2);text-decoration:none;cursor:none;
+  padding-bottom:2px;border-bottom:1px solid var(--rule);
+  transition:color .2s,border-color .2s;
+}
+.cs-article-link:hover{color:var(--ink);border-color:var(--ink)}
+.cs-article-link svg{width:12px;height:12px;transition:transform .2s}
+.cs-article-link:hover svg{transform:translate(2px,-2px)}
 
 /* figma */
 .cs-figma-wrap{margin:32px 0;border:1px solid var(--rule);overflow:hidden;position:relative;background:var(--bg2)}
@@ -656,7 +666,7 @@ site-footer,.site-footer{
     <div class="nav-divider"></div>
     <a href="#" class="nav-link" onclick="showPage('landing');scrollLP('lp-about');return false">About</a>
     <div class="nav-divider"></div>
-    <a href="mailto:yagmurgokce@gmail.com" class="nav-pill">Say hello →</a>
+    <a href="mailto:me.yagmurgokce@gmail.com" class="nav-pill">Say hello →</a>
   </div>
 </nav>
 
@@ -822,8 +832,8 @@ site-footer,.site-footer{
     <h2 class="contact-h2">Let's make<br><em>something</em><br>great.</h2>
     <div class="contact-links">
       <a href="https://www.linkedin.com/in/yagmurgokce/" target="_blank" class="contact-a">LinkedIn</a>
-      <a href="mailto:yagmurgokce@gmail.com" class="contact-email">yagmurgokce@gmail.com</a>
-      <a href="https://read.cv/yagmurgokce" target="_blank" class="contact-a">Read.cv</a>
+      <a href="mailto:me.yagmurgokce@gmail.com" class="contact-email">me.yagmurgokce@gmail.com</a>
+      <a href="assets/cv/Yagmur-Gokce-CV.pdf" target="_blank" class="contact-a">CV</a>
     </div>
   </section>
 
@@ -875,6 +885,10 @@ site-footer,.site-footer{
         <p class="cs-p">Product teams at large digital companies receive tens of thousands of app store reviews every month. Reading them is impossible. Acting on them is even harder. Most teams settle for star ratings and keyword counts — a signal so blunt it barely qualifies as insight.</p>
         <p class="cs-p">UserHear is Commencis's answer: an AI-powered analytics platform that ingests reviews from the App Store, Google Play, and social channels, then surfaces structured, prioritised, actionable intelligence — with the emotional texture of the original feedback intact.</p>
         <p class="cs-p">As Senior Lead UX Designer, I own the end-to-end product vision and roadmap, shaping both the strategic direction and the moment-to-moment design execution with my team.</p>
+        <a class="cs-article-link" href="https://medium.com/commencis/every-user-told-you-something-now-you-can-hear-all-of-it-d0ccc0bf5762" target="_blank" rel="noopener">
+          Read how UserHear works on Medium
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg>
+        </a>
         <div class="cs-tags">
           <span class="cs-tag">AI Product Design</span><span class="cs-tag">Product Strategy</span>
           <span class="cs-tag">Information Architecture</span><span class="cs-tag">Data Visualisation</span>
