@@ -613,6 +613,36 @@ site-footer,.site-footer{
 .cs-figma-btn:hover{opacity:.75}
 .cs-figma-cap{padding:11px 16px;font-size:11px;color:var(--ink4);letter-spacing:.04em;border-top:1px solid var(--rule);background:var(--bg)}
 
+/* problem/solution slider */
+.cs-slider{margin:32px 0;position:relative}
+.cs-slider-viewport{overflow:hidden;border:1px solid var(--rule);background:var(--bg2)}
+.cs-slider-track{display:flex;transition:transform .45s cubic-bezier(.65,0,.35,1)}
+.cs-slider-slide{flex:0 0 100%;position:relative}
+.cs-slider-slide img{width:100%;display:block;aspect-ratio:16/10;object-fit:cover}
+.cs-slider-cap{
+  display:flex;align-items:center;gap:12px;
+  padding:14px 18px;border-top:1px solid var(--rule);background:var(--bg);
+}
+.cs-slider-cap p{font-size:12px;color:var(--ink3);letter-spacing:.01em;line-height:1.5}
+.cs-slider-nav{
+  position:absolute;top:calc(50% - 22px);width:38px;height:38px;border-radius:50%;
+  background:var(--bg);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;
+  font-size:18px;line-height:1;color:var(--ink);cursor:none;transition:background .2s,transform .2s;
+  z-index:2;
+}
+.cs-slider-nav:hover{background:var(--bg3);transform:translateY(-1px)}
+.cs-slider-nav.prev{left:14px}
+.cs-slider-nav.next{right:14px}
+.cs-slider-dots{display:flex;justify-content:center;gap:8px;margin-top:16px}
+.cs-slider-dot{width:7px;height:7px;border-radius:50%;background:var(--ink4);border:none;cursor:none;padding:0;transition:background .2s,transform .2s}
+.cs-slider-dot.active{background:var(--ink);transform:scale(1.3)}
+@media(max-width:768px){
+  .cs-slider-nav{width:32px;height:32px;font-size:15px}
+  .cs-slider-nav.prev{left:8px}
+  .cs-slider-nav.next{right:8px}
+  .cs-slider-cap{padding:12px 14px}
+}
+
 /* reflection block */
 .cs-reflection{background:var(--ink);color:var(--bg);padding:56px;margin:56px 0 0}
 .cs-reflection-eye{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,250,248,.35);margin-bottom:18px}
@@ -950,6 +980,37 @@ site-footer,.site-footer{
           <p class="cs-quote-attr">— Product manager, discovery interview</p>
         </div>
         <p class="cs-p">Three core tensions shaped every design decision: signal vs. noise, confidence vs. humility (how do you show AI certainty without misleading?), and action vs. exploration.</p>
+
+        <div class="cs-slider" id="uh-pslider">
+          <div class="cs-slider-viewport">
+            <div class="cs-slider-track" id="uh-pslider-track">
+              <div class="cs-slider-slide">
+                <img src="assets/img/userhear-problem-1.jpg" alt="Too many reviews, scattered channels, no time — product teams receive tens of thousands of qualitative feedback signals daily and act on almost none of it">
+                <div class="cs-slider-cap"><span class="badge-light">Problem</span><p>Too many reviews, scattered across call centres, app stores, surveys and social — with almost none of it acted on.</p></div>
+              </div>
+              <div class="cs-slider-slide">
+                <img src="assets/img/userhear-problem-2.jpg" alt="UserHear's four-stepped intelligence loop: Listen, Understand, Deep dive, Uncover">
+                <div class="cs-slider-cap"><span class="badge">Solution</span><p>A four-stepped intelligence loop — Listen, Understand, Deep dive, Uncover — turns raw feedback into a roadmap.</p></div>
+              </div>
+              <div class="cs-slider-slide">
+                <img src="assets/img/userhear-problem-3.jpg" alt="UserHear differentiators: sector agnostic, number one Turkish LLM, one hundred percent traceable insights">
+                <div class="cs-slider-cap"><span class="badge">Solution</span><p>Sector-agnostic and built on a Turkish-first sentiment model, with every insight traceable back to its source.</p></div>
+              </div>
+              <div class="cs-slider-slide">
+                <img src="assets/img/userhear-problem-4.jpg" alt="Qualitative feedback, finally actionable — prioritised recommendations with clear benefits for each">
+                <div class="cs-slider-cap"><span class="badge">Solution</span><p>Qualitative feedback, finally actionable — prioritised recommendations product teams can ship against.</p></div>
+              </div>
+            </div>
+          </div>
+          <button class="cs-slider-nav prev" onclick="uhSlide(-1)" aria-label="Previous slide">‹</button>
+          <button class="cs-slider-nav next" onclick="uhSlide(1)" aria-label="Next slide">›</button>
+          <div class="cs-slider-dots" id="uh-pslider-dots">
+            <button class="cs-slider-dot active" onclick="uhGoTo(0)" aria-label="Go to slide 1"></button>
+            <button class="cs-slider-dot" onclick="uhGoTo(1)" aria-label="Go to slide 2"></button>
+            <button class="cs-slider-dot" onclick="uhGoTo(2)" aria-label="Go to slide 3"></button>
+            <button class="cs-slider-dot" onclick="uhGoTo(3)" aria-label="Go to slide 4"></button>
+          </div>
+        </div>
       </section>
 
       <section class="cs-sec" id="uh-research">
@@ -1462,6 +1523,24 @@ function loadFigma(frameId,overlayId){
   const f=document.getElementById(frameId);
   f.src=f.dataset.src;
   document.getElementById(overlayId).classList.add('gone');
+}
+
+// ── UH PROBLEM/SOLUTION SLIDER ───────────────────────────
+let uhSlideIdx=0;
+const uhSlideCount=document.querySelectorAll('#uh-pslider-track .cs-slider-slide').length;
+function uhRender(){
+  document.getElementById('uh-pslider-track').style.transform=`translateX(-${uhSlideIdx*100}%)`;
+  document.querySelectorAll('#uh-pslider-dots .cs-slider-dot').forEach((d,i)=>{
+    d.classList.toggle('active',i===uhSlideIdx);
+  });
+}
+function uhSlide(dir){
+  uhSlideIdx=(uhSlideIdx+dir+uhSlideCount)%uhSlideCount;
+  uhRender();
+}
+function uhGoTo(i){
+  uhSlideIdx=i;
+  uhRender();
 }
 
 // ── SIDENAV SMOOTH SCROLL ────────────────────────────────
