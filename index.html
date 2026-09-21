@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<base href="/">
 <script>
 // Restore the deep-linked path after the GitHub Pages 404 redirect (see 404.html).
 (function(){
@@ -675,6 +676,288 @@ site-footer,.site-footer{
 .live-dot{display:inline-block;width:6px;height:6px;background:#22c55e;
           border-radius:50%;margin-right:5px;animation:livePulse 2s infinite}
 
+/* ════════════════════════════════════════════════════════════
+   İŞCEP SECTION — hub, sub-pages and shared components
+════════════════════════════════════════════════════════════ */
+
+/* placeholder visuals */
+.ph{
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  padding:20px;text-align:center;
+  background:var(--bg2);border:1px dashed var(--ink4);color:var(--ink3);
+}
+.ph::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:repeating-linear-gradient(135deg,transparent 0 10px,rgba(20,20,18,.035) 10px 11px);
+}
+.ph-k{position:relative;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4)}
+.ph-t{position:relative;font-family:var(--serif);font-style:italic;font-size:14px;line-height:1.35;color:var(--ink2);max-width:220px}
+.ph-wide{aspect-ratio:16/10}
+.ph-phone{aspect-ratio:9/19;border-radius:26px;background:var(--bg);border-style:solid;border-color:var(--ink4);padding:34px 12px 16px}
+.ph-phone::after{
+  content:'';position:absolute;top:10px;left:50%;width:34%;height:8px;
+  border-radius:8px;background:var(--bg3);transform:translateX(-50%);
+}
+.ph-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start;margin:32px 0}
+.ph-row.four{grid-template-columns:repeat(4,1fr);gap:14px}
+.ph-row .ph-phone{width:100%;max-width:196px;justify-self:center}
+.ph-row .ph-phone:nth-child(even){margin-top:26px}
+
+/* hero visual band */
+.cs-hero.has-visual{border-bottom:none;padding-bottom:48px}
+.cs-hero-visual{max-width:1100px;margin:0 auto;padding:0 48px}
+.ph-stage{
+  position:relative;overflow:hidden;
+  display:flex;justify-content:center;align-items:flex-start;gap:clamp(14px,3vw,32px);
+  height:clamp(280px,40vw,440px);padding-top:52px;
+  background:var(--bg2);border:1px solid var(--rule);
+}
+.ph-stage .ph-phone{width:clamp(112px,17vw,200px);flex:none;border-bottom-color:transparent}
+.ph-stage .ph-phone:nth-child(even){margin-top:-24px}
+.ph-stage.wide{height:auto;aspect-ratio:21/9;padding:0;align-items:stretch}
+.ph-stage.wide .ph{flex:1;border:none;background:transparent}
+.cs-hero-visual .cs-fig-cap{padding:12px 0 0}
+
+/* figures and media blocks */
+.cs-fig{margin:32px 0}
+.cs-fig-cap{padding:11px 0 0;font-size:11px;color:var(--ink4);letter-spacing:.04em;line-height:1.5}
+.cs-media{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;margin:36px 0}
+.cs-media.rev>:first-child{order:2}
+.cs-media .cs-p{max-width:none}
+.cs-media .ph-phone{width:54%;margin:0 auto}
+.cs-media-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:8px}
+.cs-gal{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:32px 0 0}
+.cs-gal figcaption{padding-top:8px;font-size:11px;color:var(--ink4);letter-spacing:.03em;line-height:1.45}
+.cs-gal .ph{aspect-ratio:4/5}
+.cs-note{
+  display:flex;gap:14px;align-items:flex-start;
+  font-size:12px;color:var(--ink3);line-height:1.65;
+  padding:14px 18px;border:1px solid var(--rule);background:var(--bg2);margin:28px 0;
+}
+.cs-note b{font-weight:400;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);padding-top:3px;white-space:nowrap}
+
+/* track and link cards */
+.trk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:28px 0}
+.trk{background:var(--bg);padding:26px 22px;display:flex;flex-direction:column;gap:6px;transition:background .2s}
+.trk.link{cursor:none}
+.trk.link:hover{background:var(--bg2)}
+.trk-num{font-family:var(--serif);font-size:30px;line-height:1;color:var(--ink4);margin-bottom:8px}
+.trk-title{font-size:13px;font-weight:500;color:var(--ink)}
+.trk-text{font-size:12px;color:var(--ink3);line-height:1.65}
+.trk-go{margin-top:auto;padding-top:14px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);transition:color .2s,transform .2s}
+.trk.link:hover .trk-go{color:var(--ink);transform:translateX(4px)}
+
+/* product cards */
+.pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:28px 0}
+.pc{background:var(--bg);display:flex;flex-direction:column;cursor:none;transition:background .2s}
+.pc:hover{background:var(--bg2)}
+.pc .ph{border:none;border-bottom:1px dashed var(--ink4);aspect-ratio:16/9}
+.pc-img{aspect-ratio:16/9;overflow:hidden;background:var(--ink)}
+.pc-img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.pc:hover .pc-img img{transform:scale(1.04)}
+.pc-body{padding:22px;display:flex;flex-direction:column;gap:6px;flex:1}
+.pc-tag{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)}
+.pc-title{font-family:var(--serif);font-size:21px;line-height:1.15;letter-spacing:-.02em;color:var(--ink)}
+.pc-text{font-size:12px;color:var(--ink3);line-height:1.65}
+.pc-foot{margin-top:auto;padding-top:14px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--ink4);letter-spacing:.03em}
+.pc-foot span:last-child{font-size:18px;color:var(--ink3);transition:transform .25s,color .25s}
+.pc:hover .pc-foot span:last-child{transform:translateX(5px);color:var(--ink)}
+
+/* timeline with year labels */
+.tl{margin:32px 0;border-top:1px solid var(--rule)}
+.tl-row{display:grid;grid-template-columns:92px 1fr;gap:24px;padding:22px 0;border-bottom:1px solid var(--rule)}
+.tl-yr{font-family:var(--serif);font-size:22px;line-height:1.1;letter-spacing:-.02em;color:var(--ink)}
+.tl-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:3px}
+.tl-title{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.tl-text{font-size:12px;color:var(--ink3);line-height:1.65}
+
+/* design-cycle diagram */
+.cyc{display:grid;grid-template-columns:1fr 1.2fr 1.2fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);margin:28px 0 0}
+.cyc-ph{background:var(--bg);padding:22px 18px}
+.cyc-ph-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px}
+.cyc-ph-name{font-family:var(--serif);font-size:24px;line-height:1.05;letter-spacing:-.02em;color:var(--ink)}
+.cyc-ph-tr{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--ink3);margin:2px 0 16px}
+.cyc-step{display:grid;grid-template-columns:24px 1fr;gap:6px;padding:9px 0;border-top:1px solid var(--rule);font-size:12px;line-height:1.4;color:var(--ink2)}
+.cyc-step b{font-family:var(--serif);font-weight:400;font-size:13px;color:var(--ink4)}
+.cyc-gate{display:block;width:max-content;margin-top:5px;font-size:9px;letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:var(--bg);padding:1px 7px;border-radius:100px;font-style:normal;white-space:nowrap}
+.cyc-loop{display:flex;justify-content:space-between;gap:16px;padding:12px 18px;border:1px solid var(--rule);border-top:none;background:var(--bg2);font-size:11px;letter-spacing:.03em;color:var(--ink3)}
+.cyc-strip-lbl{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin:28px 0 10px}
+.cyc-strip{display:flex;gap:4px}
+.cyc-strip span{flex:1 1 0;min-width:0;max-width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--ink4);border:1px solid var(--rule);border-radius:2px}
+.cyc-strip span.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.cyc-strip i{flex:0 0 12px}
+.cyc-strip-cap{margin-top:10px;font-size:11px;color:var(--ink4);letter-spacing:.03em;line-height:1.5}
+
+/* annual loop */
+.loop{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:28px 0 0}
+.loop-cell{background:var(--bg);padding:22px 20px}
+.loop-n{font-family:var(--serif);font-size:28px;line-height:1;color:var(--ink4);margin-bottom:10px}
+.loop-t{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:5px}
+.loop-d{font-size:12px;color:var(--ink3);line-height:1.65}
+.loop-foot{padding:12px 18px;border:1px solid var(--rule);border-top:none;background:var(--bg2);font-size:11px;letter-spacing:.03em;color:var(--ink3)}
+
+/* comparison table */
+.cs-table-wrap{overflow-x:auto;margin:28px 0;border:1px solid var(--rule);scrollbar-width:thin}
+.cs-table{width:100%;min-width:640px;border-collapse:collapse}
+.cs-table th,.cs-table td{padding:16px 18px;text-align:left;vertical-align:top;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);font-size:12px;line-height:1.6;color:var(--ink2)}
+.cs-table th{background:var(--bg2);font-weight:400;font-family:var(--serif);font-size:17px;line-height:1.2;letter-spacing:-.01em;color:var(--ink)}
+.cs-table th small{display:block;margin-top:4px;font-family:var(--sans);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4)}
+.cs-table td:first-child,.cs-table th:first-child{width:96px;background:var(--bg2);font-family:var(--sans);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)}
+.cs-table tr>*:last-child{border-right:none}
+.cs-table tr:last-child>*{border-bottom:none}
+
+/* problem → artefact map */
+.map{margin:28px 0;border:1px solid var(--rule)}
+.map-row{display:grid;grid-template-columns:1fr 24px 1fr;gap:12px;align-items:center;padding:14px 18px;background:var(--bg);border-bottom:1px solid var(--rule);font-size:12px;line-height:1.55}
+.map-row:last-child{border-bottom:none}
+.map-row.head{background:var(--bg2);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)}
+.map-p{color:var(--ink3)}
+.map-a{color:var(--ink);font-weight:500}
+.map-arrow{text-align:center;color:var(--ink4)}
+
+/* playbook phases */
+.pb{margin:28px 0;border:1px solid var(--rule)}
+.pb-row{display:grid;grid-template-columns:36px 170px 1fr;gap:16px;align-items:start;padding:18px 20px;background:var(--bg);border-bottom:1px solid var(--rule)}
+.pb-row:last-child{border-bottom:none}
+.pb-n{font-family:var(--serif);font-size:22px;line-height:1;color:var(--ink4)}
+.pb-name{font-size:13px;font-weight:500;color:var(--ink);line-height:1.35}
+.pb-tr{display:block;font-family:var(--serif);font-style:italic;font-weight:300;font-size:12px;color:var(--ink3);margin-top:2px}
+.pb-steps{display:flex;flex-wrap:wrap;gap:6px}
+
+/* heuristics list */
+.hx{display:grid;grid-template-columns:1fr 1fr;gap:0 32px;margin:28px 0 0;counter-reset:hx}
+.hx-item{display:grid;grid-template-columns:26px 1fr;gap:8px;padding:12px 0;border-top:1px solid var(--rule);font-size:12px;line-height:1.5;color:var(--ink3)}
+.hx-item b{display:block;font-weight:500;font-size:13px;color:var(--ink)}
+.hx-item span{font-family:var(--serif);font-size:13px;color:var(--ink4)}
+
+/* six thinking hats */
+.hats{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0}
+.hat{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--ink2);background:var(--bg);border:1px solid var(--rule);padding:6px 13px;border-radius:100px}
+.hat i{width:10px;height:10px;border-radius:50%;border:1px solid var(--ink4);display:inline-block}
+
+/* idea card anatomy */
+.ic-wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;margin:28px 0;align-items:start}
+.ic{border:1px solid var(--ink);background:var(--bg)}
+.ic-h{padding:12px 16px;border-bottom:1px solid var(--ink);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink)}
+.ic-h span{color:var(--ink4)}
+.ic .ph{border:none;border-bottom:1px solid var(--rule);aspect-ratio:16/9}
+.ic-sec{padding:12px 16px;border-bottom:1px solid var(--rule);font-size:11px;color:var(--ink3);line-height:1.5}
+.ic-sec:last-child{border-bottom:none}
+.ic-k{display:flex;align-items:center;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4);margin-bottom:6px}
+.ic-k b{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;background:var(--ink);color:var(--bg);font-weight:400;font-size:9px;letter-spacing:0;margin-right:7px}
+.ic-chips{display:flex;flex-wrap:wrap;gap:4px}
+.ic-chips span{font-size:10px;padding:3px 8px;border:1px solid var(--rule);color:var(--ink2)}
+.ic-notes{display:flex;flex-direction:column;gap:18px}
+.ic-notes .cs-annot-text{font-size:12px}
+
+/* design-cycle explorer (hub) */
+.cyc-x{margin:32px 0 28px}
+.cyc-tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.cyc-tile{
+  position:relative;aspect-ratio:1;padding:14px;
+  display:flex;flex-direction:column;justify-content:space-between;align-items:flex-start;
+  text-align:left;font:inherit;font-weight:300;color:var(--ink);
+  background:var(--bg);border:none;cursor:none;
+  transition:background .25s,color .25s;
+}
+.cyc-tile.gate::before{content:'';position:absolute;left:0;right:0;top:0;height:2px;background:var(--ink)}
+.cyc-tile-ph{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4);transition:color .25s}
+.cyc-tile-m{position:relative;display:block;width:100%;height:44px}
+.cyc-tile-n{position:absolute;left:0;top:0;font-family:var(--serif);font-size:44px;line-height:1;letter-spacing:-.03em;color:var(--ink4);transition:opacity .25s,transform .25s}
+.cyc-tile-ic{position:absolute;left:0;top:3px;width:38px;height:38px;opacity:0;transform:translateY(6px) scale(.9);transition:opacity .25s,transform .25s}
+.cyc-tile-t{font-size:13px;font-weight:400;line-height:1.25}
+.cyc-tile.on{background:var(--ink);color:var(--bg)}
+.cyc-tile.on .cyc-tile-ph{color:rgba(250,250,248,.55)}
+.cyc-tile.on .cyc-tile-n{opacity:0;transform:translateY(-6px)}
+.cyc-tile.on .cyc-tile-ic{opacity:1;transform:none}
+.cyc-tile.gate.on::before{background:var(--bg)}
+.cyc-tile:focus-visible{outline:2px solid var(--ink);outline-offset:-4px}
+.cyc-detail{
+  display:grid;grid-template-columns:64px 1fr;gap:22px;
+  padding:24px 26px;min-height:196px;
+  border:1px solid var(--rule);border-top:none;background:var(--bg2);
+}
+.cyc-d-ic{width:64px;height:64px;border-radius:50%;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center}
+.cyc-d-ic svg{position:static;width:30px;height:30px;opacity:1;transform:none}
+.cyc-d-ph{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);margin-bottom:4px}
+.cyc-d-t{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:8px;font-family:var(--serif);font-weight:400;font-size:24px;line-height:1.1;letter-spacing:-.02em;color:var(--ink)}
+.cyc-d-t .cyc-gate{display:inline-block;margin:0}
+.cyc-d-p{max-width:560px;margin-bottom:10px;font-size:13px;line-height:1.7;color:var(--ink2)}
+.cyc-d-o{font-size:12px;line-height:1.6;color:var(--ink3)}
+.cyc-d-o b{margin-right:8px;font-weight:400;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4)}
+
+/* live device screens: real screenshots that scroll inside a phone */
+.ph-stage.live{height:auto;align-items:flex-start;padding:56px 24px 52px;gap:clamp(20px,4vw,48px)}
+.dev{
+  --w:260px;
+  position:relative;flex:none;width:var(--w);
+  padding:calc(var(--w)*.03);border-radius:calc(var(--w)*.15);
+  background:var(--ink);
+  box-shadow:0 34px 60px -28px rgba(20,20,18,.5),0 0 0 1px rgba(20,20,18,.08);
+  transition:transform .4s var(--ease);
+}
+.dev:nth-child(2){margin-top:-28px}
+.dev:hover{transform:translateY(-6px)}
+.dev-screen{position:relative;aspect-ratio:393/852;overflow:hidden;border-radius:calc(var(--w)*.12);background:var(--bg)}
+.dev-scroll{position:absolute;inset:0;overflow-x:hidden;overflow-y:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.dev-scroll::-webkit-scrollbar{display:none}
+.dev-scroll:focus-visible{outline:2px solid #3b6fd4;outline-offset:-2px}
+.dev-scroll img{display:block;width:100%;height:auto;-webkit-user-drag:none;user-select:none}
+.dev-tab{position:absolute;left:0;right:0;bottom:0;aspect-ratio:393/97;background-repeat:no-repeat;background-size:100% auto;background-position:bottom;pointer-events:none}
+.dev-hint{
+  position:absolute;left:50%;bottom:calc(var(--w)*.3);transform:translateX(-50%);
+  display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:100px;
+  background:rgba(20,20,18,.8);color:var(--bg);
+  font-size:10px;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;
+  backdrop-filter:blur(6px);pointer-events:none;transition:opacity .3s;
+}
+.dev-hint svg{width:10px;height:10px;animation:devNudge 1.6s ease-in-out infinite}
+.dev.used .dev-hint{opacity:0}
+@keyframes devNudge{0%,100%{transform:translateY(-1px)}50%{transform:translateY(2px)}}
+@media(prefers-reduced-motion:reduce){.dev-hint svg{animation:none}.dev{transition:none}}
+
+/* landing card chips */
+.proj-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.proj-chip{font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3);border:1px solid var(--rule);padding:3px 9px;border-radius:2px}
+
+@media(max-width:768px){
+  .cs-hero-visual{padding:0 20px}
+  .ph-stage{padding-top:36px;gap:10px}
+  .ph-stage .ph-phone{padding:28px 6px 12px;flex:1 1 0;min-width:0;width:auto;max-width:150px;border-radius:20px 20px 0 0}
+  .ph-stage .ph-t{font-size:11px}
+  .ph-stage .ph-k{font-size:9px}
+  .ph-stage.wide{aspect-ratio:4/3}
+  .ph-row,.ph-row.four{grid-template-columns:1fr 1fr;gap:12px}
+  .cs-media{grid-template-columns:1fr;gap:20px}
+  .cs-media.rev>:first-child{order:0}
+  .cs-media .ph-phone{width:56%}
+  .cs-gal{grid-template-columns:1fr 1fr}
+  .trk-grid,.pc-grid,.loop{grid-template-columns:1fr}
+  .tl-row{grid-template-columns:64px 1fr;gap:14px}
+  .tl-yr{font-size:18px}
+  .cyc{grid-template-columns:1fr 1fr}
+  .cyc-loop{flex-direction:column;gap:4px}
+  .map-row{grid-template-columns:1fr;gap:4px}
+  .map-row.head{display:none}
+  .map-arrow{display:none}
+  .pb-row{grid-template-columns:28px 1fr;gap:10px}
+  .pb-steps{grid-column:2}
+  .hx{grid-template-columns:1fr}
+  .ic-wrap{grid-template-columns:1fr}
+  .cs-note{flex-direction:column;gap:6px}
+  .ph-stage.live{justify-content:flex-start;overflow-x:auto;padding:36px 20px 40px;gap:16px;scrollbar-width:none;scroll-snap-type:x proximity}
+  .ph-stage.live::-webkit-scrollbar{display:none}
+  .dev{--w:min(62vw,250px);scroll-snap-align:center}
+  .dev:nth-child(2){margin-top:0}
+  .cyc-tiles{grid-template-columns:1fr 1fr}
+  .cyc-tile{aspect-ratio:4/3}
+  .cyc-detail{grid-template-columns:48px 1fr;gap:14px;padding:20px 18px;min-height:0}
+  .cyc-d-ic{width:48px;height:48px}
+  .cyc-d-ic svg{width:24px;height:24px}
+  .cyc-d-t{font-size:20px}
+}
+
 /* ─── KEYFRAMES ────────────────────────────────────────────── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 @keyframes scrollPulse{0%,100%{opacity:.4}50%{opacity:1}}
@@ -801,11 +1084,12 @@ site-footer,.site-footer{
         <div class="proj-inner">
           <div>
             <p class="proj-tag"><span class="proj-dot"></span>Banking · Mobile · Leadership</p>
-            <h2 class="proj-h2">İşCep — Turkey's largest private bank app</h2>
-            <p class="proj-desc">Led a team of 13 designers across research and design for the country's most-used mobile banking experience.</p>
+            <h2 class="proj-h2">İşCep — designing user and organization level interactions</h2>
+            <p class="proj-desc">Products, the process behind them, and the yearly vision that decides what comes next — designed with İşbank's product teams.</p>
+            <div class="proj-chips"><span class="proj-chip">Mobil Borsa</span><span class="proj-chip">İşCep'le Hayatım</span><span class="proj-chip">Maximum Dünyam</span><span class="proj-chip">10.0 Redesign</span><span class="proj-chip">Ways of working</span><span class="proj-chip">Vision</span></div>
           </div>
           <div class="proj-bottom">
-            <span class="proj-meta">Commencis · 2024 — 2026</span>
+            <span class="proj-meta">Commencis · 5 years</span>
             <div class="proj-arrow"><svg viewBox="0 0 16 16"><path d="M3 13L13 3M13 3H6M13 3V10" stroke-width="1.5"/></svg></div>
           </div>
         </div>
@@ -1146,7 +1430,7 @@ site-footer,.site-footer{
           <p class="cs-reflection-text">"The interface is the last mile of an AI system. But it's also the only mile users experience. Getting it right means understanding everything that comes before it."</p>
         </div>
         <div class="cs-next" onclick="openCS('iscep')">
-          <div><p class="cs-next-lbl">Next case study</p><p class="cs-next-title">İşCep — Turkey's largest private bank app</p></div>
+          <div><p class="cs-next-lbl">Next case study</p><p class="cs-next-title">İşCep — designing user and organization level interactions</p></div>
           <span class="cs-next-arrow">→</span>
         </div>
       </section>
@@ -1156,7 +1440,7 @@ site-footer,.site-footer{
 </div><!-- /page-userhear -->
 
 <!-- ══════════════════════════════════════════
-     CASE STUDY: İŞCEP
+     CASE STUDY: İŞCEP — HUB
 ══════════════════════════════════════════ -->
 <div class="page" id="page-iscep">
   <a class="cs-back" href="/" onclick="closeCS();return false">
@@ -1164,41 +1448,259 @@ site-footer,.site-footer{
     All work
   </a>
 
-  <header class="cs-hero">
-    <p class="cs-eyebrow">Commencis · Mobile Banking · 2024 — 2026</p>
-    <h1 class="cs-h1">İşCep — leading design<br>for <em>Turkey's largest</em><br>private bank app.</h1>
+  <header class="cs-hero has-visual">
+    <p class="cs-eyebrow">Commencis × İşbank · Mobile Banking · 2021 — Present</p>
+    <h1 class="cs-h1">İşCep — designing<br><em>user and organization</em><br>level interactions.</h1>
     <div class="cs-meta-grid">
       <div class="cs-meta-cell"><div class="cs-meta-lbl">Client</div><div class="cs-meta-val">İşbank via Commencis</div></div>
-      <div class="cs-meta-cell"><div class="cs-meta-lbl">Role</div><div class="cs-meta-val">UX Design Lead</div></div>
-      <div class="cs-meta-cell"><div class="cs-meta-lbl">Timeline</div><div class="cs-meta-val">Aug 2024 — Feb 2026</div></div>
-      <div class="cs-meta-cell"><div class="cs-meta-lbl">Team</div><div class="cs-meta-val">13 designers across research &amp; design</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Role</div><div class="cs-meta-val">Sr. UX Designer → Sr. Lead UX Designer</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Timeline</div><div class="cs-meta-val">2021 — Present</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Scope</div><div class="cs-meta-val">Products · Process · Vision</div></div>
     </div>
   </header>
+  <div class="cs-hero-visual">
+    <div class="ph-stage live">
+      <div class="dev">
+        <div class="dev-screen">
+          <div class="dev-scroll" tabindex="0" role="region" aria-label="Personalised home — scrollable screen">
+            <img src="assets/img/iscep/hub-1-home.jpg" alt="İşCep personalised home: account balance, shortcuts, recent transactions, net worth and campaigns" width="786" loading="lazy" decoding="async" draggable="false">
+          </div>
+          <div class="dev-tab" style="background-image:url('assets/img/iscep/hub-1-home.jpg')"></div>
+          <span class="dev-hint"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 1v10M2 7l4 4 4-4"/></svg>Scroll</span>
+        </div>
+      </div>
+      <div class="dev">
+        <div class="dev-screen">
+          <div class="dev-scroll" tabindex="0" role="region" aria-label="Aracım — My Vehicle — scrollable screen">
+            <img src="assets/img/iscep/hub-2-aracim-mylife.jpg" alt="Aracım (My Vehicle) space: vehicle details, expenses by category, latest valuation and vehicle campaigns" width="786" loading="lazy" decoding="async" draggable="false">
+          </div>
+          <div class="dev-tab" style="background-image:url('assets/img/iscep/hub-2-aracim-mylife.jpg')"></div>
+          <span class="dev-hint"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 1v10M2 7l4 4 4-4"/></svg>Scroll</span>
+        </div>
+      </div>
+      <div class="dev">
+        <div class="dev-screen">
+          <div class="dev-scroll" tabindex="0" role="region" aria-label="Investment — scrollable screen">
+            <img src="assets/img/iscep/hub-3-investment.jpg" alt="Investment tab: stock portfolio allocation chart, quick actions and holdings" width="786" loading="lazy" decoding="async" draggable="false">
+          </div>
+          <div class="dev-tab" style="background-image:url('assets/img/iscep/hub-3-investment.jpg')"></div>
+          <span class="dev-hint"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 1v10M2 7l4 4 4-4"/></svg>Scroll</span>
+        </div>
+      </div>
+    </div>
+    <p class="cs-fig-cap">Personalised home · Aracım (My Vehicle) · Investment — hover a screen and scroll; on touch, swipe inside it.</p>
+  </div>
 
   <div class="cs-layout">
     <aside class="cs-sidenav">
       <ul class="cs-snav-list" id="snav-iscep">
         <li class="cs-snav-item active" data-sec="ic-overview"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-overview">Overview</a></li>
-        <li class="cs-snav-item" data-sec="ic-challenge"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-challenge">The Challenge</a></li>
-        <li class="cs-snav-item" data-sec="ic-leadership"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-leadership">Leading the Team</a></li>
-        <li class="cs-snav-item" data-sec="ic-process"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-process">Design Process</a></li>
-        <li class="cs-snav-item" data-sec="ic-work"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-work">Selected Work</a></li>
-        <li class="cs-snav-item" data-sec="ic-designops"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-designops">DesignOps</a></li>
-        <li class="cs-snav-item" data-sec="ic-outcomes"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-outcomes">Outcomes</a></li>
-        <li class="cs-snav-item" data-sec="ic-reflection"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-reflection">Reflection</a></li>
+        <li class="cs-snav-item" data-sec="ic-products"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-products">Cases</a></li>
+        <li class="cs-snav-item" data-sec="ic-way"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-way">Ways of working</a></li>
+        <li class="cs-snav-item" data-sec="ic-vision"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-vision">Vision</a></li>
+        <li class="cs-snav-item" data-sec="ic-team"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ic-team">Leading the team</a></li>
       </ul>
     </aside>
     <div class="cs-content">
 
       <section class="cs-sec" id="ic-overview">
         <p class="cs-sec-eye">Overview</p>
-        <h2 class="cs-h2">Design leadership at the <em>largest scale</em> in Turkish banking.</h2>
-        <p class="cs-p">İşCep is the mobile banking application of İşbank — Turkey's largest private bank, with millions of daily active users. As UX Design Lead at Commencis, I oversaw the research and design stream through the most ambitious redesign period in the app's history: a refreshed information architecture, updated visual language, and an accelerated delivery pace, all simultaneously.</p>
-        <p class="cs-p">This wasn't a single project. It was 1.5 years of continuous design delivery — managing a team of 13, navigating complex stakeholder dynamics between Commencis and the bank's internal teams, and making design quality hold through every sprint.</p>
+        <h2 class="cs-h2">One app, three ways of <em>shaping</em> it.</h2>
+        <p class="cs-p">İşCep is the mobile banking app of İşbank — Turkey's largest private bank. It serves millions of customers every day through hundreds of functions, from a first transfer to a first trade. I've spent five years designing it alongside the bank's product teams, and the work has settled into three tracks that feed each other.</p>
+        <p class="cs-p">Some of it is <strong>products</strong>: new experiences built with individual product teams. Some of it is <strong>process</strong>: the design and product development cycles the bank uses to build anything for İşCep. And once a year it is <strong>vision</strong>: research and workshops that decide what the app should become next, and seed the following year's roadmap.</p>
+        <div class="trk-grid">
+          <div class="trk link" onclick="scrollToSec('ic-products')"><div class="trk-num">01</div><p class="trk-title">Products</p><p class="trk-text">Four case studies: the İşCep 10.0 redesign, İşCep'le Hayatım, Mobil Borsa and Maximum Dünyam.</p><span class="trk-go">See the work ↓</span></div>
+          <div class="trk link" onclick="openCS('iscep-way')"><div class="trk-num">02</div><p class="trk-title">Ways of working</p><p class="trk-text">The design cycle and the product development cycle that give every team one path from request to release.</p><span class="trk-go">Read the story →</span></div>
+          <div class="trk link" onclick="openCS('iscep-vision')"><div class="trk-num">03</div><p class="trk-title">Vision</p><p class="trk-text">The annual research-and-workshop cycle that decides where İşCep goes next.</p><span class="trk-go">Read the story →</span></div>
+        </div>
+        <div class="cs-stats">
+          <div class="cs-stat"><div class="cs-stat-num">5</div><div class="cs-stat-label">Years designing İşCep with the bank's product teams</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">740</div><div class="cs-stat-label">Functions in the app — the scale every decision has to hold</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">1 / yr</div><div class="cs-stat-label">Vision cycle that seeds the next year's roadmap</div></div>
+        </div>
+        <p class="cs-note"><b>Under NDA</b><span>Client work. Screens shown use sample data; the other visuals on these pages are placeholders while more screens are cleared. The decisions and process behind them are real, and I'm happy to walk through the work in person.</span></p>
+      </section>
+
+      <section class="cs-sec" id="ic-products">
+        <p class="cs-sec-eye">Cases</p>
+        <h2 class="cs-h2">4 cases, <em>one cycle.</em></h2>
+        <p class="cs-p">I picked these four to tell the story; there could have been others. Each went through the same design cycle, tuned to its size and its team. The problems were very different — reorganising a whole app, organising it around life, putting a trading floor inside it, making rewards visible — and so were the decisions.</p>
+        <div class="pc-grid">
+          <div class="pc" onclick="openCS('iscep-redesign')">
+            <div class="pc-img"><img src="assets/img/iscep/case-1-iscep-redesign.jpg" alt="Hyperpersonal İşCep Redesign: three phones showing the redesigned home, cards and life spaces" width="1400" height="731" loading="lazy" decoding="async" style="object-position:0 50%"></div>
+            <div class="pc-body"><p class="pc-tag">Redesign · IA · Design system</p><h3 class="pc-title">İşCep 10.0 redesign</h3><p class="pc-text">Redesigning an app with millions of habits inside it: personal home, segment-aware product areas, one design system.</p><div class="pc-foot"><span>2024 — Present</span><span>→</span></div></div>
+          </div>
+          <div class="pc" onclick="openCS('iscep-hayatim')">
+            <div class="pc-img"><img src="assets/img/iscep/case-2-hayatim.jpg" alt="İşCep'le Hayatım: the Aracım (My Vehicle) screen with vehicle expenses and campaign cards" width="1400" height="933" loading="lazy" decoding="async" style="object-position:50% 35%"></div>
+            <div class="pc-body"><p class="pc-tag">Concept · Information architecture</p><h3 class="pc-title">İşCep'le Hayatım</h3><p class="pc-text">A bank organised around life, not products: four spaces for the car, the home, the family and the trip.</p><div class="pc-foot"><span>Phase 1 of the new İşCep</span><span>→</span></div></div>
+          </div>
+          <div class="pc" onclick="openCS('iscep-borsa')">
+            <div class="ph"><p class="ph-k">Image · 16:10</p><p class="ph-t">Watchlist and order entry</p></div>
+            <div class="pc-body"><p class="pc-tag">Investing · Capital markets</p><h3 class="pc-title">Mobil Borsa</h3><p class="pc-text">Stock-market trading inside a banking app — fast for investors, forgiving for first-timers, careful with words.</p><div class="pc-foot"><span>With capital markets</span><span>→</span></div></div>
+          </div>
+          <div class="pc" onclick="openCS('iscep-maximum')">
+            <div class="ph"><p class="ph-k">Image · 16:10</p><p class="ph-t">Points, campaigns, nearby map</p></div>
+            <div class="pc-body"><p class="pc-tag">Loyalty · Campaigns</p><h3 class="pc-title">Maximum Dünyam</h3><p class="pc-text">A personal world for everything a customer earns — making rewards feel like profit, not points.</p><div class="pc-foot"><span>Cards &amp; rewards</span><span>→</span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ic-way">
+        <p class="cs-sec-eye">Ways of working</p>
+        <h2 class="cs-h2">The system behind <em>every</em> screen.</h2>
+        <p class="cs-p">Before any of the cases above, there was a more basic question: how do many product teams, an agency and a technology subsidiary ship into one app without stepping on each other? The answer is a pair of cycles — one born in design in 2019, one widened to every team in 2024.</p>
+        <p class="cs-p">The design cycle has four phases, ten steps and two quality gates. Hover over a step to see what actually happens in it.</p>
+        <div class="cyc-x">
+          <div class="cyc-tiles">
+          <button class="cyc-tile" type="button" data-i="0" aria-controls="cycDetail">
+            <span class="cyc-tile-ph">Define</span>
+            <span class="cyc-tile-m"><span class="cyc-tile-n">1</span><svg class="cyc-tile-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M9 13l2 2 4-4"/></svg></span>
+            <span class="cyc-tile-t">Request analysis</span>
+          </button>
+          <button class="cyc-tile" type="button" data-i="1" aria-controls="cycDetail">
+            <span class="cyc-tile-ph">Design</span>
+            <span class="cyc-tile-m"><span class="cyc-tile-n">2</span><svg class="cyc-tile-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v15h15"/><path d="M3 6h15v15"/></svg></span>
+            <span class="cyc-tile-t">Scoping</span>
+          </button>
+          <button class="cyc-tile" type="button" data-i="2" aria-controls="cycDetail">
+            <span class="cyc-tile-ph">Design</span>
+            <span class="cyc-tile-m"><span class="cyc-tile-n">3</span><svg class="cyc-tile-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg></span>
+            <span class="cyc-tile-t">Research</span>
+          </button>
+          <button class="cyc-tile" type="button" data-i="3" aria-controls="cycDetail">
+            <span class="cyc-tile-ph">Design</span>
+            <span class="cyc-tile-m"><span class="cyc-tile-n">4</span><svg class="cyc-tile-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1-4L16 5l3 3L8 19l-4 1z"/><path d="M14 7l3 3"/></svg></span>
+            <span class="cyc-tile-t">Concept design</span>
+          </button>
+          <button class="cyc-tile gate" type="button" data-i="4" aria-controls="cycDetail">
+            <span class="cyc-tile-ph">Design · Gate</span>
+            <span class="cyc-tile-m"><span class="cyc-tile-n">5</span><svg class="cyc-tile-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
+            <span class="cyc-tile-t">Pre-development review</span>
+          </button>
+          <button class="cyc-tile" type="button" data-i="5" aria-controls="cycDetail">
+            <span class="cyc-tile-ph">Develop</span>
+            <span class="cyc-tile-m"><span class="cyc-tile-n">6</span><svg class="cyc-tile-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 13l9 5 9-5"/></svg></span>
+            <span class="cyc-tile-t">Detailed design</span>
+          </button>
+          <button class="cyc-tile" type="button" data-i="6" aria-controls="cycDetail">
+            <span class="cyc-tile-ph">Develop</span>
+            <span class="cyc-tile-m"><span class="cyc-tile-n">7</span><svg class="cyc-tile-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M8 8l-4 4 4 4"/><path d="M16 8l4 4-4 4"/><path d="M14 5l-4 14"/></svg></span>
+            <span class="cyc-tile-t">Development</span>
+          </button>
+          <button class="cyc-tile" type="button" data-i="7" aria-controls="cycDetail">
+            <span class="cyc-tile-ph">Develop</span>
+            <span class="cyc-tile-m"><span class="cyc-tile-n">8</span><svg class="cyc-tile-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M2 20h20"/></svg></span>
+            <span class="cyc-tile-t">Data strategy</span>
+          </button>
+          <button class="cyc-tile gate" type="button" data-i="8" aria-controls="cycDetail">
+            <span class="cyc-tile-ph">Develop · Gate</span>
+            <span class="cyc-tile-m"><span class="cyc-tile-n">9</span><svg class="cyc-tile-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>
+            <span class="cyc-tile-t">Post-development review</span>
+          </button>
+          <button class="cyc-tile" type="button" data-i="9" aria-controls="cycDetail">
+            <span class="cyc-tile-ph">Improve</span>
+            <span class="cyc-tile-m"><span class="cyc-tile-n">10</span><svg class="cyc-tile-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg></span>
+            <span class="cyc-tile-t">Improvement</span>
+          </button>
+          </div>
+          <div class="cyc-detail" id="cycDetail" aria-live="polite">
+            <div class="cyc-d-ic"></div>
+            <div>
+              <p class="cyc-d-ph"></p>
+              <h3 class="cyc-d-t"><span></span><em class="cyc-gate">Gate</em></h3>
+              <p class="cyc-d-p"></p>
+              <p class="cyc-d-o"><b>You leave with</b><span></span></p>
+            </div>
+          </div>
+        </div>
+        <a class="cs-article-link" href="/iscep/way-of-working" onclick="openCS('iscep-way');return false">Read how the cycles work<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+      </section>
+
+      <section class="cs-sec" id="ic-vision">
+        <p class="cs-sec-eye">Vision</p>
+        <div class="cs-media rev">
+          <div>
+            <h2 class="cs-h2">Where the roadmap <em>comes from.</em></h2>
+            <p class="cs-p">Every year the bank and Commencis run a vision cycle: squads research for weeks, then a workshop turns the findings into ideas the bank can score, detail and place on a roadmap. What I've watched change is the output — from post-its on a wall to working demos on a phone.</p>
+            <a class="cs-article-link" href="/iscep/vision-workshops" onclick="openCS('iscep-vision');return false">Read how the vision cycle works<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+          </div>
+          <div class="ph ph-wide"><p class="ph-k">Photo · 16:10</p><p class="ph-t">Workshop wall with idea cards</p></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ic-team">
+        <p class="cs-sec-eye">Leading the team</p>
+        <h2 class="cs-h2">Building a team that <em>thinks</em>, not just executes.</h2>
+        <p class="cs-p">Alongside the work itself, I led a team of 13 designers across research and design. Managing that many people in parallel is fundamentally a communication and culture challenge, so my approach rested on three pillars: shared language, visible quality standards, and genuine creative ownership for every designer.</p>
+        <div class="cs-two-text">
+          <div><p class="cs-two-text-lbl">Shared language</p><p class="cs-two-text-body">Weekly design principles sessions — not work reviews, but discussions. "What does 'trustworthy' mean in a mobile UI?" produced better decisions than pixel-pushing feedback.</p></div>
+          <div><p class="cs-two-text-lbl">Visible standards</p><p class="cs-two-text-body">Critique cadences with documented rubrics. Not "I don't like this" but "this fails the contrast accessibility check." Specificity enables accountability without creating fear.</p></div>
+          <div><p class="cs-two-text-lbl">Creative ownership</p><p class="cs-two-text-body">Designers were assigned feature areas, not tasks. They owned features from research through handoff — building product intuition, not just execution speed.</p></div>
+          <div><p class="cs-two-text-lbl">Roadmap contribution</p><p class="cs-two-text-body">Design had a seat at the roadmap table, supported by design-led data — UX metrics, usability findings, competitive analysis — not aesthetic preference. The vision cycle is where that seat is earned every year.</p></div>
+        </div>
+        <div class="cs-reflection">
+          <p class="cs-reflection-eye">Key takeaway</p>
+          <p class="cs-reflection-text">"Design quality at scale isn't a design problem. It's a culture problem that systems, rituals and leadership can solve — but only if you treat it as seriously as any product problem."</p>
+        </div>
+        <div class="cs-next" onclick="openCS('iscep-redesign')">
+          <div><p class="cs-next-lbl">First case study</p><p class="cs-next-title">İşCep 10.0 — redesigning the app millions already use</p></div>
+          <span class="cs-next-arrow">→</span>
+        </div>
+      </section>
+
+
+    </div>
+  </div>
+</div><!-- /page-iscep -->
+
+<!-- ══════════════════════════════════════════
+     CASE STUDY: İŞCEP 10.0 REDESIGN
+══════════════════════════════════════════ -->
+<div class="page" id="page-iscep-redesign">
+  <a class="cs-back" href="/iscep" onclick="openCS('iscep');return false">
+    <svg viewBox="0 0 16 16"><path d="M13 8H3M3 8L8 3M3 8L8 13"/></svg>
+    İşCep
+  </a>
+
+  <header class="cs-hero has-visual">
+    <p class="cs-eyebrow">Commencis × İşbank · Redesign · 2024 — Present</p>
+    <h1 class="cs-h1">İşCep 10.0 — redesigning<br>the app <em>millions<br>already use.</em></h1>
+    <div class="cs-meta-grid">
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Client</div><div class="cs-meta-val">İşbank via Commencis</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Role</div><div class="cs-meta-val">UX Design Lead</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Timeline</div><div class="cs-meta-val">2024 — Present</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Scope</div><div class="cs-meta-val">IA · Home · Design system</div></div>
+    </div>
+  </header>
+  <div class="cs-hero-visual">
+    <div class="ph-stage">
+      <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Personalised home</p></div>
+      <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Segment product areas</p></div>
+      <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">İşCepX components in use</p></div>
+    </div>
+  </div>
+
+  <div class="cs-layout">
+    <aside class="cs-sidenav">
+      <ul class="cs-snav-list" id="snav-iscep-redesign">
+        <li class="cs-snav-item active" data-sec="ir-overview"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ir-overview">Overview</a></li>
+        <li class="cs-snav-item" data-sec="ir-vision"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ir-vision">Vision</a></li>
+        <li class="cs-snav-item" data-sec="ir-approach"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ir-approach">Approach</a></li>
+        <li class="cs-snav-item" data-sec="ir-system"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ir-system">Design system</a></li>
+        <li class="cs-snav-item" data-sec="ir-rollout"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ir-rollout">Rollout</a></li>
+        <li class="cs-snav-item" data-sec="ir-outcomes"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ir-outcomes">Outcomes</a></li>
+      </ul>
+    </aside>
+    <div class="cs-content">
+
+      <section class="cs-sec" id="ir-overview">
+        <p class="cs-sec-eye">Overview</p>
+        <h2 class="cs-h2">A redesign with <em>millions of habits</em> inside it.</h2>
+        <p class="cs-p">İşCep 10.0 — presented to the bank's Digital Banking department in July 2024 — set the direction for a new İşCep: a smart, personal, innovative finance and life app. It wasn't a reskin. It was a plan to change how the app is organised, how it addresses different customers, and how quickly it can evolve, while keeping it familiar to everyone who opens it every day.</p>
+        <p class="cs-p">That last part is the real design problem. A redesign at this scale is less about screens than about change: every decision in the information architecture had to account for who might get lost, and how many of them there would be.</p>
         <div class="cs-tags">
-          <span class="cs-tag">Design Leadership</span><span class="cs-tag">Mobile Banking</span>
-          <span class="cs-tag">Team Management</span><span class="cs-tag">UX Strategy</span>
-          <span class="cs-tag">Stakeholder Management</span><span class="cs-tag">DesignOps</span>
+          <span class="cs-tag">Information Architecture</span><span class="cs-tag">Personalisation</span>
+          <span class="cs-tag">Design System</span><span class="cs-tag">Change Management</span>
           <span class="cs-tag">iOS · Android</span>
         </div>
         <div class="cs-figma-wrap">
@@ -1219,127 +1721,956 @@ site-footer,.site-footer{
         </div>
         <p class="cs-figma-cap">İşCep 2024 — Commencis design presentation · Figma</p>
         <div class="cs-stats">
-          <div class="cs-stat"><div class="cs-stat-num">13</div><div class="cs-stat-label">Designers managed across both streams</div></div>
-          <div class="cs-stat"><div class="cs-stat-num">#1</div><div class="cs-stat-label">Largest private bank mobile app in Turkey</div></div>
-          <div class="cs-stat"><div class="cs-stat-num">1.5yr</div><div class="cs-stat-label">Continuous delivery at scale</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">14.6M</div><div class="cs-stat-label">Active users</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">740</div><div class="cs-stat-label">Functions to organise</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">4.6</div><div class="cs-stat-label">App Store rating going in</div></div>
         </div>
       </section>
 
-      <section class="cs-sec" id="ic-challenge">
-        <p class="cs-sec-eye">The Challenge</p>
-        <h2 class="cs-h2">Banking design is never <em>just design.</em></h2>
-        <p class="cs-p">Mobile banking applications carry extraordinary user weight. Every interaction involves trust, money, and — for a significant portion of users — genuine anxiety. The bar for quality isn't just aesthetic: a confusing form field can mean a missed payment; an ambiguous error message can mean a panic call to customer support.</p>
-        <p class="cs-p">At the same time, İşCep was under pressure to modernise rapidly — matching the pace of fintech challengers while maintaining the reliability expectations of a 100-year-old institution. These are genuinely opposing forces.</p>
-        <div class="cs-cards">
-          <div class="cs-card"><div class="cs-card-num">↕</div><p class="cs-card-title">Speed vs. safety</p><p class="cs-card-text">Fintech apps ship weekly. İşbank has compliance, legal reviews, and a user base that includes elderly first-time smartphone users. Every decision had to reconcile both realities.</p></div>
-          <div class="cs-card"><div class="cs-card-num">⬡</div><p class="cs-card-title">Scale vs. craft</p><p class="cs-card-text">13 designers working in parallel on different features creates drift. Maintaining visual and experiential coherence required systemic thinking, not just design oversight.</p></div>
-          <div class="cs-card"><div class="cs-card-num">⇄</div><p class="cs-card-title">Client vs. agency</p><p class="cs-card-text">Commencis is an agency. İşbank is the client. Aligning across two organisations — with different risk tolerances and timelines — is a leadership challenge as much as a design one.</p></div>
-          <div class="cs-card"><div class="cs-card-num">∞</div><p class="cs-card-title">Legacy vs. future</p><p class="cs-card-text">İşCep has millions of users with established mental models. Every IA change had to account for who might break, and how many — a constraint that makes every decision weightier.</p></div>
+      <section class="cs-sec" id="ir-vision">
+        <p class="cs-sec-eye">Vision</p>
+        <h2 class="cs-h2">One sentence, <em>three pillars.</em></h2>
+        <p class="cs-p">The 10.0 vision fits in a line — <em>Smart, Personal, Innovative Finance and Life App</em> — and rests on three focus areas that every workstream had to trace back to.</p>
+        <div class="trk-grid">
+          <div class="trk"><div class="trk-num">01</div><p class="trk-title">Personal-data-driven experience</p><p class="trk-text">An app that reorganises itself around how each customer actually uses it.</p></div>
+          <div class="trk"><div class="trk-num">02</div><p class="trk-title">Digital sales, context-driven</p><p class="trk-text">Offers and next steps that appear at the moment they make sense.</p></div>
+          <div class="trk"><div class="trk-num">03</div><p class="trk-title">Smart and all-in-one</p><p class="trk-text">One place for banking and the life around it.</p></div>
+        </div>
+        <p class="cs-p">The first pillar drove most of the redesign. Its five sub-themes became the backbone of the design brief:</p>
+        <div class="cs-steps" id="ir-steps">
+          <div class="cs-step"><div class="cs-step-num">01</div><div><p class="cs-step-title">Product areas shaped by usage habits</p><p class="cs-step-text">Separate spaces for retail, small-business and commercial customers instead of one menu for everyone.</p></div></div>
+          <div class="cs-step"><div class="cs-step-num">02</div><div><p class="cs-step-title">A simpler information architecture</p><p class="cs-step-text">Fewer competing entry points, and fewer component variants doing the same job.</p></div></div>
+          <div class="cs-step"><div class="cs-step-num">03</div><div><p class="cs-step-title">A personalisable home</p><p class="cs-step-text">The first screen adapts to the customer instead of showing everyone the same thing.</p></div></div>
+          <div class="cs-step"><div class="cs-step-num">04</div><div><p class="cs-step-title">A way back to the old look</p><p class="cs-step-text">An explicit escape hatch for customers who aren't ready to change.</p></div></div>
+          <div class="cs-step"><div class="cs-step-num">05</div><div><p class="cs-step-title">Hyper-personal suggestions</p><p class="cs-step-text">Products and transactions offered at the moment they're relevant.</p></div></div>
+        </div>
+        <p class="cs-p">We also gave the vision a positioning to design against — eight qualities the app should read as:</p>
+        <div class="cs-tags">
+          <span class="cs-tag">Personal</span><span class="cs-tag">Dynamic</span><span class="cs-tag">Smart</span><span class="cs-tag">Positive</span>
+          <span class="cs-tag">Collective</span><span class="cs-tag">Steady</span><span class="cs-tag">Lean</span><span class="cs-tag">Proactive</span>
         </div>
       </section>
 
-      <section class="cs-sec" id="ic-leadership">
-        <p class="cs-sec-eye">Leading the Team</p>
-        <h2 class="cs-h2">Building a team that <em>thinks</em>, not just executes.</h2>
-        <p class="cs-p">Managing 13 designers across research and design streams is fundamentally a communication and culture challenge. My approach rested on three pillars: shared language, visible quality standards, and genuine creative ownership for every designer.</p>
-        <div class="cs-two-text">
-          <div><p class="cs-two-text-lbl">Shared language</p><p class="cs-two-text-body">Weekly design principles sessions — not work reviews, but discussions. "What does 'trustworthy' mean in a mobile UI?" produced better decisions than pixel-pushing feedback.</p></div>
-          <div><p class="cs-two-text-lbl">Visible standards</p><p class="cs-two-text-body">Critique cadences with documented rubrics. Not "I don't like this" but "this fails the contrast accessibility check." Specificity enables accountability without creating fear.</p></div>
-          <div><p class="cs-two-text-lbl">Creative ownership</p><p class="cs-two-text-body">Designers were assigned feature areas, not tasks. They owned features from research through handoff — building product intuition, not just execution speed.</p></div>
-          <div><p class="cs-two-text-lbl">Roadmap contribution</p><p class="cs-two-text-body">Design had a seat at the roadmap table. I supported roadmap creation through design-led data — UX metrics, usability findings, competitive analysis — not just aesthetic preference.</p></div>
-        </div>
-        <div class="cs-quote">
-          <p class="cs-quote-text">"The best design managers protect two things: the team's time and the team's craft. Everything else is negotiable."</p>
-          <p class="cs-quote-attr">— Leadership principle, İşCep design team</p>
-        </div>
-      </section>
-
-      <section class="cs-sec" id="ic-process">
-        <p class="cs-sec-eye">Design Process</p>
-        <h2 class="cs-h2">From insight to <em>shipped screen.</em></h2>
-        <p class="cs-p">The process was adapted from double-diamond, pressure-tested for 13 designers working in parallel across multiple feature squads. The critical innovation was a "design checkpoint" system that kept quality consistent without creating bottlenecks.</p>
-        <div class="pt" id="ic-pt">
-          <div class="pt-item"><div class="pt-dot">01</div><div class="pt-body"><p class="pt-lbl">Discovery</p><p class="pt-title">Research sprints with the bank's CX team</p><p class="pt-text">User interviews, session recordings, and app store review analysis (powered by UserHear) formed the evidence base for every design initiative.</p></div></div>
-          <div class="pt-item"><div class="pt-dot">02</div><div class="pt-body"><p class="pt-lbl">Definition</p><p class="pt-title">Problem framing with PM and engineering</p><p class="pt-text">A shared problem statement, success criteria, and scope boundary — agreed by design, product, engineering, and client — before any design work begins. Single biggest time-saver.</p></div></div>
-          <div class="pt-item"><div class="pt-dot">03</div><div class="pt-body"><p class="pt-lbl">Ideation</p><p class="pt-title">Parallel concepting with structured critique</p><p class="pt-text">Multiple directions — not to increase volume, but to surface trade-offs early. "I like / I wish / what if" framework keeps feedback generative, not evaluative.</p></div></div>
-          <div class="pt-item"><div class="pt-dot">04</div><div class="pt-body"><p class="pt-lbl">Prototyping</p><p class="pt-title">High-fidelity in Figma, tested with real users</p><p class="pt-text">Prototypes tested with actual İşbank customers recruited through the bank's user panel. Think-aloud protocol. Specific, actionable findings.</p></div></div>
-          <div class="pt-item"><div class="pt-dot">05</div><div class="pt-body"><p class="pt-lbl">Delivery</p><p class="pt-title">Design checkpoint → engineering handoff</p><p class="pt-text">Mandatory gate: lead review, accessibility audit, component library compliance check before any handoff. Eliminated ~80% of revision loops.</p></div></div>
-        </div>
-      </section>
-
-      <section class="cs-sec" id="ic-work">
-        <p class="cs-sec-eye">Selected Work</p>
-        <h2 class="cs-h2">A few of the <em>initiatives</em> I led.</h2>
-        <p class="cs-p">İşCep work is under NDA. What follows describes the design challenges and decisions behind selected initiatives — not specific screens.</p>
-        <div class="cs-steps" id="ic-steps">
-          <div class="cs-step"><div class="cs-step-num">→</div><div><p class="cs-step-title">Information architecture redesign</p><p class="cs-step-text">The existing bottom navigation had 7 tabs accumulated over years of feature additions. Card sorting with 40 users, three competing IA proposals, all three tested in prototype. The winner reduced time-to-task on the five most common banking operations measurably.</p></div></div>
-          <div class="cs-step"><div class="cs-step-num">→</div><div><p class="cs-step-title">Money transfer flow simplification</p><p class="cs-step-text">The transfer flow — the app's most-used feature — had 6 screens. Analysis showed users abandoning at confirmation, nervously re-checking details. Redesigned around progressive disclosure: all details upfront, confirmation as a summary not a form. Abandonment at the confirmation step dropped.</p></div></div>
-          <div class="cs-step"><div class="cs-step-num">→</div><div><p class="cs-step-title">Accessibility uplift across core flows</p><p class="cs-step-text">Systematic audit found 38% of colour combinations failing WCAG AA contrast. Token-level audit of the design system, updated every out-of-compliance value, and built automated contrast checking into the Figma process going forward.</p></div></div>
-          <div class="cs-step"><div class="cs-step-num">→</div><div><p class="cs-step-title">Modular onboarding framework</p><p class="cs-step-text">Every new product launch (savings, insurance, investment) previously required onboarding designed from scratch. I created a modular onboarding system — reusable across product types — reducing design time for new product launches by ~60%.</p></div></div>
-        </div>
-        <div class="cs-split">
-          <div class="cs-split-l">
-            <p class="cs-sec-eye" style="margin-bottom:12px">Quality indicators</p>
-            <h3 class="cs-h3">The numbers <em>we cared about.</em></h3>
-            <p style="font-size:13px;color:var(--ink3);margin-top:10px;line-height:1.65">Banking UX success can't be measured only by aesthetic ratings. We tracked operational and experiential metrics that told a more honest story.</p>
+      <section class="cs-sec" id="ir-approach">
+        <p class="cs-sec-eye">Approach</p>
+        <h2 class="cs-h2">Design the <em>change,</em> not only the screens.</h2>
+        <div class="cs-media">
+          <div>
+            <p class="cs-media-lbl">01 · Segment-aware product areas</p>
+            <p class="cs-p">İşCep serves individuals, small businesses and commercial customers from a single app. Rather than one navigation for everybody, each customer type gets product areas organised around what they do most.</p>
           </div>
-          <div class="cs-split-r">
-            <div class="cs-split-item"><p class="cs-split-item-lbl">Usability testing pass rate</p><p class="cs-split-item-val">Task completion on core flows before shipping</p></div>
-            <div class="cs-split-item"><p class="cs-split-item-lbl">Accessibility compliance</p><p class="cs-split-item-val">WCAG AA pass rate across all new components</p></div>
-            <div class="cs-split-item"><p class="cs-split-item-lbl">Design-to-dev revision rate</p><p class="cs-split-item-val">Tracked per sprint to measure handoff quality</p></div>
-            <div class="cs-split-item"><p class="cs-split-item-lbl">App store sentiment (UserHear)</p><p class="cs-split-item-val">UX-specific review sentiment tracked monthly</p></div>
-          </div>
+          <div class="ph ph-wide"><p class="ph-k">Image · 16:10</p><p class="ph-t">Retail vs. business product areas</p></div>
         </div>
-      </section>
-
-      <section class="cs-sec" id="ic-designops">
-        <p class="cs-sec-eye">DesignOps</p>
-        <h2 class="cs-h2">The systems that make <em>design work.</em></h2>
-        <p class="cs-p">With 13 designers working simultaneously, the biggest quality risk isn't individual skill — it's drift. Components used inconsistently. Accessibility standards applied selectively. Naming conventions that differ between teams. These small inconsistencies compound into a product that feels like it was designed by many different people, because it was.</p>
-        <p class="cs-p">I invested significantly in DesignOps as a force multiplier: building the systems, standards, and rituals that let the team maintain quality without requiring my review on every screen.</p>
+        <div class="cs-media rev">
+          <div>
+            <p class="cs-media-lbl">02 · A home that adapts</p>
+            <p class="cs-p">The first screen is the most valuable real estate in the app. Personalising it means deciding what earns a place: the customer's own habits, the moment, and — sparingly — a suggestion.</p>
+          </div>
+          <div class="ph ph-wide"><p class="ph-k">Image · 16:10</p><p class="ph-t">Home layouts for three customer types</p></div>
+        </div>
+        <div class="cs-media">
+          <div>
+            <p class="cs-media-lbl">03 · A way back</p>
+            <p class="cs-p">People with established mental models are the biggest risk in a redesign. The option to return to the old look trades a little short-term purity for a lot of trust.</p>
+          </div>
+          <div class="ph ph-wide"><p class="ph-k">Image · 16:10</p><p class="ph-t">Switch between new and classic view</p></div>
+        </div>
         <div class="cs-annotated">
-          <p class="cs-sec-eye" style="margin-bottom:18px">DesignOps interventions</p>
-          <div class="cs-annot-row"><div class="cs-annot-num">1</div><p class="cs-annot-text"><strong>Component library governance.</strong> Naming convention, contribution process, and deprecation policy for the Figma component library. Any designer can add a component; any addition goes through a review gate. The library grew without becoming chaotic.</p></div>
-          <div class="cs-annot-row"><div class="cs-annot-num">2</div><p class="cs-annot-text"><strong>Weekly design critique cadence.</strong> Rotating presenters. Structured rubric ("does this meet the accessibility standard?" not "do I like this?"). Reviews became a learning environment, not a judgment environment.</p></div>
-          <div class="cs-annot-row"><div class="cs-annot-num">3</div><p class="cs-annot-text"><strong>12-point handoff checklist.</strong> Mandatory before any design goes to engineering: contrast ratios, touch targets, error/loading/empty states, responsive breakpoints, copy review. Eliminated the most common sources of revision requests from engineering.</p></div>
-          <div class="cs-annot-row"><div class="cs-annot-num">4</div><p class="cs-annot-text"><strong>Research templates.</strong> Standardised interview guides, affinity mapping templates, and synthesis formats. Any designer could run a research sprint without reinventing the process. Reduced research setup time by ~50%.</p></div>
+          <p class="cs-sec-eye" style="margin-bottom:20px">Key decisions</p>
+          <div class="cs-annot-row"><div class="cs-annot-num">1</div><p class="cs-annot-text"><strong>Personalise the surface, not the structure.</strong> Every customer sees a different home, but the underlying navigation stays predictable, so a customer's mental model survives the change.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">2</div><p class="cs-annot-text"><strong>Ship an escape hatch.</strong> The customers who most need a way back are also the ones most likely to churn if they feel forced forward.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">3</div><p class="cs-annot-text"><strong>Design for the component reality.</strong> Three generations of components coexist in the app. The redesign had to work with all of them while migrating toward one.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">4</div><p class="cs-annot-text"><strong>Test before build.</strong> Concepts passed the design cycle's pre-development gate: usability testing with customers, scaled to the size of the change, before a line of code.</p></div>
         </div>
-        <div class="cs-quote">
-          <p class="cs-quote-text">"Good DesignOps is invisible — designers shouldn't notice the system, they should just find it easier to do great work."</p>
-          <p class="cs-quote-attr">— Design principle, Commencis</p>
-        </div>
+        <div class="cyc-strip-lbl">Where this project sat in the design cycle</div>
+        <div class="cyc-strip"><span class="on">1</span><i></i><span class="on">2</span><span class="on">3</span><span class="on">4</span><span class="on">5</span><i></i><span class="on">6</span><span class="on">7</span><span class="on">8</span><span class="on">9</span><i></i><span class="on">10</span></div>
+        <p class="cyc-strip-cap">A large-scope request runs the full cycle — every step, both gates.</p>
       </section>
 
-      <section class="cs-sec" id="ic-outcomes">
+      <section class="cs-sec" id="ir-system">
+        <p class="cs-sec-eye">Design system</p>
+        <h2 class="cs-h2">Three generations of components, <em>one app.</em></h2>
+        <p class="cs-p">İşCep carries three component styles at once: the legacy MCM theme, the Postlogin theme from an earlier redesign, and İşCepX — the new design system built for İşCep 10.0. Teams building rendering-based screens use Postlogin components by default and fall back to legacy ones only where migration hasn't happened yet.</p>
+        <div class="cs-gal">
+          <figure><div class="ph"><p class="ph-k">Image</p><p class="ph-t">Legacy MCM components</p></div><figcaption>01 · Legacy MCM theme</figcaption></figure>
+          <figure><div class="ph"><p class="ph-k">Image</p><p class="ph-t">Postlogin components</p></div><figcaption>02 · Postlogin theme</figcaption></figure>
+          <figure><div class="ph"><p class="ph-k">Image</p><p class="ph-t">İşCepX components</p></div><figcaption>03 · İşCepX, the new system</figcaption></figure>
+        </div>
+        <div class="cs-compare" style="margin-top:36px">
+          <div class="cs-compare-pane">
+            <p class="cs-compare-lbl">Native <span class="badge-light">Client-driven UI</span></p>
+            <ul class="cs-compare-list">
+              <li>Pixel-level control over every detail</li>
+              <li>Built by the core mobile teams</li>
+              <li>Right for distinctive, complex screens</li>
+            </ul>
+          </div>
+          <div class="cs-compare-pane after">
+            <p class="cs-compare-lbl">Rendering <span class="badge">Server-driven UI</span></p>
+            <ul class="cs-compare-list">
+              <li>Screens assembled from components via templates</li>
+              <li>Fast for the bank's own agile teams</li>
+              <li>Limited room for customisation</li>
+            </ul>
+          </div>
+        </div>
+        <p class="cs-p">Which of the two a screen uses decides how much room design has, so the design system had to be a migration tool as much as a style guide: a component-alignment document maps what exists in each generation and which one to reach for.</p>
+      </section>
+
+      <section class="cs-sec" id="ir-rollout">
+        <p class="cs-sec-eye">Rollout</p>
+        <h2 class="cs-h2">Shipped in <em>phases,</em> not in a big bang.</h2>
+        <p class="cs-p">The redesign was planned as five phases tied to app releases, starting with a life-domain redesign and building toward the 10.0 release. Small, reversible steps keep a very large user base calm.</p>
+        <p class="cs-p">The design cycle's last step is built for exactly this: beta versions are tested with up to 500,000 customers, funnels are watched closely, and a problem found small is fixed small.</p>
+        <a class="cs-article-link" href="/iscep/hayatim" onclick="openCS('iscep-hayatim');return false">See the first phase: İşCep'le Hayatım<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
+      </section>
+
+      <section class="cs-sec" id="ir-outcomes">
         <p class="cs-sec-eye">Outcomes</p>
-        <h2 class="cs-h2">What <em>1.5 years</em> looks like.</h2>
-        <p class="cs-p">The outcomes are multidimensional — product quality, team capability, and organisational practice all improved in measurable ways. The most meaningful outcome is harder to quantify: a design team that got better at design over the course of the engagement, not just faster.</p>
-        <div class="cs-cards">
-          <div class="cs-card"><div class="cs-card-num">01</div><p class="cs-card-title">App store UX sentiment improved</p><p class="cs-card-text">Monthly UX-specific app store sentiment (tracked via UserHear) showed consistent improvement across the core banking flows redesigned by the team.</p></div>
-          <div class="cs-card"><div class="cs-card-num">02</div><p class="cs-card-title">Design velocity increased</p><p class="cs-card-text">With DesignOps systems in place, the team shipped more features per sprint without a proportional increase in revision requests — quality, not just speed.</p></div>
-          <div class="cs-card"><div class="cs-card-num">03</div><p class="cs-card-title">Team capability visibly grew</p><p class="cs-card-text">Designers who joined as mid-level practitioners were doing lead-level work within 6–8 months. The critique culture and ownership model accelerated growth.</p></div>
-          <div class="cs-card"><div class="cs-card-num">04</div><p class="cs-card-title">Design sat at strategy</p><p class="cs-card-text">By the end, design was contributing to roadmap decisions with data — not just being handed features to design. This shift took 12 deliberate months.</p></div>
+        <h2 class="cs-h2">What changed <em>after.</em></h2>
+        <p class="cs-p">Success measures are defined at the start of every request, not after launch. For the redesign they follow the bank's KPI tree for the channel: customer complaints about the developed product, NPS and CSAT.</p>
+        <div class="cs-stats">
+          <div class="cs-stat"><div class="cs-stat-num">—</div><div class="cs-stat-label">Add result: NPS / CSAT change after 10.0</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">—</div><div class="cs-stat-label">Add result: complaint-rate change</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">—</div><div class="cs-stat-label">Add result: App Store rating trend</div></div>
         </div>
-      </section>
-
-      <section class="cs-sec" id="ic-reflection">
-        <p class="cs-sec-eye">Reflection</p>
-        <h2 class="cs-h2">What leading at scale <em>actually taught me.</em></h2>
-        <p class="cs-p">I came into this role thinking design leadership was primarily about design decisions. I left understanding it's primarily about communication — between disciplines, between organisations, between levels of abstraction. The best design leader isn't the best designer in the room; it's the person who makes everyone in the room better at design.</p>
-        <p class="cs-p">The hardest moment was realising that protecting the team's creative energy sometimes meant absorbing stakeholder pressure myself — not passing it downstream. That's not heroism; it's what the role requires. And it's what builds trust with a team faster than anything else.</p>
         <div class="cs-reflection">
           <p class="cs-reflection-eye">Key takeaway</p>
-          <p class="cs-reflection-text">"Design quality at scale isn't a design problem. It's a culture problem that systems, rituals, and leadership can solve — but only if you treat it as seriously as any product problem."</p>
+          <p class="cs-reflection-text">"You don't redesign an app. You redesign a habit — and the habit belongs to the customer, not to you."</p>
         </div>
-        <div class="cs-next" onclick="openCS('userhear')">
-          <div><p class="cs-next-lbl">Previous case study</p><p class="cs-next-title">UserHear — AI-powered review analytics</p></div>
-          <span class="cs-next-arrow">←</span>
+        <div class="cs-next" onclick="openCS('iscep-hayatim')">
+          <div><p class="cs-next-lbl">Next case study</p><p class="cs-next-title">İşCep'le Hayatım — a bank organised around life</p></div>
+          <span class="cs-next-arrow">→</span>
         </div>
       </section>
 
     </div>
   </div>
-</div><!-- /page-iscep -->
+</div><!-- /page-iscep-redesign -->
+
+<!-- ══════════════════════════════════════════
+     CASE STUDY: İŞCEP'LE HAYATIM
+══════════════════════════════════════════ -->
+<div class="page" id="page-iscep-hayatim">
+  <a class="cs-back" href="/iscep" onclick="openCS('iscep');return false">
+    <svg viewBox="0 0 16 16"><path d="M13 8H3M3 8L8 3M3 8L8 13"/></svg>
+    İşCep
+  </a>
+
+  <header class="cs-hero has-visual">
+    <p class="cs-eyebrow">Commencis × İşbank · Concept · Phase 1 of the new İşCep</p>
+    <h1 class="cs-h1">İşCep'le Hayatım — a bank<br>organised around <em>life,</em><br>not products.</h1>
+    <div class="cs-meta-grid">
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Client</div><div class="cs-meta-val">İşbank via Commencis</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Role</div><div class="cs-meta-val">UX Design Lead</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Timeline</div><div class="cs-meta-val">2024</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Scope</div><div class="cs-meta-val">IA · Concept · Flows</div></div>
+    </div>
+  </header>
+  <div class="cs-hero-visual">
+    <div class="ph-stage">
+      <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Aracım</p></div>
+      <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Evim</p></div>
+      <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Ailem</p></div>
+      <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Seyahatim</p></div>
+    </div>
+  </div>
+
+  <div class="cs-layout">
+    <aside class="cs-sidenav">
+      <ul class="cs-snav-list" id="snav-iscep-hayatim">
+        <li class="cs-snav-item active" data-sec="ih-overview"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ih-overview">Overview</a></li>
+        <li class="cs-snav-item" data-sec="ih-insight"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ih-insight">Insight</a></li>
+        <li class="cs-snav-item" data-sec="ih-concept"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ih-concept">Concept</a></li>
+        <li class="cs-snav-item" data-sec="ih-screens"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ih-screens">Screens</a></li>
+        <li class="cs-snav-item" data-sec="ih-decisions"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ih-decisions">Decisions</a></li>
+        <li class="cs-snav-item" data-sec="ih-delivery"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ih-delivery">Delivery</a></li>
+        <li class="cs-snav-item" data-sec="ih-measures"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ih-measures">Measures</a></li>
+      </ul>
+    </aside>
+    <div class="cs-content">
+
+      <section class="cs-sec" id="ih-overview">
+        <p class="cs-sec-eye">Overview</p>
+        <h2 class="cs-h2">Banking, the way people <em>actually</em> plan their lives.</h2>
+        <p class="cs-p">İşCep's functions are organised the way a bank is organised: by product. People don't think that way. They think in moments — buying a car, moving house, starting a family, planning a trip — and each of those touches loans, insurance, payments and offers scattered across the app.</p>
+        <p class="cs-p">İşCep'le Hayatım — "life with İşCep" — gives each of those moments its own space: <strong>Aracım</strong> (my car), <strong>Evim</strong> (my home), <strong>Ailem</strong> (my family) and <strong>Seyahatim</strong> (my travel). It was the first phase of the new İşCep roadmap.</p>
+        <div class="cs-tags">
+          <span class="cs-tag">Information Architecture</span><span class="cs-tag">Concept Design</span>
+          <span class="cs-tag">Contextual Offers</span><span class="cs-tag">Empty States</span>
+        </div>
+        <div class="cyc-strip-lbl">Where this project sat in the design cycle</div>
+        <div class="cyc-strip"><span class="on">1</span><i></i><span class="on">2</span><span class="on">3</span><span class="on">4</span><span class="on">5</span><i></i><span class="on">6</span><span class="on">7</span><span class="on">8</span><span class="on">9</span><i></i><span>10</span></div>
+        <p class="cyc-strip-cap">Request analysis through post-development review; improvement continues after release.</p>
+      </section>
+
+      <section class="cs-sec" id="ih-insight">
+        <p class="cs-sec-eye">Insight</p>
+        <h2 class="cs-h2">A product-shaped app, <em>life-shaped</em> needs.</h2>
+        <p class="cs-p">Discovery started where every request in the cycle starts: a qualitative-plus-quantitative baseline. Usage funnels, the bank's customer-issue records, app-store and forum feedback, and a competitor benchmark told us where people got lost between the need and the product that met it.</p>
+        <div class="cs-compare">
+          <div class="cs-compare-pane">
+            <p class="cs-compare-lbl">Before <span class="badge-light">Product-shaped</span></p>
+            <ul class="cs-compare-list">
+              <li>A car-related need means visiting loans, insurance and payments separately</li>
+              <li>Offers live in a campaigns area, away from the need</li>
+              <li>Nothing tells customers what's relevant to their situation</li>
+              <li>Cross-product journeys depend on knowing product names</li>
+            </ul>
+          </div>
+          <div class="cs-compare-pane after">
+            <p class="cs-compare-lbl">After <span class="badge">Life-shaped</span></p>
+            <ul class="cs-compare-list">
+              <li>One space per life domain, the customer's own products first</li>
+              <li>Related services and offers shown in context</li>
+              <li>The app reflects what the customer already has</li>
+              <li>New domains can be added without redesigning navigation</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ih-concept">
+        <p class="cs-sec-eye">Concept</p>
+        <h2 class="cs-h2">Four spaces, <em>one pattern.</em></h2>
+        <p class="cs-p">Each space follows the same structure — what you have, what's coming up, what you could do next — so learning one teaches the other three.</p>
+        <div class="cs-feat-grid">
+          <div class="cs-feat"><div class="cs-feat-icon">🚗</div><p class="cs-feat-title">Aracım · My car</p><p class="cs-feat-text">Vehicle financing, insurance, tolls and fines, and offers around running a car.</p></div>
+          <div class="cs-feat"><div class="cs-feat-icon">🏠</div><p class="cs-feat-title">Evim · My home</p><p class="cs-feat-text">Home loans, home insurance, utility bills and everything that comes with a place of your own.</p></div>
+          <div class="cs-feat"><div class="cs-feat-icon">👨‍👩‍👧</div><p class="cs-feat-title">Ailem · My family</p><p class="cs-feat-text">Shared financial life: children's savings, protection and the payments a household repeats.</p></div>
+          <div class="cs-feat"><div class="cs-feat-icon">✈️</div><p class="cs-feat-title">Seyahatim · My travel</p><p class="cs-feat-text">Currency, travel cover, spending abroad and offers before, during and after a trip.</p></div>
+        </div>
+        <p class="cs-p">The same life-domain logic came back later in the annual vision workshops, where travel, family and child journeys were proposed as ideas in their own right.</p>
+      </section>
+
+      <section class="cs-sec" id="ih-screens">
+        <p class="cs-sec-eye">Screens</p>
+        <h2 class="cs-h2">From the home screen <em>into a life.</em></h2>
+        <div class="cs-media">
+          <div>
+            <p class="cs-media-lbl">01 · Entry from home</p>
+            <p class="cs-p">The spaces are reachable from the home screen itself, not buried in a menu, and only show the ones that are relevant to that customer.</p>
+          </div>
+          <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Home entry points</p></div>
+        </div>
+        <div class="cs-media rev">
+          <div>
+            <p class="cs-media-lbl">02 · Inside a space</p>
+            <p class="cs-p">A space opens with the customer's own products, then upcoming payments and, last, suggested next steps — in that order.</p>
+          </div>
+          <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Space detail</p></div>
+        </div>
+        <div class="ph-row">
+          <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Empty state</p></div>
+          <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Suggested step</p></div>
+          <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Flow into a product</p></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ih-decisions">
+        <p class="cs-sec-eye">Decisions</p>
+        <h2 class="cs-h2">What made it <em>feel right.</em></h2>
+        <div class="cs-annotated">
+          <div class="cs-annot-row"><div class="cs-annot-num">1</div><p class="cs-annot-text"><strong>Start from what the customer already has.</strong> A space that opens with a sales pitch feels like an ad. One that opens with the customer's own car loan feels like a tool.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">2</div><p class="cs-annot-text"><strong>Suggest in context, never as a banner.</strong> An offer belongs next to the need it serves, at the moment it makes sense.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">3</div><p class="cs-annot-text"><strong>One pattern, four spaces.</strong> Shared structure and components mean a fifth space costs a content brief, not a redesign.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">4</div><p class="cs-annot-text"><strong>Design the empty state.</strong> A customer without a car still opens Aracım. The cycle requires error, partial and empty states, not only the happy path — and here the empty state is the front door.</p></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ih-delivery">
+        <p class="cs-sec-eye">Delivery</p>
+        <h2 class="cs-h2">From concept to <em>release.</em></h2>
+        <p class="cs-p">The concept moved through the bank's product development cycle like any other large request — each hand-off with a named owner and a written output.</p>
+        <div class="pt" id="ih-pt">
+          <div class="pt-item"><div class="pt-dot">01</div><div class="pt-body"><p class="pt-lbl">Concept (UX)</p><p class="pt-title">Wireframes with edge cases</p><p class="pt-text">User flows and wireframes, including error, partial and empty states, checked against the wireframe checklist and reviewed for UX writing.</p></div></div>
+          <div class="pt-item"><div class="pt-dot">02</div><div class="pt-body"><p class="pt-lbl">Walkthrough</p><p class="pt-title">Flows with product and software teams</p><p class="pt-text">A design-and-flow walkthrough with product, analysts and front-end, ending in written agreement on the final flow.</p></div></div>
+          <div class="pt-item"><div class="pt-dot">03</div><div class="pt-body"><p class="pt-lbl">Visual (UI)</p><p class="pt-title">Built on the design system</p><p class="pt-text">High-fidelity design on the İşCepX design system, with any new component approved by development before it's added.</p></div></div>
+          <div class="pt-item"><div class="pt-dot">04</div><div class="pt-body"><p class="pt-lbl">Review</p><p class="pt-title">Build compared with design</p><p class="pt-text">After development, the build is compared with the design and differences are logged as major or cosmetic.</p></div></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ih-measures">
+        <p class="cs-sec-eye">Measures</p>
+        <h2 class="cs-h2">How we'd know it <em>worked.</em></h2>
+        <p class="cs-p">KPIs are agreed before design starts. The measures follow the bank's KPI tree for the channel:</p>
+        <div class="cs-cards">
+          <div class="cs-card"><div class="cs-card-num">01</div><p class="cs-card-title">Adoption of each space</p><p class="cs-card-text">How many customers open a space, and how often they come back.</p></div>
+          <div class="cs-card"><div class="cs-card-num">02</div><p class="cs-card-title">Cross-product usage</p><p class="cs-card-text">Whether customers reach products they didn't use before, through a space.</p></div>
+          <div class="cs-card"><div class="cs-card-num">03</div><p class="cs-card-title">Complaint rate</p><p class="cs-card-text">Customer-issue records about the developed product, as a share of all records.</p></div>
+          <div class="cs-card"><div class="cs-card-num">04</div><p class="cs-card-title">NPS &amp; CSAT</p><p class="cs-card-text">Promoters minus detractors, and share of satisfied customers surveyed.</p></div>
+        </div>
+        <div class="cs-next" onclick="openCS('iscep-borsa')">
+          <div><p class="cs-next-lbl">Next case study</p><p class="cs-next-title">Mobil Borsa — the trading floor inside a banking app</p></div>
+          <span class="cs-next-arrow">→</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div><!-- /page-iscep-hayatim -->
+
+<!-- ══════════════════════════════════════════
+     CASE STUDY: MOBİL BORSA
+══════════════════════════════════════════ -->
+<div class="page" id="page-iscep-borsa">
+  <a class="cs-back" href="/iscep" onclick="openCS('iscep');return false">
+    <svg viewBox="0 0 16 16"><path d="M13 8H3M3 8L8 3M3 8L8 13"/></svg>
+    İşCep
+  </a>
+
+  <header class="cs-hero has-visual">
+    <p class="cs-eyebrow">Commencis × İşbank · Investing · Capital markets</p>
+    <h1 class="cs-h1">Mobil Borsa — the<br><em>trading floor</em> inside<br>a banking app.</h1>
+    <div class="cs-meta-grid">
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Client</div><div class="cs-meta-val">İşbank via Commencis</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Role</div><div class="cs-meta-val">UX Design Lead</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Timeline</div><div class="cs-meta-val">TBD</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Scope</div><div class="cs-meta-val">Research · Concept · UI</div></div>
+    </div>
+  </header>
+  <div class="cs-hero-visual">
+    <div class="ph-stage">
+      <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Watchlist</p></div>
+      <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Order entry</p></div>
+      <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Portfolio</p></div>
+    </div>
+  </div>
+
+  <div class="cs-layout">
+    <aside class="cs-sidenav">
+      <ul class="cs-snav-list" id="snav-iscep-borsa">
+        <li class="cs-snav-item active" data-sec="ib-overview"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ib-overview">Overview</a></li>
+        <li class="cs-snav-item" data-sec="ib-investor"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ib-investor">The investor</a></li>
+        <li class="cs-snav-item" data-sec="ib-challenges"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ib-challenges">Challenges</a></li>
+        <li class="cs-snav-item" data-sec="ib-concept"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ib-concept">Concept</a></li>
+        <li class="cs-snav-item" data-sec="ib-screens"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ib-screens">Screens</a></li>
+        <li class="cs-snav-item" data-sec="ib-decisions"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ib-decisions">Decisions</a></li>
+        <li class="cs-snav-item" data-sec="ib-measures"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ib-measures">Measures</a></li>
+      </ul>
+    </aside>
+    <div class="cs-content">
+
+      <section class="cs-sec" id="ib-overview">
+        <p class="cs-sec-eye">Overview</p>
+        <h2 class="cs-h2">Trading, in an app <em>built for banking.</em></h2>
+        <p class="cs-p">Mobil Borsa brings stock-market trading into İşCep, designed with the bank's capital markets team. The brief sounds simple — let customers see the market, place an order and follow their portfolio — but it puts a high-stakes, high-frequency activity inside an app designed for everyday banking, and asks it to stand next to dedicated investing apps.</p>
+        <div class="cs-tags">
+          <span class="cs-tag">Investing UX</span><span class="cs-tag">Data Visualisation</span>
+          <span class="cs-tag">Regulated Content</span><span class="cs-tag">Progressive Disclosure</span>
+        </div>
+        <div class="cyc-strip-lbl">Where this project sat in the design cycle</div>
+        <div class="cyc-strip"><span class="on">1</span><i></i><span class="on">2</span><span class="on">3</span><span class="on">4</span><span class="on">5</span><i></i><span class="on">6</span><span class="on">7</span><span class="on">8</span><span class="on">9</span><i></i><span class="on">10</span></div>
+        <p class="cyc-strip-cap">A large-scope request runs the full cycle.</p>
+      </section>
+
+      <section class="cs-sec" id="ib-investor">
+        <p class="cs-sec-eye">The investor</p>
+        <h2 class="cs-h2">Who trades, and who <em>they listen to.</em></h2>
+        <p class="cs-p">Research from the annual vision cycle split the bank's customers into four groups. Two of them matter most here.</p>
+        <div class="cs-two-text">
+          <div><p class="cs-two-text-lbl">Investor</p><p class="cs-two-text-body">Saving and investing habits are established, and they follow many sources. The goal is to earn more. They take advice from Telegram, YouTube and friends rather than the bank — bank suggestions have historically returned too little — and they're sensitive to commissions and fees. Open to the bank in principle, not in practice.</p></div>
+          <div><p class="cs-two-text-lbl">Everyday user</p><p class="cs-two-text-body">Invests at low-to-medium risk but watches less closely. Motivated by staying balanced and moving slowly upward, and afraid of a large loss. Uses many banking products, is open to new ones, and open to suggestions.</p></div>
+        </div>
+        <div class="cs-quote">
+          <p class="cs-quote-text">The opportunity: transparent, competitive tools for the first group — and low-threshold starting points for the second.</p>
+          <p class="cs-quote-attr">— Vision research, engagement opportunity</p>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ib-challenges">
+        <p class="cs-sec-eye">Challenges</p>
+        <h2 class="cs-h2">Four tensions <em>in one screen.</em></h2>
+        <div class="cs-cards">
+          <div class="cs-card"><div class="cs-card-num">↕</div><p class="cs-card-title">Speed vs. safety</p><p class="cs-card-text">An order is money moving fast. The form has to be quick for experts and forgiving for beginners.</p></div>
+          <div class="cs-card"><div class="cs-card-num">◐</div><p class="cs-card-title">Transparency vs. simplicity</p><p class="cs-card-text">Investors are fee-sensitive, so commission has to be visible before confirmation without cluttering the flow.</p></div>
+          <div class="cs-card"><div class="cs-card-num">§</div><p class="cs-card-title">Information vs. advice</p><p class="cs-card-text">In regulated investing, "recommendation" carries legal weight. The interface has to inform without advising.</p></div>
+          <div class="cs-card"><div class="cs-card-num">⇄</div><p class="cs-card-title">One interface, several investors</p><p class="cs-card-text">First-timers and active traders need different depth. One screen for both risks serving neither.</p></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ib-concept">
+        <p class="cs-sec-eye">Concept</p>
+        <h2 class="cs-h2">Market first, <em>depth on demand.</em></h2>
+        <p class="cs-p">The concept treats trading as three moments — watching, acting and reviewing — and keeps each one to a single job.</p>
+        <div class="cs-feat-grid">
+          <div class="cs-feat"><div class="cs-feat-icon">👁</div><p class="cs-feat-title">Watch</p><p class="cs-feat-text">A watchlist and market overview that answer "what's happening?" in a glance.</p></div>
+          <div class="cs-feat"><div class="cs-feat-icon">⚡</div><p class="cs-feat-title">Act</p><p class="cs-feat-text">Order entry with costs and consequences visible before the final tap.</p></div>
+          <div class="cs-feat"><div class="cs-feat-icon">📈</div><p class="cs-feat-title">Review</p><p class="cs-feat-text">A portfolio and performance view that answers "how am I doing?" honestly.</p></div>
+          <div class="cs-feat"><div class="cs-feat-icon">🌱</div><p class="cs-feat-title">Start</p><p class="cs-feat-text">A gentle first-trade path for customers who have never invested.</p></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ib-screens">
+        <p class="cs-sec-eye">Screens</p>
+        <h2 class="cs-h2">The three <em>moments.</em></h2>
+        <div class="ph-row">
+          <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Watchlist &amp; market</p></div>
+          <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Order entry &amp; confirmation</p></div>
+          <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Portfolio &amp; performance</p></div>
+        </div>
+        <div class="cs-fig">
+          <div class="ph ph-wide"><p class="ph-k">Image · 16:10</p><p class="ph-t">Order states: pending, partial, filled, cancelled</p></div>
+          <p class="cs-fig-cap">Order status — never ambiguous</p>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ib-decisions">
+        <p class="cs-sec-eye">Decisions</p>
+        <h2 class="cs-h2">Where the <em>details</em> earned their keep.</h2>
+        <div class="cs-annotated">
+          <div class="cs-annot-row"><div class="cs-annot-num">1</div><p class="cs-annot-text"><strong>Show the cost before the tap.</strong> Commission and fees appear on the order screen, not after it. For a fee-sensitive customer, transparency is the product.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">2</div><p class="cs-annot-text"><strong>Simple by default, deep on demand.</strong> The same flow serves first-timers and active traders by revealing depth progressively, rather than splitting the app in two.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">3</div><p class="cs-annot-text"><strong>Status is never ambiguous.</strong> An order is always pending, partially filled, filled or cancelled — and the interface says which. Users should never wonder whether it worked.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">4</div><p class="cs-annot-text"><strong>Words are a design material.</strong> Copy was reviewed with the business unit so the app presents information and options, not advice.</p></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="ib-measures">
+        <p class="cs-sec-eye">Measures</p>
+        <h2 class="cs-h2">How we'd know it <em>worked.</em></h2>
+        <p class="cs-p">For a trading product, the KPI tree ties design to revenue as well as satisfaction:</p>
+        <div class="cs-cards">
+          <div class="cs-card"><div class="cs-card-num">01</div><p class="cs-card-title">Commission income</p><p class="cs-card-text">Transaction amount × commission rate, tracked as a channel contribution.</p></div>
+          <div class="cs-card"><div class="cs-card-num">02</div><p class="cs-card-title">New investing customers</p><p class="cs-card-text">Customers who place a first trade, and how they got there.</p></div>
+          <div class="cs-card"><div class="cs-card-num">03</div><p class="cs-card-title">Complaint rate</p><p class="cs-card-text">Customer-issue records about the product as a share of all records.</p></div>
+          <div class="cs-card"><div class="cs-card-num">04</div><p class="cs-card-title">NPS &amp; CSAT</p><p class="cs-card-text">Promoters minus detractors, and share of satisfied customers surveyed.</p></div>
+        </div>
+        <div class="cs-next" onclick="openCS('iscep-maximum')">
+          <div><p class="cs-next-lbl">Next case study</p><p class="cs-next-title">Maximum Dünyam — rewards that feel like profit</p></div>
+          <span class="cs-next-arrow">→</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div><!-- /page-iscep-borsa -->
+
+<!-- ══════════════════════════════════════════
+     CASE STUDY: MAXIMUM DÜNYAM
+══════════════════════════════════════════ -->
+<div class="page" id="page-iscep-maximum">
+  <a class="cs-back" href="/iscep" onclick="openCS('iscep');return false">
+    <svg viewBox="0 0 16 16"><path d="M13 8H3M3 8L8 3M3 8L8 13"/></svg>
+    İşCep
+  </a>
+
+  <header class="cs-hero has-visual">
+    <p class="cs-eyebrow">Commencis × İşbank · Loyalty · Campaigns</p>
+    <h1 class="cs-h1">Maximum Dünyam —<br>rewards that feel like<br><em>earning,</em> not collecting.</h1>
+    <div class="cs-meta-grid">
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Client</div><div class="cs-meta-val">İşbank via Commencis</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Role</div><div class="cs-meta-val">UX Design Lead</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Timeline</div><div class="cs-meta-val">TBD</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Scope</div><div class="cs-meta-val">Concept · Flows · UI</div></div>
+    </div>
+  </header>
+  <div class="cs-hero-visual">
+    <div class="ph-stage">
+      <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Points &amp; progress</p></div>
+      <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Campaigns for you</p></div>
+      <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Nearby on the map</p></div>
+    </div>
+  </div>
+
+  <div class="cs-layout">
+    <aside class="cs-sidenav">
+      <ul class="cs-snav-list" id="snav-iscep-maximum">
+        <li class="cs-snav-item active" data-sec="im-overview"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#im-overview">Overview</a></li>
+        <li class="cs-snav-item" data-sec="im-context"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#im-context">Context</a></li>
+        <li class="cs-snav-item" data-sec="im-concept"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#im-concept">Concept</a></li>
+        <li class="cs-snav-item" data-sec="im-screens"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#im-screens">Screens</a></li>
+        <li class="cs-snav-item" data-sec="im-decisions"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#im-decisions">Decisions</a></li>
+        <li class="cs-snav-item" data-sec="im-measures"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#im-measures">Measures</a></li>
+      </ul>
+    </aside>
+    <div class="cs-content">
+
+      <section class="cs-sec" id="im-overview">
+        <p class="cs-sec-eye">Overview</p>
+        <h2 class="cs-h2">A personal world for <em>everything you earn.</em></h2>
+        <p class="cs-p">Maximum is İşbank's card and rewards programme. Maximum Dünyam — "my Maximum world" — gathers a customer's points, campaigns and rewards into one personal space in İşCep, so the value of using the card is something customers can see and act on instead of something they have to go looking for.</p>
+        <div class="cs-tags">
+          <span class="cs-tag">Loyalty</span><span class="cs-tag">Personalisation</span>
+          <span class="cs-tag">Map &amp; Filters</span><span class="cs-tag">Progress Visibility</span>
+        </div>
+        <div class="cyc-strip-lbl">Where this project sat in the design cycle</div>
+        <div class="cyc-strip"><span class="on">1</span><i></i><span class="on">2</span><span class="on">3</span><span class="on">4</span><span class="on">5</span><i></i><span class="on">6</span><span class="on">7</span><span class="on">8</span><span class="on">9</span><i></i><span class="on">10</span></div>
+        <p class="cyc-strip-cap">A large-scope request runs the full cycle.</p>
+      </section>
+
+      <section class="cs-sec" id="im-context">
+        <p class="cs-sec-eye">Context</p>
+        <h2 class="cs-h2">Loyalty should feel like <em>profit.</em></h2>
+        <p class="cs-p">Two lines from the annual vision research framed the brief. Customers should feel they are gaining as they use the bank — <em>the more I use it, the more I earn</em>. And the campaigns around them should be visible: what they can earn or spend nearby, right now.</p>
+        <p class="cs-p">The benchmark set spanned card-loyalty and cashback programmes from other Turkish banks, tiered premium plans from global challengers, and subscription models built on "use it more, get more". The gap in most of them was the same: points sit in a balance, while the reason to spend sits somewhere else.</p>
+        <div class="cs-hscroll">
+          <div class="cs-hscroll-inner">
+            <div class="cs-hscroll-card"><p class="cs-hscroll-card-tag">Question 1</p><p class="cs-hscroll-card-title">What do I have?</p><p class="cs-hscroll-card-body">Points, rewards and status — legible in a glance.</p></div>
+            <div class="cs-hscroll-card"><p class="cs-hscroll-card-tag">Question 2</p><p class="cs-hscroll-card-title">What can I earn next?</p><p class="cs-hscroll-card-body">Progress toward a reward, not just a running total.</p></div>
+            <div class="cs-hscroll-card"><p class="cs-hscroll-card-tag">Question 3</p><p class="cs-hscroll-card-title">What's around me?</p><p class="cs-hscroll-card-body">Campaigns near the customer, on a map they can filter.</p></div>
+            <div class="cs-hscroll-card"><p class="cs-hscroll-card-tag">Question 4</p><p class="cs-hscroll-card-title">How do I use it?</p><p class="cs-hscroll-card-body">Redeeming in as few steps as earning took.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="im-concept">
+        <p class="cs-sec-eye">Concept</p>
+        <h2 class="cs-h2">From balance to <em>momentum.</em></h2>
+        <div class="cs-feat-grid">
+          <div class="cs-feat"><div class="cs-feat-icon">🎯</div><p class="cs-feat-title">Points &amp; progress</p><p class="cs-feat-text">Progress toward the next reward, so a balance becomes a goal.</p></div>
+          <div class="cs-feat"><div class="cs-feat-icon">✨</div><p class="cs-feat-title">Campaigns for you</p><p class="cs-feat-text">Fewer, more relevant campaigns, chosen from the customer's own habits.</p></div>
+          <div class="cs-feat"><div class="cs-feat-icon">📍</div><p class="cs-feat-title">Nearby on the map</p><p class="cs-feat-text">Map-based discovery with search and dynamic filters.</p></div>
+          <div class="cs-feat"><div class="cs-feat-icon">🎁</div><p class="cs-feat-title">One-step redemption</p><p class="cs-feat-text">Use a reward where it was discovered, without a detour.</p></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="im-screens">
+        <p class="cs-sec-eye">Screens</p>
+        <h2 class="cs-h2">Earning, made <em>visible.</em></h2>
+        <div class="cs-media">
+          <div>
+            <p class="cs-media-lbl">01 · Points &amp; progress</p>
+            <p class="cs-p">The landing view reads as progress first and balance second: how far to the next reward, and what would get there fastest.</p>
+          </div>
+          <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Progress view</p></div>
+        </div>
+        <div class="cs-media rev">
+          <div>
+            <p class="cs-media-lbl">02 · Campaigns on the map</p>
+            <p class="cs-p">The map is a way to filter campaigns by place, not a destination of its own. Filters are dynamic so the list stays short and relevant.</p>
+          </div>
+          <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Map &amp; filters</p></div>
+        </div>
+        <div class="cs-fig">
+          <div class="ph ph-wide"><p class="ph-k">Image · 16:10</p><p class="ph-t">Campaign detail → redeem in one step</p></div>
+          <p class="cs-fig-cap">From discovery to redemption</p>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="im-decisions">
+        <p class="cs-sec-eye">Decisions</p>
+        <h2 class="cs-h2">Where the <em>details</em> earned their keep.</h2>
+        <div class="cs-annotated">
+          <div class="cs-annot-row"><div class="cs-annot-num">1</div><p class="cs-annot-text"><strong>Progress, not gamification.</strong> Progress toward a reward makes value visible without turning banking into a game.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">2</div><p class="cs-annot-text"><strong>Relevance before volume.</strong> A short list that fits the customer beats a long list that fits everyone.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">3</div><p class="cs-annot-text"><strong>The map is a filter.</strong> Location narrows the list; it doesn't become a second app to learn.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">4</div><p class="cs-annot-text"><strong>Redeem where you discover.</strong> Every step between "I want this" and "I've got it" is a place to lose the customer.</p></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="im-measures">
+        <p class="cs-sec-eye">Measures</p>
+        <h2 class="cs-h2">How we'd know it <em>worked.</em></h2>
+        <p class="cs-p">For a loyalty product, the KPI tree ties design to spending behaviour as well as satisfaction:</p>
+        <div class="cs-cards">
+          <div class="cs-card"><div class="cs-card-num">01</div><p class="cs-card-title">Card spend &amp; bill payments</p><p class="cs-card-text">Whether visible rewards move everyday spending onto the card.</p></div>
+          <div class="cs-card"><div class="cs-card-num">02</div><p class="cs-card-title">Campaign usage</p><p class="cs-card-text">From viewed to used, and how many taps that takes.</p></div>
+          <div class="cs-card"><div class="cs-card-num">03</div><p class="cs-card-title">Return visits</p><p class="cs-card-text">Whether customers come back to the space between purchases.</p></div>
+          <div class="cs-card"><div class="cs-card-num">04</div><p class="cs-card-title">NPS &amp; CSAT</p><p class="cs-card-text">Promoters minus detractors, and share of satisfied customers surveyed.</p></div>
+        </div>
+        <div class="cs-next" onclick="openCS('iscep-way')">
+          <div><p class="cs-next-lbl">Next</p><p class="cs-next-title">How İşCep gets built — the design and product development cycles</p></div>
+          <span class="cs-next-arrow">→</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div><!-- /page-iscep-maximum -->
+
+<!-- ══════════════════════════════════════════
+     CASE STUDY: İŞCEP WAYS OF WORKING
+══════════════════════════════════════════ -->
+<div class="page" id="page-iscep-way">
+  <a class="cs-back" href="/iscep" onclick="openCS('iscep');return false">
+    <svg viewBox="0 0 16 16"><path d="M13 8H3M3 8L8 3M3 8L8 13"/></svg>
+    İşCep
+  </a>
+
+  <header class="cs-hero has-visual">
+    <p class="cs-eyebrow">Commencis × İşbank · Process · DesignOps · 2019 — Present</p>
+    <h1 class="cs-h1">How a bank builds<br>an app: <em>the İşCep<br>cycles.</em></h1>
+    <div class="cs-meta-grid">
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Client</div><div class="cs-meta-val">İşbank via Commencis</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Role</div><div class="cs-meta-val">Design lead · Facilitator</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Timeline</div><div class="cs-meta-val">2019 — Present</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Scope</div><div class="cs-meta-val">Process · Playbook · Facilitation</div></div>
+    </div>
+  </header>
+  <div class="cs-hero-visual">
+    <div class="ph-stage wide">
+      <div class="ph"><p class="ph-k">Photo · 21:9</p><p class="ph-t">Brainstorm session board — every product team in the room</p></div>
+    </div>
+  </div>
+
+  <div class="cs-layout">
+    <aside class="cs-sidenav">
+      <ul class="cs-snav-list" id="snav-iscep-way">
+        <li class="cs-snav-item active" data-sec="iw-overview"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iw-overview">Overview</a></li>
+        <li class="cs-snav-item" data-sec="iw-design"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iw-design">The design cycle</a></li>
+        <li class="cs-snav-item" data-sec="iw-diagnosis"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iw-diagnosis">The 2024 diagnosis</a></li>
+        <li class="cs-snav-item" data-sec="iw-artefacts"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iw-artefacts">Problems to artefacts</a></li>
+        <li class="cs-snav-item" data-sec="iw-playbook"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iw-playbook">The playbook</a></li>
+        <li class="cs-snav-item" data-sec="iw-principles"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iw-principles">Design principles</a></li>
+        <li class="cs-snav-item" data-sec="iw-reflection"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iw-reflection">Reflection</a></li>
+      </ul>
+    </aside>
+    <div class="cs-content">
+
+      <section class="cs-sec" id="iw-overview">
+        <p class="cs-sec-eye">Overview</p>
+        <h2 class="cs-h2">A process is a product <em>with users too.</em></h2>
+        <p class="cs-p">İşCep isn't built by one team. Many product teams, the bank's channel and experience teams, agencies and technology subsidiaries all ship into the same app. Without a shared path from request to release, every team invents its own — and the customer feels the seams.</p>
+        <p class="cs-p">I've worked on that path throughout my time on İşCep: first the design cycle Commencis and the bank set up in 2019–20, then the product development cycle that grew out of it in 2024, when it became clear that everyone building for İşCep needed the same map, not only designers.</p>
+        <div class="cs-stats">
+          <div class="cs-stat"><div class="cs-stat-num">10</div><div class="cs-stat-label">Steps in the design cycle, with two quality gates</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">6</div><div class="cs-stat-label">Brainstorm sessions with the bank's product teams</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">5</div><div class="cs-stat-label">Phases in the product development playbook</div></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="iw-design">
+        <p class="cs-sec-eye">2019–20 · The design cycle</p>
+        <h2 class="cs-h2">Define, design, develop, <em>improve.</em></h2>
+        <p class="cs-p">When İşbank formed its first Customer Experience team, Commencis and the bank built the Customer-Centred Experience Development Cycle: four phases, ten steps, and two quality gates: one before development starts and one after release.</p>
+        <div class="cyc">
+          <div class="cyc-ph">
+            <p class="cyc-ph-lbl">Phase 1</p><p class="cyc-ph-name">Define</p><p class="cyc-ph-tr">Tanımla</p>
+            <div class="cyc-step"><b>1</b><span>Request analysis</span></div>
+          </div>
+          <div class="cyc-ph">
+            <p class="cyc-ph-lbl">Phase 2</p><p class="cyc-ph-name">Design</p><p class="cyc-ph-tr">Tasarla</p>
+            <div class="cyc-step"><b>2</b><span>Scoping</span></div>
+            <div class="cyc-step"><b>3</b><span>Research</span></div>
+            <div class="cyc-step"><b>4</b><span>Concept design</span></div>
+            <div class="cyc-step"><b>5</b><span>Pre-development review <em class="cyc-gate">Gate</em></span></div>
+          </div>
+          <div class="cyc-ph">
+            <p class="cyc-ph-lbl">Phase 3</p><p class="cyc-ph-name">Develop</p><p class="cyc-ph-tr">Geliştir</p>
+            <div class="cyc-step"><b>6</b><span>Detailed design</span></div>
+            <div class="cyc-step"><b>7</b><span>Development</span></div>
+            <div class="cyc-step"><b>8</b><span>Data strategy</span></div>
+            <div class="cyc-step"><b>9</b><span>Post-development review <em class="cyc-gate">Gate</em></span></div>
+          </div>
+          <div class="cyc-ph">
+            <p class="cyc-ph-lbl">Phase 4</p><p class="cyc-ph-name">Improve</p><p class="cyc-ph-tr">İyileştir</p>
+            <div class="cyc-step"><b>10</b><span>Improvement</span></div>
+          </div>
+        </div>
+        <div class="cyc-loop"><span>↺ Improvement feeds new requests — the loop restarts at step 1</span><span>◆ Gates = pass score</span></div>
+        <p class="cs-p" style="margin-top:28px">The gates are the heart of it. The first asks whether a concept has been checked with customers or experts — and against the design system — before anyone writes code. The second asks whether what was built matches what was designed. Between them sits production, and after them comes step ten: beta releases tested with up to 500,000 customers, funnels tracked, problems fixed small.</p>
+      </section>
+
+      <section class="cs-sec" id="iw-diagnosis">
+        <p class="cs-sec-eye">2024 · The diagnosis</p>
+        <h2 class="cs-h2">Everyone who builds for İşCep, <em>in the same room.</em></h2>
+        <p class="cs-p">İşCep 10.0 exposed a gap. The design cycle described how design worked, but the teams building for İşCep had very different levels of familiarity with digital development and with the İşCep channel. So we asked them.</p>
+        <p class="cs-p">Six 90-minute brainstorm sessions brought in the bank's digital banking, channel and experience teams alongside product teams from payments, capital markets, treasury, deposits, insurance and commercial products — product owners, managers, analysts and MCM developers. In each, participants walked us through four stages, first as they are today and then as they should be.</p>
+        <div class="cs-fig">
+          <div class="ph ph-wide"><p class="ph-k">Image · 16:10</p><p class="ph-t">Brainstorm board — themes and green solution bands</p></div>
+          <p class="cs-fig-cap">Post-its grouped into themes; a green band under each names the tool or ritual that answers it</p>
+        </div>
+        <div class="cs-cards">
+          <div class="cs-card"><div class="cs-card-num">01</div><p class="cs-card-title">Request &amp; scoping</p><p class="cs-card-text">How does a change reach the experience and channel teams, and what needs to exist before design can start?</p></div>
+          <div class="cs-card"><div class="cs-card-num">02</div><p class="cs-card-title">Research &amp; design</p><p class="cs-card-text">How do teams work with design, and how are outputs approved and revised?</p></div>
+          <div class="cs-card"><div class="cs-card-num">03</div><p class="cs-card-title">Development &amp; release</p><p class="cs-card-text">Where do analysts, developers, testers and product owners depend on each other?</p></div>
+          <div class="cs-card"><div class="cs-card-num">04</div><p class="cs-card-title">Follow-up &amp; improvement</p><p class="cs-card-text">How is success tracked after release, and does it change what happens next?</p></div>
+        </div>
+        <p class="cs-p">Six patterns came up across the sessions:</p>
+        <div class="cs-steps" id="iw-steps">
+          <div class="cs-step"><div class="cs-step-num">01</div><div><p class="cs-step-title">Requests arrived in many shapes</p><p class="cs-step-text">Email, chat, tickets and hallway conversations — with no standard content, so the same ask could be told differently to different teams.</p></div></div>
+          <div class="cs-step"><div class="cs-step-num">02</div><div><p class="cs-step-title">Prioritisation was invisible</p><p class="cs-step-text">Teams wanted to know how requests were ranked, and why theirs waited.</p></div></div>
+          <div class="cs-step"><div class="cs-step-num">03</div><div><p class="cs-step-title">Stakeholders surfaced late</p><p class="cs-step-text">Screen owners and service owners were often discovered mid-project rather than at the kickoff.</p></div></div>
+          <div class="cs-step"><div class="cs-step-num">04</div><div><p class="cs-step-title">Design files outgrew their readers</p><p class="cs-step-text">Versions and alternatives piled up faster than teams could tell which one was current.</p></div></div>
+          <div class="cs-step"><div class="cs-step-num">05</div><div><p class="cs-step-title">Three component generations meant rework</p><p class="cs-step-text">Design and development kept meeting at the same mismatch: the component the design needed wasn't the one the platform had.</p></div></div>
+          <div class="cs-step"><div class="cs-step-num">06</div><div><p class="cs-step-title">Success was tracked team by team</p><p class="cs-step-text">Rarely against shared KPIs, and rarely feeding the roadmap.</p></div></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="iw-artefacts">
+        <p class="cs-sec-eye">From problems to artefacts</p>
+        <h2 class="cs-h2">Every problem got a <em>concrete</em> answer.</h2>
+        <p class="cs-p">Each theme on the board ended with a green band: the problem, and the tool or ritual that would answer it. Together they became the artefact set behind the playbook.</p>
+        <div class="map">
+          <div class="map-row head"><span>The problem</span><span></span><span>The artefact</span></div>
+          <div class="map-row"><span class="map-p">Requests through many channels</span><span class="map-arrow">→</span><span class="map-a">One shared İşCep product development Jira</span></div>
+          <div class="map-row"><span class="map-p">Requests with no standard content</span><span class="map-arrow">→</span><span class="map-a">A Product Requirements Document (PRD) template</span></div>
+          <div class="map-row"><span class="map-p">Prioritisation nobody could see</span><span class="map-arrow">→</span><span class="map-a">Product acceptance criteria and a request evaluation committee</span></div>
+          <div class="map-row"><span class="map-p">Stakeholders found mid-project</span><span class="map-arrow">→</span><span class="map-a">Scoping meeting, stakeholder document, screen–service map</span></div>
+          <div class="map-row"><span class="map-p">Design versions nobody could follow</span><span class="map-arrow">→</span><span class="map-a">Wireframe checklist, Figma reading guide, project card</span></div>
+          <div class="map-row"><span class="map-p">Design–component mismatch</span><span class="map-arrow">→</span><span class="map-a">Component alignment and differences documentation</span></div>
+          <div class="map-row"><span class="map-p">Surprises in build and test</span><span class="map-arrow">→</span><span class="map-a">Final design walkthrough, shared development calendar, test checklist</span></div>
+          <div class="map-row"><span class="map-p">Unclear ownership when something breaks</span><span class="map-arrow">→</span><span class="map-a">A RACI matrix</span></div>
+          <div class="map-row"><span class="map-p">Success tracked per team</span><span class="map-arrow">→</span><span class="map-a">An İşCep KPI tree and a KPI-driven roadmap</span></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="iw-playbook">
+        <p class="cs-sec-eye">The playbook</p>
+        <h2 class="cs-h2">Five phases, <em>one page each.</em></h2>
+        <p class="cs-p">The output is an interactive playbook: five phases, each broken into steps that say who does what, which stakeholders are involved (as a RACI — responsible, accountable, consulted, informed, support) and which template to use.</p>
+        <div class="pb">
+          <div class="pb-row"><span class="pb-n">1</span><span class="pb-name">Goal &amp; scope definition<span class="pb-tr">İş ve Hedef Tanımı</span></span><div class="pb-steps"><span class="cs-tag">Detail the request</span><span class="cs-tag">Check acceptance criteria</span><span class="cs-tag">Kick-off</span></div></div>
+          <div class="pb-row"><span class="pb-n">2</span><span class="pb-name">Design<span class="pb-tr">Tasarım</span></span><div class="pb-steps"><span class="cs-tag">Concept (UX)</span><span class="cs-tag">Visual (UI)</span><span class="cs-tag">Kick-off &amp; hand-off</span></div></div>
+          <div class="pb-row"><span class="pb-n">3</span><span class="pb-name">Development<span class="pb-tr">Geliştirme</span></span><div class="pb-steps"><span class="cs-tag">Design &amp; analysis review</span><span class="cs-tag">Update technical plan</span><span class="cs-tag">Front-end, MCM &amp; services</span></div></div>
+          <div class="pb-row"><span class="pb-n">4</span><span class="pb-name">Test</span><div class="pb-steps"><span class="cs-tag">Unit tests &amp; package</span><span class="cs-tag">Business &amp; QA testing</span><span class="cs-tag">Approval &amp; release</span></div></div>
+          <div class="pb-row"><span class="pb-n">5</span><span class="pb-name">Release &amp; follow-up<span class="pb-tr">Canlıya Çıkış ve Takip</span></span><div class="pb-steps"><span class="cs-tag">Technical maintenance</span><span class="cs-tag">Define &amp; track KPIs</span></div></div>
+        </div>
+        <div class="cs-fig">
+          <div class="ph ph-wide"><p class="ph-k">Image · 16:10</p><p class="ph-t">Playbook prototype — a phase page with steps, RACI and templates</p></div>
+          <p class="cs-fig-cap">Playbook prototype · Figma</p>
+        </div>
+        <p class="cs-p">Not every request needs every step. The playbook sorts work into three sizes, so a new icon doesn't go through the machinery of a redesign:</p>
+        <div class="trk-grid">
+          <div class="trk"><div class="trk-num">L</div><p class="trk-title">Large scope</p><p class="trk-text">New features and redesigns run the full five-phase cycle, every step mandatory.</p></div>
+          <div class="trk"><div class="trk-num">M</div><p class="trk-title">Medium scope</p><p class="trk-text">A new feature inside an existing flow, or a component update — a lighter path.</p></div>
+          <div class="trk"><div class="trk-num">S</div><p class="trk-title">Small scope</p><p class="trk-text">Icons, illustrations, an extra field or an expert opinion on a mini app.</p></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="iw-principles">
+        <p class="cs-sec-eye">Design principles</p>
+        <h2 class="cs-h2">A manifesto everyone <em>can point to.</em></h2>
+        <p class="cs-p">The playbook opens with the İşCep design manifesto — intuitive, consistent and effective — so "good design" means the same thing to a product owner, a developer and a designer. Product development runs on four principles:</p>
+        <div class="cs-cards">
+          <div class="cs-card"><div class="cs-card-num">01</div><p class="cs-card-title">Be customer-led, know your users</p></div>
+          <div class="cs-card"><div class="cs-card-num">02</div><p class="cs-card-title">Know, track and improve success metrics</p></div>
+          <div class="cs-card"><div class="cs-card-num">03</div><p class="cs-card-title">Minimise user effort</p></div>
+          <div class="cs-card"><div class="cs-card-num">04</div><p class="cs-card-title">Keep balance, keep communication strong</p></div>
+        </div>
+        <p class="cs-p">Design itself follows eight working principles:</p>
+        <div class="cs-tags">
+          <span class="cs-tag">We know our users</span><span class="cs-tag">Data-fed</span><span class="cs-tag">Transparent &amp; simple</span><span class="cs-tag">Inclusive</span>
+          <span class="cs-tag">Unafraid of risk</span><span class="cs-tag">Innovative</span><span class="cs-tag">Consistent</span><span class="cs-tag">Always improving</span>
+        </div>
+        <p class="cs-p" style="margin-top:20px">And usability is anchored in Nielsen's ten heuristics, each rewritten as a line anyone on the team can remember:</p>
+        <div class="hx">
+          <div class="hx-item"><span>1</span><div><b>System status</b>Never leave the user in the dark.</div></div>
+          <div class="hx-item"><span>2</span><div><b>Match the real world</b>Speak the user's language.</div></div>
+          <div class="hx-item"><span>3</span><div><b>User control &amp; freedom</b>Let people feel in control.</div></div>
+          <div class="hx-item"><span>4</span><div><b>Consistency &amp; standards</b>The same everywhere.</div></div>
+          <div class="hx-item"><span>5</span><div><b>Error prevention</b>No room for error.</div></div>
+          <div class="hx-item"><span>6</span><div><b>Recognition over recall</b>Don't make them ask "what was this?"</div></div>
+          <div class="hx-item"><span>7</span><div><b>Flexibility &amp; efficiency</b>Who doesn't want quick and easy?</div></div>
+          <div class="hx-item"><span>8</span><div><b>Aesthetic &amp; minimal</b>Less is more.</div></div>
+          <div class="hx-item"><span>9</span><div><b>Recover from errors</b>Not a problem — here's the fix.</div></div>
+          <div class="hx-item"><span>10</span><div><b>Help &amp; documentation</b>Help people find their way.</div></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="iw-reflection">
+        <p class="cs-sec-eye">Reflection</p>
+        <h2 class="cs-h2">What building a <em>process</em> taught me.</h2>
+        <p class="cs-p">The most useful part of the diagnosis wasn't any single finding; it was that teams who rarely met saw the same problems from different sides. A shared map doesn't just speed teams up — it gives them a way to disagree productively.</p>
+        <p class="cs-p">The other lesson is humility. The follow-up-and-improvement stage was the least mature of the four, with few artefacts behind it. A process, like a product, ships unfinished and improves against the people who use it.</p>
+        <div class="cs-reflection">
+          <p class="cs-reflection-eye">Key takeaway</p>
+          <p class="cs-reflection-text">"A good process is invisible to the customer and obvious to the team. If people have to ask what happens next, the process isn't finished."</p>
+        </div>
+        <div class="cs-next" onclick="openCS('iscep-vision')">
+          <div><p class="cs-next-lbl">Next</p><p class="cs-next-title">Vision workshops — designing next year's İşCep</p></div>
+          <span class="cs-next-arrow">→</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div><!-- /page-iscep-way -->
+
+<!-- ══════════════════════════════════════════
+     CASE STUDY: İŞCEP VISION WORKSHOPS
+══════════════════════════════════════════ -->
+<div class="page" id="page-iscep-vision">
+  <a class="cs-back" href="/iscep" onclick="openCS('iscep');return false">
+    <svg viewBox="0 0 16 16"><path d="M13 8H3M3 8L8 3M3 8L8 13"/></svg>
+    İşCep
+  </a>
+
+  <header class="cs-hero has-visual">
+    <p class="cs-eyebrow">Commencis × İşbank · Strategy · Facilitation · Every year</p>
+    <h1 class="cs-h1">Designing next year's<br>İşCep, <em>every year.</em></h1>
+    <div class="cs-meta-grid">
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Client</div><div class="cs-meta-val">İşbank Digital Banking</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Role</div><div class="cs-meta-val">Facilitator · Design lead</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Cadence</div><div class="cs-meta-val">Annual · summer to autumn</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Output</div><div class="cs-meta-val">Next year's roadmap</div></div>
+    </div>
+  </header>
+  <div class="cs-hero-visual">
+    <div class="ph-stage wide">
+      <div class="ph"><p class="ph-k">Photo · 21:9</p><p class="ph-t">Workshop wall — idea cards, dots and post-its</p></div>
+    </div>
+  </div>
+
+  <div class="cs-layout">
+    <aside class="cs-sidenav">
+      <ul class="cs-snav-list" id="snav-iscep-vision">
+        <li class="cs-snav-item active" data-sec="iv-overview"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iv-overview">Overview</a></li>
+        <li class="cs-snav-item" data-sec="iv-loop"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iv-loop">The annual loop</a></li>
+        <li class="cs-snav-item" data-sec="iv-evolution"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iv-evolution">How it evolved</a></li>
+        <li class="cs-snav-item" data-sec="iv-day"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iv-day">The workshop day</a></li>
+        <li class="cs-snav-item" data-sec="iv-handoff"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iv-handoff">Ideas to roadmap</a></li>
+        <li class="cs-snav-item" data-sec="iv-2027"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iv-2027">The 2027 edition</a></li>
+        <li class="cs-snav-item" data-sec="iv-reflection"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iv-reflection">Reflection</a></li>
+      </ul>
+    </aside>
+    <div class="cs-content">
+
+      <section class="cs-sec" id="iv-overview">
+        <p class="cs-sec-eye">Overview</p>
+        <h2 class="cs-h2">Where the roadmap <em>comes from.</em></h2>
+        <p class="cs-p">Every year, İşbank's digital banking team and Commencis run a vision cycle to decide where İşCep goes next. It starts with a focus — a set of questions the bank wants to explore in depth. Past focuses have included hyper-personalisation and İşCep for everyone; the constant thread is making the app as personal as possible and using AI to transform digital banking.</p>
+        <p class="cs-p">The output isn't a deck that gets filed. Ideas that come out of the cycle feed the next year's product roadmap, which makes it the front door of annual planning — and, once the ideas become projects, the front door of the product development cycle too.</p>
+        <div class="cs-stats">
+          <div class="cs-stat"><div class="cs-stat-num">14</div><div class="cs-stat-label">Idea cards in the workshop for the 2023 roadmap</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">12</div><div class="cs-stat-label">Ideas scored and handed off for the 2026 roadmap</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">8</div><div class="cs-stat-label">Squads in the latest edition, for 2027</div></div>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="iv-loop">
+        <p class="cs-sec-eye">The annual loop</p>
+        <h2 class="cs-h2">Six steps, <em>every year.</em></h2>
+        <p class="cs-p">The squad structure and the timings change from one year to the next. The shape doesn't: research first, then a workshop, then a handoff that turns ideas into work.</p>
+        <div class="loop">
+          <div class="loop-cell"><div class="loop-n">1</div><p class="loop-t">Focus</p><p class="loop-d">The bank and the design team agree on the year's focus areas and research questions.</p></div>
+          <div class="loop-cell"><div class="loop-n">2</div><p class="loop-t">Research</p><p class="loop-d">Squads work in parallel for weeks: trends and benchmarks, what customers say, ideation.</p></div>
+          <div class="loop-cell"><div class="loop-n">3</div><p class="loop-t">Vision day</p><p class="loop-d">Idea cards go on the wall; participants review, score and detail them together.</p></div>
+          <div class="loop-cell"><div class="loop-n">4</div><p class="loop-t">Prioritise</p><p class="loop-d">Ideas are scored on user impact, vision fit, metric impact and feasibility.</p></div>
+          <div class="loop-cell"><div class="loop-n">5</div><p class="loop-t">Hand off</p><p class="loop-d">Each prioritised idea is transferred to the teams who will own it, with a project plan.</p></div>
+          <div class="loop-cell"><div class="loop-n">6</div><p class="loop-t">Roadmap</p><p class="loop-d">Ideas enter next year's İşCep roadmap and the product development cycle picks them up.</p></div>
+        </div>
+        <div class="loop-foot">↺ What ships informs the next year's research</div>
+      </section>
+
+      <section class="cs-sec" id="iv-evolution">
+        <p class="cs-sec-eye">How it evolved</p>
+        <h2 class="cs-h2">From post-its on a wall to <em>working demos.</em></h2>
+        <p class="cs-p">Three editions show the shift: from a one-day event with research behind it, to structured prioritisation and transfer, to a seven-week sprint whose output is something you can tap.</p>
+        <div class="cs-table-wrap">
+          <table class="cs-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>For 2023<small>Held Aug 2022</small></th>
+                <th>For 2026<small>Held 2025</small></th>
+                <th>For 2027<small>Held 2026</small></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Setup</td><td>Three research tracks feeding one workshop day</td><td>A workshop plus a formal transfer to product teams</td><td>Eight squads: four by segment, three by idea, one for process and AI transformation</td></tr>
+              <tr><td>Research</td><td>Trends and benchmarks · what users say, qualitative and quantitative · ideation, over about six weeks</td><td>Research around the year's focus areas</td><td>Seven weeks with product-team meetings, benchmarks, data requests, user interviews and senior design reviews</td></tr>
+              <tr><td>Ideas</td><td>14 idea cards</td><td>12 ideas</td><td>One chosen concept per squad</td></tr>
+              <tr><td>Decision</td><td>Gallery walk, scoring, top four, round-robin detailing</td><td>Participants score four criteria</td><td>Six Thinking Hats session with each product team</td></tr>
+              <tr><td>Output</td><td>Detailed idea cards and a draft roadmap poster</td><td>Handoff deck: framing question, key considerations, project plan</td><td>Working demos at Vision Day on 1 September</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="iv-day">
+        <p class="cs-sec-eye">The workshop day</p>
+        <h2 class="cs-h2">Designed for <em>leaving with something.</em></h2>
+        <p class="cs-p">The workshop's manifesto is one line: be goal- and output-focused — we want to leave with something in our hands. That's why it's physical: printed cards, wall space, stickers, and a designer facilitating every group.</p>
+        <div class="ic-wrap">
+          <div class="ic">
+            <div class="ic-h"><p class="ic-k" style="margin-bottom:4px"><b>1</b>Idea name</p><span>[Area] — [Innovative idea]</span></div>
+            <div class="ph"><p class="ph-k">Concept visual</p><p class="ph-t">Flow sketch and competitor screens</p></div>
+            <div class="ic-sec"><p class="ic-k"><b>2</b>Value</p>Business value: volume, profitability, customers · User value: evidence from customer comments</div>
+            <div class="ic-sec"><p class="ic-k"><b>3</b>AARRR</p><div class="ic-chips"><span>Acquisition</span><span>Activation</span><span>Retention</span><span>Referral</span><span>Revenue</span></div></div>
+            <div class="ic-sec"><p class="ic-k"><b>4</b>Goals</p>Detailed success metrics</div>
+          </div>
+          <div class="ic-notes">
+            <p class="cs-sec-eye" style="margin-bottom:0">Anatomy of an idea card</p>
+            <div class="cs-annot-row"><div class="cs-annot-num">1</div><p class="cs-annot-text"><strong>Name and concept.</strong> One idea per card, with a sketch and competitor examples so it reads without a presenter.</p></div>
+            <div class="cs-annot-row"><div class="cs-annot-num">2</div><p class="cs-annot-text"><strong>Value.</strong> What the business gains and what the customer gains, with evidence from customer comments.</p></div>
+            <div class="cs-annot-row"><div class="cs-annot-num">3</div><p class="cs-annot-text"><strong>AARRR.</strong> The idea mapped to the pirate funnel, so it's tied to a metric before it's tied to a screen.</p></div>
+            <div class="cs-annot-row"><div class="cs-annot-num">4</div><p class="cs-annot-text"><strong>Goals.</strong> Success metrics detailed enough to be checked later.</p></div>
+          </div>
+        </div>
+        <div class="cs-gal">
+          <figure><div class="ph"><p class="ph-k">Photo</p><p class="ph-t">Gallery walk</p></div><figcaption>Idea cards on the wall</figcaption></figure>
+          <figure><div class="ph"><p class="ph-k">Photo</p><p class="ph-t">Dot voting</p></div><figcaption>Voting on concept screens</figcaption></figure>
+          <figure><div class="ph"><p class="ph-k">Photo</p><p class="ph-t">Roadmap poster</p></div><figcaption>Idea slices placed by timeframe</figcaption></figure>
+        </div>
+        <div class="pt" id="iv-pt" style="margin-top:36px">
+          <div class="pt-item"><div class="pt-dot">01</div><div class="pt-body"><p class="pt-lbl">45 minutes</p><p class="pt-title">Review and prioritise</p><p class="pt-text">A gallery walk of the idea cards, individual scoring on six criteria from 1 to 10, and the top four chosen by the room.</p></div></div>
+          <div class="pt-item"><div class="pt-dot">02</div><div class="pt-body"><p class="pt-lbl">55 minutes</p><p class="pt-title">Evaluate and detail</p><p class="pt-text">Dot voting on concept screens and competitor examples, then each group takes one idea through a round-robin: the needs it meets, how people start using it, how it looks, and how to slice and release it.</p></div></div>
+          <div class="pt-item"><div class="pt-dot">03</div><div class="pt-body"><p class="pt-lbl">45 minutes</p><p class="pt-title">Build the roadmap</p><p class="pt-text">Groups place idea slices and user stories on a large printed roadmap and close with the main learnings.</p></div></div>
+        </div>
+        <div class="cs-tags">
+          <span class="cs-tag">User problem</span><span class="cs-tag">Reach</span><span class="cs-tag">Metric impact</span>
+          <span class="cs-tag">Novelty</span><span class="cs-tag">User impact</span><span class="cs-tag">Business impact</span>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="iv-handoff">
+        <p class="cs-sec-eye">Ideas to roadmap</p>
+        <h2 class="cs-h2">The workshop ends. The <em>work</em> starts.</h2>
+        <p class="cs-p">A separate transfer session — held in October or November with the bank's digital banking team, Commencis design and the AI team — turns each prioritised idea into a project. The workshop day isn't part of it; the handoff is its own event. Every idea gets the same three-part treatment:</p>
+        <div class="trk-grid">
+          <div class="trk"><div class="trk-num">01</div><p class="trk-title">The idea slide</p><p class="trk-text">One "how might we…" sentence and, where there is one, a concept visual.</p></div>
+          <div class="trk"><div class="trk-num">02</div><p class="trk-title">Key considerations</p><p class="trk-text">Grouped into experience and infrastructure grounding, concerns needing further evaluation, and user impact.</p></div>
+          <div class="trk"><div class="trk-num">03</div><p class="trk-title">The project plan</p><p class="trk-text">Activities, purpose, owners and dates — with the date left open until the transfer meeting settles it.</p></div>
+        </div>
+        <p class="cs-p">Every plan ends with the same line: an ongoing loop that hands the idea to the İşCep product development cycle.</p>
+        <p class="cs-p">Ideas are scored on four criteria — user impact, fit with the vision, impact on metrics, and feasibility — and the total decides the order they're taken up.</p>
+      </section>
+
+      <section class="cs-sec" id="iv-2027">
+        <p class="cs-sec-eye">The 2027 edition</p>
+        <h2 class="cs-h2">Eight squads, seven weeks, <em>one demo day.</em></h2>
+        <p class="cs-p">The latest edition changed the unit of work. Instead of ideas competing on a wall, eight squads worked in parallel — each with UX, UI, business analysis, development, sometimes a writer, and the bank's own experience-design and channel owners in the same team.</p>
+        <div class="cs-cards">
+          <div class="cs-card"><div class="cs-card-num">4</div><p class="cs-card-title">Segment squads</p><p class="cs-card-text">Own a customer segment, decide who to focus on, and supply research the other squads build on.</p></div>
+          <div class="cs-card"><div class="cs-card-num">3</div><p class="cs-card-title">Idea squads</p><p class="cs-card-text">Design how one concept works across the segments it touches.</p></div>
+          <div class="cs-card"><div class="cs-card-num">1</div><p class="cs-card-title">Process &amp; transformation</p><p class="cs-card-text">Rethinks how the bank itself decides and operates, and what an AI-native app looks like. Its output sets the ground for the others.</p></div>
+          <div class="cs-card"><div class="cs-card-num">∞</div><p class="cs-card-title">Room to flex</p><p class="cs-card-text">The plan guides; it doesn't prescribe. Squads choose their own methods and artefacts.</p></div>
+        </div>
+        <div class="tl">
+          <div class="tl-row"><div class="tl-yr">W1</div><div><p class="tl-title">Squads form, kickoff</p><p class="tl-text">Roles are set, the research brief is read together, and an open-questions list starts.</p></div></div>
+          <div class="tl-row"><div class="tl-yr">W2</div><div><p class="tl-title">First product-team meeting (M1)</p><p class="tl-text">Knowledge handover and research scope; data requests go out. Squads share across teams for the first time.</p></div></div>
+          <div class="tl-row"><div class="tl-yr">W3</div><div><p class="tl-title">Benchmarks, data, interviews</p><p class="tl-text">Research is synthesised, separating surprising findings from expected ones.</p></div></div>
+          <div class="tl-row"><div class="tl-yr">W4</div><div><p class="tl-title">Brainstorming day and M2</p><p class="tl-text">Findings and concept ideas go to the product team, evaluated with the six thinking hats.</p></div></div>
+          <div class="tl-row"><div class="tl-yr">W5</div><div><p class="tl-title">Concept development and senior review</p><p class="tl-text">A developer feasibility checkpoint decides what becomes code and what stays a prototype; senior designers review as a working session, not a presentation.</p></div></div>
+          <div class="tl-row"><div class="tl-yr">W6</div><div><p class="tl-title">Design review (M3) and developer handoff</p><p class="tl-text">Detailed design, KPIs and the demo scenario are agreed; developers start building.</p></div></div>
+          <div class="tl-row"><div class="tl-yr">W7</div><div><p class="tl-title">Build, QA and rehearsal</p><p class="tl-text">Design QA, edge cases and a final rehearsal where every squad presents to the others. Vision Day follows on 1 September.</p></div></div>
+        </div>
+        <p class="cs-p">In M2, each product team wore the six thinking hats over every concept and left with a Concept Evaluation Card: strengths, weaknesses, open questions and a direction.</p>
+        <div class="hats">
+          <span class="hat"><i style="background:#fff"></i>White · data</span>
+          <span class="hat"><i style="background:#d94b4b;border-color:#d94b4b"></i>Red · intuition</span>
+          <span class="hat"><i style="background:#141412;border-color:#141412"></i>Black · risk</span>
+          <span class="hat"><i style="background:#e8b931;border-color:#e8b931"></i>Yellow · opportunity</span>
+          <span class="hat"><i style="background:#4caf7a;border-color:#4caf7a"></i>Green · alternatives</span>
+          <span class="hat"><i style="background:#3b6fd4;border-color:#3b6fd4"></i>Blue · decision</span>
+        </div>
+        <div class="cs-gal">
+          <figure><div class="ph"><p class="ph-k">Image</p><p class="ph-t">Squad board</p></div><figcaption>A squad's working board</figcaption></figure>
+          <figure><div class="ph"><p class="ph-k">Image</p><p class="ph-t">Concept evaluation card</p></div><figcaption>Six-hats output</figcaption></figure>
+          <figure><div class="ph"><p class="ph-k">Image</p><p class="ph-t">Demo on device</p></div><figcaption>A working demo at Vision Day</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="cs-sec" id="iv-reflection">
+        <p class="cs-sec-eye">Reflection</p>
+        <h2 class="cs-h2">What the cycle <em>keeps teaching.</em></h2>
+        <p class="cs-p">Vision work fails when it ends at a slide. The version I trust most is the one whose output is tested by the people who will have to build it — which is why the format moved from cards on a wall to squads with developers in them and something to click at the end.</p>
+        <p class="cs-p">The other lesson is about consistency: the same four scoring criteria, the same handoff shape, and the same line at the end of every plan let the bank compare an idea from this year to one from three years ago.</p>
+        <div class="cs-reflection">
+          <p class="cs-reflection-eye">Key takeaway</p>
+          <p class="cs-reflection-text">"A vision is only as good as the roadmap it changes. Design the handoff as carefully as the workshop."</p>
+        </div>
+        <div class="cs-next" onclick="openCS('iscep')">
+          <div><p class="cs-next-lbl">Back to</p><p class="cs-next-title">İşCep — designing user and organization level interactions</p></div>
+          <span class="cs-next-arrow">→</span>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div><!-- /page-iscep-vision -->
 
 <!-- ══════════════════════════════════════════
      CASE STUDY: ARMUT (shorter)
@@ -1496,11 +2827,30 @@ window.addEventListener('scroll',()=>{
 },{passive:true});
 
 // ── PAGE MANAGEMENT ──────────────────────────────────────
-const CS_PAGES=['userhear','iscep','armut','research'];
+const PATHS={
+  landing: '/',
+  userhear: '/userhear',
+  iscep: '/iscep',
+  'iscep-redesign': '/iscep/redesign',
+  'iscep-hayatim': '/iscep/hayatim',
+  'iscep-borsa': '/iscep/mobil-borsa',
+  'iscep-maximum': '/iscep/maximum-dunyam',
+  'iscep-way': '/iscep/way-of-working',
+  'iscep-vision': '/iscep/vision-workshops',
+  armut: '/armut',
+  research: '/research'
+};
+const CS_PAGES=Object.keys(PATHS).filter(id=>id!=='landing');
 const PAGE_TITLES={
   landing: 'Yağmur Gökçe — Senior Lead UX Designer',
   userhear: 'UserHear — Yağmur Gökçe',
   iscep: 'İşCep — Yağmur Gökçe',
+  'iscep-redesign': 'İşCep 10.0 Redesign — Yağmur Gökçe',
+  'iscep-hayatim': 'İşCep\'le Hayatım — Yağmur Gökçe',
+  'iscep-borsa': 'Mobil Borsa — Yağmur Gökçe',
+  'iscep-maximum': 'Maximum Dünyam — Yağmur Gökçe',
+  'iscep-way': 'İşCep Ways of Working — Yağmur Gökçe',
+  'iscep-vision': 'İşCep Vision Workshops — Yağmur Gökçe',
   armut: 'Armut — Yağmur Gökçe',
   research: 'Research — Yağmur Gökçe'
 };
@@ -1513,14 +2863,19 @@ function showPage(id){
   window.scrollTo({top:0,behavior:'instant'});
 }
 function pagePath(id){
-  return id==='landing' ? '/' : '/'+id;
+  return PATHS[id]||'/';
 }
-function slugFromPath(path){
-  return path.replace(/^\/+|\/+$/g,'');
+function idFromPath(path){
+  const clean='/'+path.replace(/^\/+|\/+$/g,'');
+  return CS_PAGES.find(id=>PATHS[id]===clean)||'landing';
 }
 function setUrlForPage(id,replace){
   const url=pagePath(id);
   history[replace?'replaceState':'pushState']({page:id},'',url);
+}
+function scrollToSec(id){
+  const el=document.getElementById(id);
+  if(el)el.scrollIntoView({behavior:'smooth',block:'start'});
 }
 function scrollLP(id){
   setTimeout(()=>{
@@ -1547,8 +2902,7 @@ function goHome(scrollId){
   if(scrollId)scrollLP(scrollId);
 }
 window.addEventListener('popstate',e=>{
-  const slug=e.state?e.state.page:slugFromPath(location.pathname);
-  const id=CS_PAGES.includes(slug)?slug:'landing';
+  const id=e.state&&PATHS[e.state.page]?e.state.page:idFromPath(location.pathname);
   showPage(id);
   if(id!=='landing')setTimeout(initObservers,50);
 });
@@ -1584,6 +2938,41 @@ function uhGoTo(i){
   uhSlideIdx=i;
   uhRender();
 }
+
+// ── DEVICE SCREENS: hide the scroll hint after first use ──
+document.querySelectorAll('.dev-scroll').forEach(el=>{
+  el.addEventListener('scroll',()=>el.closest('.dev').classList.add('used'),{passive:true,once:true});
+});
+
+// ── DESIGN CYCLE EXPLORER (İşCep hub) ────────────────────
+const CYC_STEPS=[
+  {phase:'Define · Tanımla',desc:'The design request is rationalised: why now, for whom, and what it should change. The bank-side stakeholders and the team who will work on it are named, the scope is projected onto a timeline, and a success goal is set.',out:'A request template covering rationale, business, user and market impact, release plan and success criteria.'},
+  {phase:'Design · Tasarla',desc:'The request reaches the experience team, and designers are assigned and coordinated. The team lists risks, dependencies, timing and activities, so the change is scoped by its real impact instead of by surprise in development.',out:'A risk, dependency and activity plan — and one shared place for documents and approvals until the work is in production.'},
+  {phase:'Design · Tasarla',desc:'The request is checked against real need. The team analyses the current state (funnels, complaints, store reviews, past research), benchmarks competitors, and runs customer research where the size of the change justifies it.',out:'Evidence that the request answers a real user need, not just an internal opinion.'},
+  {phase:'Design · Tasarla',desc:'The core experience is designed first, across awareness, first use and retention, and only then the details. Skipping straight to detail is what used to cause chaos and lost time. The design team also joins the technical analysis of every development.',out:'A concept for the core experience, kept separate from the detailed design.'},
+  {phase:'Design · Tasarla',gate:true,desc:'Before any code is written, the concept is tested with customers — moderated or unmoderated, scaled to the size of the change — or reviewed by experts. It is also checked against the design library and İşCep principles. Work only enters development with a passing score.',out:'A pass score, and an agreed list of what changes before the build.'},
+  {phase:'Develop · Geliştir',desc:'The concept is detailed until it can be built: components from the design system, every state, and copy. Synchronous sessions with the product owner, analysts, channel, experience, front-end, middleware and back-end teams keep decisions consistent across teams.',out:'Build-ready designs that respect the component library and İşCep principles.'},
+  {phase:'Develop · Geliştir',desc:'Software is built, and design does not stop. A software follow-up step keeps designers in the loop, agile sessions keep teams aligned, and experience-critical work always gets the experience and design team’s view — while time-critical work can move on its own initiative.',out:'Design and engineering in sync, with the details of the experience intact.'},
+  {phase:'Develop · Geliştir',desc:'Measurement is planned before release, not after. Standard measures are defined, custom events are set up so funnels can be built, and designers can add data hypotheses for anything non-standard — so satisfaction and business results are visible from day one.',out:'A measurement plan: events, funnels and hypotheses to test.'},
+  {phase:'Develop · Geliştir',gate:true,desc:'What was built is compared with what was designed. Differences are sorted into major and cosmetic, followed through test and production, and scheduled for fixing. Where the change is large, a customer test is added — not just functional testing.',out:'A list of input-versus-output differences, with owners and timing.'},
+  {phase:'Improve · İyileştir',desc:'The live product is followed against its data plan. Beta versions are tested with up to 500,000 customers, funnels are watched closely, and market research keeps running, so a problem is found small and fixed small. What is learned becomes new requests, and the loop restarts.',out:'Beta results, funnel insights and the next round of requests.'}
+];
+function cycShow(i){
+  const tiles=document.querySelectorAll('.cyc-tile');
+  if(!tiles.length)return;
+  const st=CYC_STEPS[i],t=tiles[i],d=document.getElementById('cycDetail');
+  tiles.forEach((el,k)=>el.classList.toggle('on',k===i));
+  d.querySelector('.cyc-d-ic').innerHTML=t.querySelector('.cyc-tile-ic').outerHTML;
+  d.querySelector('.cyc-d-ph').textContent='Step '+(i+1)+' · '+st.phase;
+  d.querySelector('.cyc-d-t span').textContent=t.querySelector('.cyc-tile-t').textContent;
+  d.querySelector('.cyc-gate').style.display=st.gate?'inline-block':'none';
+  d.querySelector('.cyc-d-p').textContent=st.desc;
+  d.querySelector('.cyc-d-o span').textContent=st.out;
+}
+document.querySelectorAll('.cyc-tile').forEach((t,i)=>{
+  ['mouseenter','focus','click'].forEach(ev=>t.addEventListener(ev,()=>cycShow(i)));
+});
+cycShow(0);
 
 // ── SIDENAV SMOOTH SCROLL ────────────────────────────────
 document.querySelectorAll('.cs-snav-link').forEach(a=>{
@@ -1647,8 +3036,7 @@ function initLandingAnims(){
 
 // ── INITIAL ROUTE ────────────────────────────────────────
 (function initRoute(){
-  const slug=slugFromPath(location.pathname);
-  const id=CS_PAGES.includes(slug)?slug:'landing';
+  const id=idFromPath(location.pathname);
   showPage(id);
   setUrlForPage(id,true);
   if(id!=='landing')setTimeout(initObservers,120);
