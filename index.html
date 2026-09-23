@@ -74,7 +74,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);
           color:var(--ink);text-decoration:none;cursor:none;
           letter-spacing:-.01em}
 .nav-logo em{font-style:italic;color:var(--ink3)}
-.nav-right{display:flex;align-items:center;gap:10px}
+.nav-right{display:flex;align-items:center;gap:10px;margin-left:auto}
 .nav-link{font-size:12px;letter-spacing:.05em;text-transform:uppercase;
           color:var(--ink3);text-decoration:none;cursor:none;
           padding:7px 0;transition:color .2s}
@@ -85,6 +85,10 @@ body{background:var(--bg);color:var(--ink);font-family:var(--sans);
           text-decoration:none;transition:all .2s;background:transparent}
 .nav-pill:hover{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .nav-divider{width:1px;height:14px;background:var(--rule);margin:0 6px}
+.nav-link-detail{display:none}
+body.is-detail .nav-logo{display:none}
+body.is-detail .nav-link-home,body.is-detail .nav-divider-home{display:none}
+body.is-detail .nav-link-detail{display:inline-flex}
 
 /* ─── PAGE SWITCHING ──────────────────────────────────────── */
 .page{display:none}
@@ -295,6 +299,7 @@ site-footer,.site-footer{
 }
 .cs-back:hover{color:var(--ink);border-color:var(--ink)}
 .cs-back svg{width:14px;stroke:currentColor;fill:none;stroke-width:1.5}
+body.nav-scrolled .cs-back{top:14px}
 
 /* hero */
 .cs-hero{
@@ -1052,7 +1057,7 @@ site-footer,.site-footer{
   .cs-cards,.cs-stats,.cs-feat-grid,.cs-compare,.cs-two-text,.cs-split{grid-template-columns:1fr}
   .cs-reflection{padding:36px 20px}
   .cs-next{padding:32px 20px;margin:0 -20px}
-  .cs-back{left:20px;top:16px}
+  .cs-back,body.nav-scrolled .cs-back{left:20px;top:16px}
   site-footer,.site-footer{padding:20px;flex-direction:column;gap:6px;text-align:center}
 }
 </style>
@@ -1068,9 +1073,10 @@ site-footer,.site-footer{
 <nav class="site-nav" id="siteNav">
   <a href="/" class="nav-logo" onclick="goHome();return false">Yağmur Gökçe<em>.</em></a>
   <div class="nav-right">
-    <a href="/" class="nav-link" onclick="goHome('lp-work');return false">Work</a>
-    <div class="nav-divider"></div>
-    <a href="/" class="nav-link" onclick="goHome('lp-about');return false">About</a>
+    <a href="/" class="nav-link nav-link-home" onclick="goHome('lp-work');return false">Work</a>
+    <div class="nav-divider nav-divider-home"></div>
+    <a href="/" class="nav-link nav-link-home" onclick="goHome('lp-about');return false">About</a>
+    <a href="/" class="nav-link nav-link-detail" onclick="goHome();return false">Home</a>
     <div class="nav-divider"></div>
     <a href="mailto:me.yagmurgokce@gmail.com" class="nav-pill">Say hello →</a>
   </div>
@@ -2931,7 +2937,9 @@ window.addEventListener('scroll',()=>{
 // ── NAV ──────────────────────────────────────────────────
 const nav=document.getElementById('siteNav');
 window.addEventListener('scroll',()=>{
-  nav.classList.toggle('scrolled',window.scrollY>40);
+  const scrolled=window.scrollY>40;
+  nav.classList.toggle('scrolled',scrolled);
+  document.body.classList.toggle('nav-scrolled',scrolled);
 },{passive:true});
 
 // ── PAGE MANAGEMENT ──────────────────────────────────────
@@ -2968,6 +2976,7 @@ function showPage(id){
   document.getElementById('page-'+id).classList.add('active');
   currentPage=id;
   document.title=PAGE_TITLES[id]||PAGE_TITLES.landing;
+  document.body.classList.toggle('is-detail',id!=='landing');
   window.scrollTo({top:0,behavior:'instant'});
 }
 function pagePath(id){
