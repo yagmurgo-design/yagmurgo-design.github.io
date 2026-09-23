@@ -722,6 +722,24 @@ site-footer,.site-footer{
 .cs-hero-visual .cs-fig-cap{padding:12px 0 0}
 
 /* figures and media blocks */
+/* testimonials + award */
+.cs-award{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:36px;align-items:center;margin:36px 0 0;padding:28px;background:var(--bg2);border:1px solid var(--rule)}
+.cs-award img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}
+.cs-award-k{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4);margin-bottom:12px}
+.cs-award-t{font-family:var(--serif);font-weight:300;font-size:clamp(22px,2.6vw,30px);line-height:1.2;color:var(--ink);margin-bottom:14px}
+.cs-award-t em{font-style:italic}
+.cs-award .cs-p{margin:0}
+.cs-voices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0 0}
+.cs-voice{display:flex;flex-direction:column;justify-content:space-between;gap:22px;padding:28px;border:1px solid var(--rule)}
+.cs-voice-text{font-family:var(--serif);font-style:italic;font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:var(--ink)}
+.cs-voice-attr{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink4);line-height:1.5}
+.cs-voice-attr b{font-weight:400;color:var(--ink)}
+@media(max-width:768px){
+  .cs-award{grid-template-columns:1fr;gap:22px;padding:20px}
+  .cs-award img{max-width:320px}
+  .cs-voices{grid-template-columns:1fr}
+  .cs-voice{padding:22px 20px}
+}
 .cs-fig{margin:32px 0}
 .cs-fig-cap{padding:11px 0 0;font-size:11px;color:var(--ink4);letter-spacing:.04em;line-height:1.5}
 .cs-media{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;margin:36px 0}
@@ -900,6 +918,9 @@ site-footer,.site-footer{
   transition:transform .4s var(--ease);
 }
 .dev:nth-child(2){margin-top:-28px}
+.ph-stage.live.four{gap:24px}
+.ph-stage.live.four .dev{--w:clamp(180px,19vw,215px)}
+.ph-stage.live.four .dev:nth-child(4){margin-top:-28px}
 .dev:hover{transform:translateY(-6px)}
 .dev-screen{position:relative;aspect-ratio:393/852;overflow:hidden;border-radius:calc(var(--w)*.12);background:var(--bg)}
 .dev-scroll{position:absolute;inset:0;overflow-x:hidden;overflow-y:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
@@ -918,6 +939,50 @@ site-footer,.site-footer{
 .dev.used .dev-hint{opacity:0}
 @keyframes devNudge{0%,100%{transform:translateY(-1px)}50%{transform:translateY(2px)}}
 @media(prefers-reduced-motion:reduce){.dev-hint svg{animation:none}.dev{transition:none}}
+
+/* before / after: two synced screen recordings */
+.ba{margin:36px 0}
+.ba-stage{display:flex;justify-content:center;align-items:flex-start;gap:clamp(24px,6vw,72px);padding:48px 24px 40px;background:var(--bg2);border:1px solid var(--rule)}
+.ba-item{display:flex;flex-direction:column;align-items:center;gap:16px}
+.ba-item .dev{--w:clamp(180px,22vw,240px)}
+.ba-item .dev:hover{transform:none}
+.ba-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;background:var(--bg3)}
+.ba-toggle{
+  position:absolute;right:calc(var(--w)*.06);bottom:calc(var(--w)*.06);
+  width:44px;height:44px;border-radius:50%;border:none;padding:0;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(20,20,18,.78);color:var(--bg);backdrop-filter:blur(6px);
+  cursor:pointer;transition:transform .2s,background .2s;
+}
+.ba-toggle:hover{background:var(--ink);transform:scale(1.06)}
+.ba-toggle:focus-visible{outline:2px solid #3b6fd4;outline-offset:2px}
+.ba-toggle svg{width:18px;height:18px}
+.ba-toggle .ic-pause{display:none}
+.ba-item.playing .ba-toggle .ic-pause{display:block}
+.ba-item.playing .ba-toggle .ic-play{display:none}
+.ba-item figcaption{font-size:13px;color:var(--ink2);display:flex;align-items:baseline;gap:10px}
+.ba-k{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink4)}
+.ba-cap{padding:14px 0 0;font-size:13px;line-height:1.65;color:var(--ink3);max-width:620px}
+.iv .ba-item{align-items:stretch}
+.iv-frame{--w:320px;position:relative;aspect-ratio:1/1;overflow:hidden;background:var(--bg3);border:1px solid var(--rule)}
+.iv-title{font-family:var(--serif);font-weight:300;font-size:clamp(22px,2.6vw,30px);line-height:1.2;color:var(--ink);margin-bottom:14px}
+.iv-title em{font-style:italic}
+.ap{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,36px);margin:36px 0}
+.ap-item{align-items:stretch;gap:0}
+.ap-item .dev{--w:220px;width:100%;max-width:230px;margin:0 auto 24px;padding:7px;border-radius:34px}
+.ap-item .dev-screen{border-radius:28px}
+.ap-item .ba-toggle{right:12px;bottom:12px;width:38px;height:38px}
+.ap-item .ba-toggle svg{width:15px;height:15px}
+.ap-item figcaption{display:block;border-top:1px solid var(--rule);padding-top:16px}
+.ap-text{font-size:13px;line-height:1.7;color:var(--ink2)}
+@media(max-width:768px){
+  .ba-stage{gap:14px;padding:28px 12px 24px}
+  .ba-item .dev{--w:min(40vw,200px)}
+  .ba-toggle{width:36px;height:36px}
+  .ap{grid-template-columns:1fr;gap:40px}
+  .ap-item .dev{max-width:240px}
+  .ba-toggle svg{width:15px;height:15px}
+}
 
 /* landing card chips */
 .proj-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
@@ -952,6 +1017,9 @@ site-footer,.site-footer{
   .ph-stage.live::-webkit-scrollbar{display:none}
   .dev{--w:min(62vw,250px);scroll-snap-align:center}
   .dev:nth-child(2){margin-top:0}
+  .ph-stage.live.four{gap:16px}
+  .ph-stage.live.four .dev{--w:min(62vw,250px)}
+  .ph-stage.live.four .dev:nth-child(4){margin-top:0}
   .cyc-tiles{grid-template-columns:1fr 1fr}
   .cyc-tile{aspect-ratio:4/3}
   .cyc-detail{grid-template-columns:48px 1fr;gap:14px;padding:20px 18px;min-height:0}
@@ -1530,7 +1598,7 @@ site-footer,.site-footer{
         <div class="pc-grid">
           <div class="pc" onclick="openCS('iscep-redesign')">
             <div class="pc-img"><img src="assets/img/iscep/case-1-iscep-redesign.jpg" alt="Hyperpersonal İşCep Redesign: three phones showing the redesigned home, cards and life spaces" width="1400" height="731" loading="lazy" decoding="async" style="object-position:0 50%"></div>
-            <div class="pc-body"><p class="pc-tag">Redesign · IA · Design system</p><h3 class="pc-title">İşCep 10.0 Redesign</h3><p class="pc-text">Redesigning an app with millions of habits inside it: personal home, segment-aware product areas, one design system.</p><div class="pc-foot"><span>2023 — 2024</span><span>→</span></div></div>
+            <div class="pc-body"><p class="pc-tag">Redesign · IA</p><h3 class="pc-title">İşCep 10.0 Redesign</h3><p class="pc-text">Redesigning an app with millions of habits inside it: personal home and segment-aware product areas.</p><div class="pc-foot"><span>2023 — 2024</span><span>→</span></div></div>
           </div>
           <div class="pc" onclick="openCS('iscep-hayatim')">
             <div class="pc-img"><img src="assets/img/iscep/case-2-hayatim.jpg" alt="İşCep'le Hayatım: the Aracım (My Vehicle) screen with vehicle expenses and campaign cards" width="1400" height="933" loading="lazy" decoding="async" style="object-position:50% 35%"></div>
@@ -1665,20 +1733,52 @@ site-footer,.site-footer{
   </a>
 
   <header class="cs-hero has-visual">
-    <p class="cs-eyebrow">Commencis × İşbank · Redesign · 2024 — Present</p>
+    <p class="cs-eyebrow">Commencis × İşbank · Redesign · 2023 — Present</p>
     <h1 class="cs-h1">İşCep 10.0 — redesigning<br>the app <em>millions<br>already use.</em></h1>
     <div class="cs-meta-grid">
       <div class="cs-meta-cell"><div class="cs-meta-lbl">Client</div><div class="cs-meta-val">İşbank via Commencis</div></div>
       <div class="cs-meta-cell"><div class="cs-meta-lbl">Role</div><div class="cs-meta-val">UX Design Lead</div></div>
-      <div class="cs-meta-cell"><div class="cs-meta-lbl">Timeline</div><div class="cs-meta-val">2024 — Present</div></div>
-      <div class="cs-meta-cell"><div class="cs-meta-lbl">Scope</div><div class="cs-meta-val">IA · Home · Design system</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Timeline</div><div class="cs-meta-val">2023 — Present</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Scope</div><div class="cs-meta-val">Redesign</div></div>
     </div>
   </header>
   <div class="cs-hero-visual">
-    <div class="ph-stage">
-      <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Personalised home</p></div>
-      <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">Segment product areas</p></div>
-      <div class="ph ph-phone"><p class="ph-k">Screen</p><p class="ph-t">İşCepX components in use</p></div>
+    <div class="ph-stage live four">
+      <div class="dev">
+        <div class="dev-screen">
+          <div class="dev-scroll" tabindex="0" role="region" aria-label="Personalised home — scrollable screen">
+            <img src="assets/img/iscep/hub-1-home.jpg" alt="İşCep personalised home: account balance, shortcuts, recent transactions, net worth and campaigns" width="786" loading="lazy" decoding="async" draggable="false">
+          </div>
+          <div class="dev-tab" style="background-image:url('assets/img/iscep/hub-1-home.jpg')"></div>
+          <span class="dev-hint"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 1v10M2 7l4 4 4-4"/></svg>Scroll</span>
+        </div>
+      </div>
+      <div class="dev">
+        <div class="dev-screen">
+          <div class="dev-scroll" tabindex="0" role="region" aria-label="Investment home — scrollable screen">
+            <img src="assets/img/iscep/hub-3-investment.jpg" alt="Investment tab: stock portfolio allocation chart, quick actions and holdings" width="786" loading="lazy" decoding="async" draggable="false">
+          </div>
+          <div class="dev-tab" style="background-image:url('assets/img/iscep/hub-3-investment.jpg')"></div>
+          <span class="dev-hint"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 1v10M2 7l4 4 4-4"/></svg>Scroll</span>
+        </div>
+      </div>
+      <div class="dev">
+        <div class="dev-screen">
+          <div class="dev-scroll" tabindex="0" role="region" aria-label="Menu — all transactions — scrollable screen">
+            <img src="assets/img/iscep/redesign-menu.jpg" alt="Menu with All Transactions and My Shortcuts tabs, grouping money transfer, payments, accounts, cards, investment and settings" width="786" loading="lazy" decoding="async" draggable="false">
+          </div>
+          <div class="dev-tab" style="background-image:url('assets/img/iscep/redesign-menu.jpg')"></div>
+          <span class="dev-hint"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 1v10M2 7l4 4 4-4"/></svg>Scroll</span>
+        </div>
+      </div>
+      <div class="dev">
+        <div class="dev-screen">
+          <div class="dev-scroll" tabindex="0" role="region" aria-label="Profile and settings — scrollable screen">
+            <img src="assets/img/iscep/redesign-profile.jpg" alt="Profile and Settings screen with the Switch to Old View option at the top, followed by preferences and security settings" width="393" loading="lazy" decoding="async" draggable="false">
+          </div>
+          <span class="dev-hint"><svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 1v10M2 7l4 4 4-4"/></svg>Scroll</span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1688,9 +1788,8 @@ site-footer,.site-footer{
         <li class="cs-snav-item active" data-sec="ir-overview"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ir-overview">Overview</a></li>
         <li class="cs-snav-item" data-sec="ir-vision"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ir-vision">Vision</a></li>
         <li class="cs-snav-item" data-sec="ir-approach"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ir-approach">Approach</a></li>
-        <li class="cs-snav-item" data-sec="ir-system"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ir-system">Design system</a></li>
-        <li class="cs-snav-item" data-sec="ir-rollout"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ir-rollout">Rollout</a></li>
         <li class="cs-snav-item" data-sec="ir-outcomes"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ir-outcomes">Outcomes</a></li>
+        <li class="cs-snav-item" data-sec="ir-testimonials"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#ir-testimonials">Testimonials</a></li>
       </ul>
     </aside>
     <div class="cs-content">
@@ -1702,26 +1801,32 @@ site-footer,.site-footer{
         <p class="cs-p">That last part is the real design problem. A redesign at this scale is less about screens than about change: every decision in the information architecture had to account for who might get lost, and how many of them there would be.</p>
         <div class="cs-tags">
           <span class="cs-tag">Information Architecture</span><span class="cs-tag">Personalisation</span>
-          <span class="cs-tag">Design System</span><span class="cs-tag">Change Management</span>
+          <span class="cs-tag">Change Management</span>
           <span class="cs-tag">iOS · Android</span>
         </div>
-        <div class="cs-figma-wrap">
-          <div class="cs-figma-overlay" id="figma-overlay">
-            <div class="cs-figma-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="#141412" stroke-width="1.5">
-                <path d="M8 3H16C17.1 3 18 3.9 18 5V7C18 8.1 17.1 9 16 9H8C6.9 9 6 8.1 6 7V5C6 3.9 6.9 3 8 3Z"/>
-                <path d="M6 9H10C11.1 9 12 9.9 12 11V13C12 14.1 11.1 15 10 15H8C6.9 15 6 14.1 6 13V9Z"/>
-                <path d="M12 9H16C17.1 9 18 9.9 18 11V13C18 14.1 17.1 15 16 15H14C12.9 15 12 14.1 12 13V9Z"/>
-                <path d="M6 15H10C11.1 15 12 15.9 12 17V19C12 20.1 11.1 21 10 21H8C6.9 21 6 20.1 6 19V15Z"/>
-                <circle cx="15" cy="18" r="3"/>
-              </svg>
+        <div class="ba" id="ir-ba">
+          <div class="ba-stage">
+          <figure class="ba-item">
+            <div class="dev">
+              <div class="dev-screen">
+                <video class="ba-video" muted playsinline loop preload="metadata" poster="assets/img/iscep/redesign-oldlook-poster.jpg" aria-label="Screen recording of the previous İşCep home: a fixed balance card, shortcuts, upcoming payments and recent transactions"><source src="assets/video/iscep/redesign-oldlook.mp4" type="video/mp4"></video>
+                <button class="ba-toggle" type="button" aria-label="Play video"><svg class="ic-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1"/><rect x="14" y="4.5" width="4" height="15" rx="1"/></svg></button>
+              </div>
             </div>
-            <p class="cs-figma-sub">View İşCep design work in Figma</p>
-            <button class="cs-figma-btn" onclick="loadFigma('figma-frame','figma-overlay')">Open Figma file</button>
+            <figcaption><span class="ba-k">Before</span>Old look</figcaption>
+          </figure>
+          <figure class="ba-item">
+            <div class="dev">
+              <div class="dev-screen">
+                <video class="ba-video" muted playsinline loop preload="metadata" poster="assets/img/iscep/redesign-newlook-poster.jpg" aria-label="Screen recording of the redesigned İşCep: the personalised home, cards, net worth, investment and life areas"><source src="assets/video/iscep/redesign-newlook.mp4" type="video/mp4"></video>
+                <button class="ba-toggle" type="button" aria-label="Play video"><svg class="ic-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1"/><rect x="14" y="4.5" width="4" height="15" rx="1"/></svg></button>
+              </div>
+            </div>
+            <figcaption><span class="ba-k">After</span>New look</figcaption>
+          </figure>
           </div>
-          <iframe id="figma-frame" src="" data-src="https://www.figma.com/embed?embed_host=share&url=https://www.figma.com/design/gvlalc0cOQeIeiT1AFXMdl/Commencis_iscep_2024_sunumu?node-id=6090-18998" allowfullscreen></iframe>
+          <p class="ba-cap">Experience shifted from a one-size-fits-all approach to personal, data-oriented product dashboards. Enlarged tap areas and restructured menu items and transactions improved the experience.</p>
         </div>
-        <p class="cs-figma-cap">İşCep 2024 — Commencis design presentation · Figma</p>
         <div class="cs-stats">
           <div class="cs-stat"><div class="cs-stat-num">14.6M</div><div class="cs-stat-label">Active users</div></div>
           <div class="cs-stat"><div class="cs-stat-num">740</div><div class="cs-stat-label">Functions to organise</div></div>
@@ -1751,31 +1856,61 @@ site-footer,.site-footer{
           <span class="cs-tag">Personal</span><span class="cs-tag">Dynamic</span><span class="cs-tag">Smart</span><span class="cs-tag">Positive</span>
           <span class="cs-tag">Collective</span><span class="cs-tag">Steady</span><span class="cs-tag">Lean</span><span class="cs-tag">Proactive</span>
         </div>
+        <div class="cs-media ba iv">
+          <div>
+            <p class="cs-media-lbl">Interaction vision</p>
+            <p class="iv-title">Turning a crowded closet into a <em>custom-fitted wardrobe.</em></p>
+            <p class="cs-p">The interaction vision is our answer to one question: how should the redesign make users feel? Today İşCep can feel like a closet where everything is somewhere, if you dig for it. The redesign should feel like a wardrobe built around its owner: what you use most within reach, the rest neatly in its place.</p>
+          </div>
+          <figure class="ba-item">
+            <div class="iv-frame">
+              <video class="ba-video" muted playsinline loop preload="metadata" poster="assets/img/iscep/interaction-vision-poster.jpg" aria-label="Animation: a crowded, messy closet turns into a tidy, organised wardrobe"><source src="assets/video/iscep/interaction-vision.mp4" type="video/mp4"></video>
+              <button class="ba-toggle" type="button" aria-label="Play video"><svg class="ic-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1"/><rect x="14" y="4.5" width="4" height="15" rx="1"/></svg></button>
+            </div>
+          </figure>
+        </div>
       </section>
 
       <section class="cs-sec" id="ir-approach">
         <p class="cs-sec-eye">Approach</p>
         <h2 class="cs-h2">Design the <em>change,</em> not only the screens.</h2>
-        <div class="cs-media">
-          <div>
-            <p class="cs-media-lbl">01 · Segment-aware product areas</p>
-            <p class="cs-p">İşCep serves individuals, small businesses and commercial customers from a single app. Rather than one navigation for everybody, each customer type gets product areas organised around what they do most.</p>
-          </div>
-          <div class="ph ph-wide"><p class="ph-k">Image · 16:10</p><p class="ph-t">Retail vs. business product areas</p></div>
-        </div>
-        <div class="cs-media rev">
-          <div>
-            <p class="cs-media-lbl">02 · A home that adapts</p>
-            <p class="cs-p">The first screen is the most valuable real estate in the app. Personalising it means deciding what earns a place: the customer's own habits, the moment, and — sparingly — a suggestion.</p>
-          </div>
-          <div class="ph ph-wide"><p class="ph-k">Image · 16:10</p><p class="ph-t">Home layouts for three customer types</p></div>
-        </div>
-        <div class="cs-media">
-          <div>
-            <p class="cs-media-lbl">03 · A way back</p>
-            <p class="cs-p">People with established mental models are the biggest risk in a redesign. The option to return to the old look trades a little short-term purity for a lot of trust.</p>
-          </div>
-          <div class="ph ph-wide"><p class="ph-k">Image · 16:10</p><p class="ph-t">Switch between new and classic view</p></div>
+        <div class="ap ba">
+          <figure class="ba-item ap-item">
+            <div class="dev">
+              <div class="dev-screen">
+                <video class="ba-video" muted playsinline loop preload="metadata" poster="assets/img/iscep/approach-dashboards-poster.jpg" aria-label="Screen recording: moving between the Cards, Financial Status and Investment dashboards in the redesigned İşCep"><source src="assets/video/iscep/approach-dashboards.mp4" type="video/mp4"></video>
+                <button class="ba-toggle" type="button" aria-label="Play video"><svg class="ic-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1"/><rect x="14" y="4.5" width="4" height="15" rx="1"/></svg></button>
+              </div>
+            </div>
+            <figcaption>
+              <p class="cs-media-lbl">01 · Segment-aware product areas</p>
+              <p class="ap-text">İşCep serves individuals, small businesses and commercial customers from a single app. Rather than one navigation for everybody, each customer type gets product areas organised around what they do most.</p>
+            </figcaption>
+          </figure>
+          <figure class="ba-item ap-item">
+            <div class="dev">
+              <div class="dev-screen">
+                <video class="ba-video" muted playsinline loop preload="metadata" poster="assets/img/iscep/approach-customize-poster.jpg" aria-label="Screen recording: editing the home screen by adding, removing and reordering widgets"><source src="assets/video/iscep/approach-customize.mp4" type="video/mp4"></video>
+                <button class="ba-toggle" type="button" aria-label="Play video"><svg class="ic-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1"/><rect x="14" y="4.5" width="4" height="15" rx="1"/></svg></button>
+              </div>
+            </div>
+            <figcaption>
+              <p class="cs-media-lbl">02 · A home that adapts</p>
+              <p class="ap-text">The first screen is the most valuable real estate in the app. Personalising it means deciding what earns a place: the customer's own habits, the moment, and — sparingly — a suggestion.</p>
+            </figcaption>
+          </figure>
+          <figure class="ba-item ap-item">
+            <div class="dev">
+              <div class="dev-screen">
+                <video class="ba-video" muted playsinline loop preload="metadata" poster="assets/img/iscep/approach-offers-poster.jpg" aria-label="Screen recording: personalised offer cards and insights on the home and spending screens"><source src="assets/video/iscep/approach-offers.mp4" type="video/mp4"></video>
+                <button class="ba-toggle" type="button" aria-label="Play video"><svg class="ic-play" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z"/></svg><svg class="ic-pause" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1"/><rect x="14" y="4.5" width="4" height="15" rx="1"/></svg></button>
+              </div>
+            </div>
+            <figcaption>
+              <p class="cs-media-lbl">03 · Personalised offers</p>
+              <p class="ap-text">We created new offer areas inside İşCep, giving product offers and sales a place of their own. From there, the app sells and makes personalised recommendations.</p>
+            </figcaption>
+          </figure>
         </div>
         <div class="cs-annotated">
           <p class="cs-sec-eye" style="margin-bottom:20px">Key decisions</p>
@@ -1784,61 +1919,40 @@ site-footer,.site-footer{
           <div class="cs-annot-row"><div class="cs-annot-num">3</div><p class="cs-annot-text"><strong>Design for the component reality.</strong> Three generations of components coexist in the app. The redesign had to work with all of them while migrating toward one.</p></div>
           <div class="cs-annot-row"><div class="cs-annot-num">4</div><p class="cs-annot-text"><strong>Test before build.</strong> Concepts passed the design cycle's pre-development gate: usability testing with customers, scaled to the size of the change, before a line of code.</p></div>
         </div>
-        <div class="cyc-strip-lbl">Where this project sat in the design cycle</div>
-        <div class="cyc-strip"><span class="on">1</span><i></i><span class="on">2</span><span class="on">3</span><span class="on">4</span><span class="on">5</span><i></i><span class="on">6</span><span class="on">7</span><span class="on">8</span><span class="on">9</span><i></i><span class="on">10</span></div>
-        <p class="cyc-strip-cap">A large-scope request runs the full cycle — every step, both gates.</p>
-      </section>
-
-      <section class="cs-sec" id="ir-system">
-        <p class="cs-sec-eye">Design system</p>
-        <h2 class="cs-h2">Three generations of components, <em>one app.</em></h2>
-        <p class="cs-p">İşCep carries three component styles at once: the legacy MCM theme, the Postlogin theme from an earlier redesign, and İşCepX — the new design system built for İşCep 10.0. Teams building rendering-based screens use Postlogin components by default and fall back to legacy ones only where migration hasn't happened yet.</p>
-        <div class="cs-gal">
-          <figure><div class="ph"><p class="ph-k">Image</p><p class="ph-t">Legacy MCM components</p></div><figcaption>01 · Legacy MCM theme</figcaption></figure>
-          <figure><div class="ph"><p class="ph-k">Image</p><p class="ph-t">Postlogin components</p></div><figcaption>02 · Postlogin theme</figcaption></figure>
-          <figure><div class="ph"><p class="ph-k">Image</p><p class="ph-t">İşCepX components</p></div><figcaption>03 · İşCepX, the new system</figcaption></figure>
-        </div>
-        <div class="cs-compare" style="margin-top:36px">
-          <div class="cs-compare-pane">
-            <p class="cs-compare-lbl">Native <span class="badge-light">Client-driven UI</span></p>
-            <ul class="cs-compare-list">
-              <li>Pixel-level control over every detail</li>
-              <li>Built by the core mobile teams</li>
-              <li>Right for distinctive, complex screens</li>
-            </ul>
-          </div>
-          <div class="cs-compare-pane after">
-            <p class="cs-compare-lbl">Rendering <span class="badge">Server-driven UI</span></p>
-            <ul class="cs-compare-list">
-              <li>Screens assembled from components via templates</li>
-              <li>Fast for the bank's own agile teams</li>
-              <li>Limited room for customisation</li>
-            </ul>
-          </div>
-        </div>
-        <p class="cs-p">Which of the two a screen uses decides how much room design has, so the design system had to be a migration tool as much as a style guide: a component-alignment document maps what exists in each generation and which one to reach for.</p>
-      </section>
-
-      <section class="cs-sec" id="ir-rollout">
-        <p class="cs-sec-eye">Rollout</p>
-        <h2 class="cs-h2">Shipped in <em>phases,</em> not in a big bang.</h2>
-        <p class="cs-p">The redesign was planned as five phases tied to app releases, starting with a life-domain redesign and building toward the 10.0 release. Small, reversible steps keep a very large user base calm.</p>
-        <p class="cs-p">The design cycle's last step is built for exactly this: beta versions are tested with up to 500,000 customers, funnels are watched closely, and a problem found small is fixed small.</p>
-        <a class="cs-article-link" href="/iscep/hayatim" onclick="openCS('iscep-hayatim');return false">See the first phase: İşCep'le Hayatım<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 17L17 7M17 7H8M17 7V16"/></svg></a>
       </section>
 
       <section class="cs-sec" id="ir-outcomes">
         <p class="cs-sec-eye">Outcomes</p>
         <h2 class="cs-h2">What changed <em>after.</em></h2>
-        <p class="cs-p">Success measures are defined at the start of every request, not after launch. For the redesign they follow the bank's KPI tree for the channel: customer complaints about the developed product, NPS and CSAT.</p>
+        <p class="cs-p">Success measures are defined at the start of every request, not after launch. For the redesign they follow the bank's KPI tree for the channel: increase in feature usage and transaction completion, improvement in NPS and decrease in customer complaints that are linked with discoverability.</p>
         <div class="cs-stats">
-          <div class="cs-stat"><div class="cs-stat-num">—</div><div class="cs-stat-label">Add result: NPS / CSAT change after 10.0</div></div>
-          <div class="cs-stat"><div class="cs-stat-num">—</div><div class="cs-stat-label">Add result: complaint-rate change</div></div>
-          <div class="cs-stat"><div class="cs-stat-num">—</div><div class="cs-stat-label">Add result: App Store rating trend</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">+13pp</div><div class="cs-stat-label">Overall feature usage monthly</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">+6pp</div><div class="cs-stat-label">NPS change</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">−9pp</div><div class="cs-stat-label">Complaint-rate change</div></div>
         </div>
-        <div class="cs-reflection">
-          <p class="cs-reflection-eye">Key takeaway</p>
-          <p class="cs-reflection-text">"You don't redesign an app. You redesign a habit — and the habit belongs to the customer, not to you."</p>
+      </section>
+
+      <section class="cs-sec" id="ir-testimonials">
+        <p class="cs-sec-eye">Testimonials</p>
+        <h2 class="cs-h2">Heard by customers, <em>recognised by the industry.</em></h2>
+        <p class="cs-p">Numbers show what people did. What they said after the launch — unprompted, in public — shows how the change felt: designers reviewed it on LinkedIn, everyday customers talked about it on Ekşi Sözlük.</p>
+        <div class="cs-voices">
+          <figure class="cs-voice">
+            <blockquote class="cs-voice-text">"It has finally moved away from its previously complex interface and menu structure. The bottom sheet menu groups options in a way that's more meaningful and easier to understand."</blockquote>
+            <figcaption class="cs-voice-attr"><b>Lead UI/UX designer</b><br>Review on LinkedIn · translated</figcaption>
+          </figure>
+          <figure class="cs-voice">
+            <blockquote class="cs-voice-text">"I can add the transaction cards I want to my homepage — it gives off a very clean, Apple-like feeling. It's really nice to finally see a Turkish app modernising like this."</blockquote>
+            <figcaption class="cs-voice-attr"><b>İşCep customer</b><br>Entry on Ekşi Sözlük · translated</figcaption>
+          </figure>
+        </div>
+        <div class="cs-award">
+          <img src="assets/img/iscep/tcxa-2025-award.jpg" alt="TCXA 2025 gold award for İşCep in the Best User Experience category, presented by Awards International" width="720" height="900" loading="lazy" decoding="async">
+          <div>
+            <p class="cs-award-k">Award · 2025</p>
+            <p class="cs-award-t">Gold, <em>Best User Experience</em> — TCXA 2025</p>
+            <p class="cs-p">The redesign won gold in the Best User Experience category at the Turkish Customer Experience Awards, organised by Awards International. We presented the project to the jury as "Hyperpersonal Digital Banking Experience".</p>
+          </div>
         </div>
         <div class="cs-next" onclick="openCS('iscep-hayatim')">
           <div><p class="cs-next-lbl">Next case study</p><p class="cs-next-title">İşCep'le Hayatım — a bank organised around life</p></div>
@@ -2936,6 +3050,20 @@ function uhGoTo(i){
 // ── DEVICE SCREENS: hide the scroll hint after first use ──
 document.querySelectorAll('.dev-scroll').forEach(el=>{
   el.addEventListener('scroll',()=>el.closest('.dev').classList.add('used'),{passive:true,once:true});
+});
+
+// ── INLINE VIDEOS: start paused, each has its own play/pause, pause when scrolled away ──
+document.querySelectorAll('.ba').forEach(ba=>{
+  let visible=false;
+  const items=[...ba.querySelectorAll('.ba-item')].map(el=>({el,v:el.querySelector('video'),b:el.querySelector('.ba-toggle'),wanted:false}));
+  const sync=it=>{
+    it.v.muted=true;
+    it.wanted&&visible?it.v.play().catch(()=>{}):it.v.pause();
+    it.el.classList.toggle('playing',it.wanted);
+    it.b.setAttribute('aria-label',it.wanted?'Pause video':'Play video');
+  };
+  items.forEach(it=>it.b.addEventListener('click',()=>{it.wanted=!it.wanted;sync(it)}));
+  new IntersectionObserver(es=>{visible=es[0].isIntersecting;items.forEach(sync)},{threshold:.35}).observe(ba);
 });
 
 // ── DESIGN CYCLE EXPLORER (İşCep hub) ────────────────────
