@@ -601,6 +601,8 @@ body.nav-scrolled .cs-back{top:14px}
 .cs-figma-wrap iframe{width:100%;height:540px;border:none;display:block}
 .cs-figma-wrap.iv-figjam-wrap iframe{height:clamp(380px,62vw,640px)}
 .iv-figjam-wrap{min-height:clamp(380px,62vw,640px)}
+.cs-figma-wrap.iw-proto-wrap{margin:0;aspect-ratio:16/9}
+.cs-figma-wrap.iw-proto-wrap iframe{height:100%}
 .cs-figma-wrap.uh-proto-wrap{margin-top:32px;padding:28px 0;background:var(--ink);border-color:var(--ink)}
 .uh-proto-crop{position:relative;overflow:hidden;aspect-ratio:1440/978}
 .uh-proto-crop iframe{
@@ -1554,11 +1556,7 @@ body.nav-scrolled .cs-back{top:14px}
         <h2 class="cs-h2">What I'm still <em>learning.</em></h2>
         <p class="cs-p">The hardest challenge has been calibrating user expectations — not the AI model itself. Early users either over-trusted the output (treating it as ground truth) or under-trusted it (verifying every insight before acting). The right level of epistemic humility in the interface is an ongoing experiment.</p>
         <p class="cs-p">I've also learned that AI product design is unusually dependent on prompt quality and model selection. A designer who understands these layers — and can advocate for design decisions that affect them — is a different kind of designer than one who only works at the UI layer.</p>
-        <div class="cs-reflection">
-          <p class="cs-reflection-eye">Key takeaway</p>
-          <p class="cs-reflection-text">"The interface is the last mile of an AI system. But it's also the only mile users experience. Getting it right means understanding everything that comes before it."</p>
-        </div>
-        <div class="cs-next" onclick="openCS('iscep')">
+        <div class="cs-next" style="margin-top:56px" onclick="openCS('iscep')">
           <div><p class="cs-next-lbl">Next case study</p><p class="cs-next-title">İşCep — designing user and organization level interactions</p></div>
           <span class="cs-next-arrow">→</span>
         </div>
@@ -2462,13 +2460,23 @@ body.nav-scrolled .cs-back{top:14px}
       <div class="cs-meta-cell"><div class="cs-meta-lbl">Client</div><div class="cs-meta-val">İşbank via Commencis</div></div>
       <div class="cs-meta-cell"><div class="cs-meta-lbl">Role</div><div class="cs-meta-val">Design lead · Facilitator</div></div>
       <div class="cs-meta-cell"><div class="cs-meta-lbl">Timeline</div><div class="cs-meta-val">2019 — Present</div></div>
-      <div class="cs-meta-cell"><div class="cs-meta-lbl">Scope</div><div class="cs-meta-val">Process · Playbook · Facilitation</div></div>
+      <div class="cs-meta-cell"><div class="cs-meta-lbl">Scope</div><div class="cs-meta-val">Process Design · Facilitation</div></div>
     </div>
   </header>
   <div class="cs-hero-visual">
-    <div class="ph-stage wide">
-      <div class="ph"><p class="ph-k">Photo · 21:9</p><p class="ph-t">Brainstorm session board — every product team in the room</p></div>
-    </div>
+    <figure class="cs-fig">
+      <div class="cs-figma-wrap iw-proto-wrap">
+        <div class="cs-figma-overlay" id="iw-proto-overlay">
+          <div class="cs-figma-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M10 8.5l5 3.5-5 3.5z"/></svg>
+          </div>
+          <p class="cs-figma-sub">Explore the live prototype — click around as a real user would</p>
+          <button class="cs-figma-btn" type="button" onclick="loadFigma('iw-proto-frame','iw-proto-overlay')">Open interactive prototype</button>
+        </div>
+        <iframe id="iw-proto-frame" src="" data-src="https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Fproto%2Ff3jHY4Xpc1vP14FObptWax%2FCommencis_%25C4%25B0%25C5%259FCep-%25C3%259Cr%25C3%25BCn-Geli%25C5%259Ftirme-D%25C3%25B6ng%25C3%25BCs%25C3%25BC%3Fnode-id%3D1055-5374%26scaling%3Dscale-down-width%26content-scaling%3Dfixed%26starting-point-node-id%3D1055%253A5374%26page-id%3D410%253A2390&amp;hide-ui=1" title="İşCep Product Development Playbook prototype" allowfullscreen></iframe>
+      </div>
+      <figcaption class="cs-fig-cap">İşCep Product Development Playbook</figcaption>
+    </figure>
   </div>
 
   <div class="cs-layout">
@@ -2488,10 +2496,10 @@ body.nav-scrolled .cs-back{top:14px}
       <section class="cs-sec" id="iw-overview">
         <p class="cs-sec-eye">Overview</p>
         <h2 class="cs-h2">A process is a product <em>with users too.</em></h2>
-        <p class="cs-p">İşCep isn't built by one team. Many product teams, the bank's channel and experience teams, agencies and technology subsidiaries all ship into the same app. Without a shared path from request to release, every team invents its own — and the customer feels the seams.</p>
-        <p class="cs-p">I've worked on that path throughout my time on İşCep: first the design cycle Commencis and the bank set up in 2019–20, then the product development cycle that grew out of it in 2024, when it became clear that everyone building for İşCep needed the same map, not only designers.</p>
+        <p class="cs-p">İşCep isn't built by one team. All of the bank's product teams, its channel development and experience teams, creative marketing agencies and technology subsidiaries ship into the same app. Without a shared way of working from request to release, every team finds its own path, with back-and-forth along the way that causes major inefficiencies.</p>
+        <p class="cs-p">I've worked on that way of working throughout my time on İşCep: first the Commencis way of designing, which we adapted to İşbank's setup in 2020–21, then the product development cycle that grew out of it in 2024, when it became clear that everyone building for İşCep needed the same map, not only designers.</p>
         <div class="cs-stats">
-          <div class="cs-stat"><div class="cs-stat-num">10</div><div class="cs-stat-label">Steps in the design cycle, with two quality gates</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">225</div><div class="cs-stat-label">İşBankers contributed from product and development teams</div></div>
           <div class="cs-stat"><div class="cs-stat-num">6</div><div class="cs-stat-label">Brainstorm sessions with the bank's product teams</div></div>
           <div class="cs-stat"><div class="cs-stat-num">5</div><div class="cs-stat-label">Phases in the product development playbook</div></div>
         </div>
@@ -2526,18 +2534,27 @@ body.nav-scrolled .cs-back{top:14px}
           </div>
         </div>
         <div class="cyc-loop"><span>↺ Improvement feeds new requests — the loop restarts at step 1</span><span>◆ Gates = pass score</span></div>
-        <p class="cs-p" style="margin-top:28px">The gates are the heart of it. The first asks whether a concept has been checked with customers or experts — and against the design system — before anyone writes code. The second asks whether what was built matches what was designed. Between them sits production, and after them comes step ten: beta releases tested with up to 500,000 customers, funnels tracked, problems fixed small.</p>
+        <p class="cs-p" style="margin-top:28px">The gates are the heart of it. The first asks whether a concept has been checked with customers or experts — and against the design system — before anyone writes code. A total score, derived from participants' task completion rates and perceived satisfaction, decides whether the design is a go or a no-go. The second asks whether what was built matches what was designed. Between them sits production, and after them comes step ten: beta releases tested with up to 500,000 customers, funnels tracked, and problems fixed while they are still small.</p>
       </section>
 
       <section class="cs-sec" id="iw-diagnosis">
         <p class="cs-sec-eye">2024 · The diagnosis</p>
         <h2 class="cs-h2">Everyone who builds for İşCep, <em>in the same room.</em></h2>
         <p class="cs-p">İşCep 10.0 exposed a gap. The design cycle described how design worked, but the teams building for İşCep had very different levels of familiarity with digital development and with the İşCep channel. So we asked them.</p>
-        <p class="cs-p">Six 90-minute brainstorm sessions brought in the bank's digital banking, channel and experience teams alongside product teams from payments, capital markets, treasury, deposits, insurance and commercial products — product owners, managers, analysts and MCM developers. In each, participants walked us through four stages, first as they are today and then as they should be.</p>
-        <div class="cs-fig">
-          <div class="ph ph-wide"><p class="ph-k">Image · 16:10</p><p class="ph-t">Brainstorm board — themes and green solution bands</p></div>
-          <p class="cs-fig-cap">Post-its grouped into themes; a green band under each names the tool or ritual that answers it</p>
-        </div>
+        <p class="cs-p">Six 90-minute brainstorm sessions brought in the bank's digital banking, channel and experience teams alongside product teams from payments, capital markets, treasury, deposits, insurance and commercial products — product owners, managers, analysts and developers. In each, participants walked us through the four stages of product development, first as they are today and then as they should be.</p>
+        <figure class="cs-fig">
+          <div class="cs-figma-wrap iv-figjam-wrap">
+            <div class="cs-figma-overlay" id="iw-figjam-overlay">
+              <div class="cs-figma-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 10v10"/></svg>
+              </div>
+              <p class="cs-figma-sub">Explore the board — the brainstorm behind the İşCep product development process</p>
+              <button class="cs-figma-btn" type="button" onclick="loadFigma('iw-figjam-frame','iw-figjam-overlay')">Open FigJam board</button>
+            </div>
+            <iframe id="iw-figjam-frame" src="" data-src="https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Fboard%2FpIWFftARy5Qys5JGIuRb2J%2FCommencis_Yeni-%25C4%25B0%25C5%259FCep-%25C3%259Cr%25C3%25BCn-Geli%25C5%259Ftirme-S%25C3%25BCre%25C3%25A7leri-Beyin-F%25C4%25B1rt%25C4%25B1nas%25C4%25B1%3Fnode-id%3D589-6412" title="İşCep product development process FigJam board" allowfullscreen></iframe>
+          </div>
+          <figcaption class="cs-fig-cap"><a class="cs-fig-link" href="https://www.figma.com/board/pIWFftARy5Qys5JGIuRb2J/Commencis_Yeni-%C4%B0%C5%9FCep-%C3%9Cr%C3%BCn-Geli%C5%9Ftirme-S%C3%BCre%C3%A7leri-Beyin-F%C4%B1rt%C4%B1nas%C4%B1?node-id=589-6412" target="_blank" rel="noopener">İşCep Product Development Process</a>: Co-creative approach to identify improvement points; analysis of the existing and desired</figcaption>
+        </figure>
         <div class="cs-cards">
           <div class="cs-card"><div class="cs-card-num">01</div><p class="cs-card-title">Request &amp; scoping</p><p class="cs-card-text">How does a change reach the experience and channel teams, and what needs to exist before design can start?</p></div>
           <div class="cs-card"><div class="cs-card-num">02</div><p class="cs-card-title">Research &amp; design</p><p class="cs-card-text">How do teams work with design, and how are outputs approved and revised?</p></div>
@@ -2584,10 +2601,6 @@ body.nav-scrolled .cs-back{top:14px}
           <div class="pb-row"><span class="pb-n">4</span><span class="pb-name">Test</span><div class="pb-steps"><span class="cs-tag">Unit tests &amp; package</span><span class="cs-tag">Business &amp; QA testing</span><span class="cs-tag">Approval &amp; release</span></div></div>
           <div class="pb-row"><span class="pb-n">5</span><span class="pb-name">Release &amp; follow-up<span class="pb-tr">Canlıya Çıkış ve Takip</span></span><div class="pb-steps"><span class="cs-tag">Technical maintenance</span><span class="cs-tag">Define &amp; track KPIs</span></div></div>
         </div>
-        <div class="cs-fig">
-          <div class="ph ph-wide"><p class="ph-k">Image · 16:10</p><p class="ph-t">Playbook prototype — a phase page with steps, RACI and templates</p></div>
-          <p class="cs-fig-cap">Playbook prototype · Figma</p>
-        </div>
         <p class="cs-p">Not every request needs every step. The playbook sorts work into three sizes, so a new icon doesn't go through the machinery of a redesign:</p>
         <div class="trk-grid">
           <div class="trk"><div class="trk-num">L</div><p class="trk-title">Large scope</p><p class="trk-text">New features and redesigns run the full five-phase cycle, every step mandatory.</p></div>
@@ -2631,11 +2644,7 @@ body.nav-scrolled .cs-back{top:14px}
         <h2 class="cs-h2">What building a <em>process</em> taught me.</h2>
         <p class="cs-p">The most useful part of the diagnosis wasn't any single finding; it was that teams who rarely met saw the same problems from different sides. A shared map doesn't just speed teams up — it gives them a way to disagree productively.</p>
         <p class="cs-p">The other lesson is humility. The follow-up-and-improvement stage was the least mature of the four, with few artefacts behind it. A process, like a product, ships unfinished and improves against the people who use it.</p>
-        <div class="cs-reflection">
-          <p class="cs-reflection-eye">Key takeaway</p>
-          <p class="cs-reflection-text">"A good process is invisible to the customer and obvious to the team. If people have to ask what happens next, the process isn't finished."</p>
-        </div>
-        <div class="cs-next" onclick="openCS('iscep-vision')">
+        <div class="cs-next" style="margin-top:56px" onclick="openCS('iscep-vision')">
           <div><p class="cs-next-lbl">Next</p><p class="cs-next-title">Vision workshops — designing next year's İşCep</p></div>
           <span class="cs-next-arrow">→</span>
         </div>
