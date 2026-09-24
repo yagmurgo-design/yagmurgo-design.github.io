@@ -599,6 +599,8 @@ body.nav-scrolled .cs-back{top:14px}
 /* figma */
 .cs-figma-wrap{margin:32px 0;border:1px solid var(--rule);overflow:hidden;position:relative;background:var(--bg2)}
 .cs-figma-wrap iframe{width:100%;height:540px;border:none;display:block}
+.cs-figma-wrap.iv-figjam-wrap iframe{height:clamp(380px,62vw,640px)}
+.iv-figjam-wrap{min-height:clamp(380px,62vw,640px)}
 .cs-figma-wrap.uh-proto-wrap{margin-top:32px;padding:28px 0;background:var(--ink);border-color:var(--ink)}
 .uh-proto-crop{position:relative;overflow:hidden;aspect-ratio:1440/978}
 .uh-proto-crop iframe{
@@ -726,6 +728,30 @@ body.nav-scrolled .cs-back{top:14px}
 .ph-stage.wide .ph{flex:1;border:none;background:transparent}
 .cs-hero-visual .cs-fig-cap{padding:12px 0 0}
 
+/* hero photo slider */
+.hero-slider{position:relative}
+.hero-slider-viewport{overflow:hidden;border:1px solid var(--rule);background:var(--ink)}
+.hero-slider-track{display:flex;transition:transform .5s cubic-bezier(.65,0,.35,1);touch-action:pan-y}
+.hero-slider-slide{flex:0 0 100%;aspect-ratio:16/9}
+.hero-slider-slide img{width:100%;height:100%;display:block;object-fit:cover;user-select:none;-webkit-user-drag:none}
+.hero-slider-nav{
+  position:absolute;top:calc(50% - 26px);width:38px;height:38px;border-radius:50%;
+  background:var(--bg);border:1px solid var(--rule);display:flex;align-items:center;justify-content:center;
+  font-size:18px;line-height:1;color:var(--ink);cursor:none;transition:background .2s,transform .2s;z-index:2;
+}
+.hero-slider-nav:hover{background:var(--bg3);transform:translateY(-1px)}
+.hero-slider-nav.prev{left:16px}
+.hero-slider-nav.next{right:16px}
+.hero-slider-dots{display:flex;justify-content:center;gap:8px;margin-top:16px}
+.hero-slider-dot{width:7px;height:7px;border-radius:50%;background:var(--ink4);border:none;cursor:none;padding:0;transition:background .2s,transform .2s}
+.hero-slider-dot.active{background:var(--ink);transform:scale(1.3)}
+@media(max-width:768px){
+  .hero-slider-slide{aspect-ratio:4/3}
+  .hero-slider-nav{width:32px;height:32px;font-size:15px;top:calc(50% - 24px)}
+  .hero-slider-nav.prev{left:8px}
+  .hero-slider-nav.next{right:8px}
+}
+
 /* figures and media blocks */
 /* testimonials + award */
 .cs-award{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:36px;align-items:center;margin:36px 0 0;padding:28px;background:var(--bg2);border:1px solid var(--rule)}
@@ -747,6 +773,8 @@ body.nav-scrolled .cs-back{top:14px}
 }
 .cs-fig{margin:32px 0}
 .cs-fig-cap{padding:11px 0 0;font-size:11px;color:var(--ink4);letter-spacing:.04em;line-height:1.5}
+.cs-fig-link{color:var(--ink2);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px;transition:color .2s}
+.cs-fig-link:hover{color:var(--ink)}
 .cs-media{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;margin:36px 0}
 .cs-media.rev>:first-child{order:2}
 .cs-media .cs-p{max-width:none}
@@ -815,8 +843,9 @@ body.nav-scrolled .cs-back{top:14px}
 .cyc-strip-cap{margin-top:10px;font-size:11px;color:var(--ink4);letter-spacing:.03em;line-height:1.5}
 
 /* annual loop */
-.loop{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:28px 0 0}
-.loop-cell{background:var(--bg);padding:22px 20px}
+.loop{display:grid;grid-template-columns:repeat(12,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin:28px 0 0}
+.loop-cell{background:var(--bg);padding:22px 20px;grid-column:span 3}
+.loop-cell:nth-child(n+5){grid-column:span 4}
 .loop-n{font-family:var(--serif);font-size:28px;line-height:1;color:var(--ink4);margin-bottom:10px}
 .loop-t{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:5px}
 .loop-d{font-size:12px;color:var(--ink3);line-height:1.65}
@@ -874,6 +903,26 @@ body.nav-scrolled .cs-back{top:14px}
 .ic-chips{display:flex;flex-wrap:wrap;gap:4px}
 .ic-chips span{font-size:10px;padding:3px 8px;border:1px solid var(--rule);color:var(--ink2)}
 .ic-notes{display:flex;flex-direction:column;gap:18px}
+.zoomable{display:block;width:100%;padding:0;border:none;background:none;position:relative;cursor:none}
+.zoomable::after{
+  content:"";position:absolute;right:10px;bottom:10px;width:30px;height:30px;border-radius:50%;
+  background:var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23555' stroke-width='1.6' stroke-linecap='round'%3E%3Ccircle cx='10.5' cy='10.5' r='5.5'/%3E%3Cpath d='M15 15l5 5M10.5 8v5M8 10.5h5'/%3E%3C/svg%3E") center/16px no-repeat;
+  border:1px solid var(--rule);opacity:.9;transition:transform .2s;
+}
+.zoomable:hover::after{transform:scale(1.08)}
+.ic-fig{margin:0}
+.ic-fig .zoomable{border:1px solid var(--ink)}
+.ic-fig img{display:block;width:100%;height:auto}
+.cs-gal .zoomable{aspect-ratio:4/5;overflow:hidden;background:var(--bg2);border:1px solid var(--rule)}
+.cs-gal .zoomable img{width:100%;height:100%;object-fit:cover;display:block}
+.cs-gal.doc .zoomable{aspect-ratio:1190/1684;background:#fff}
+.cs-gal.doc .zoomable img{object-fit:contain}
+.lb{position:fixed;inset:0;z-index:1000;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;background:rgba(15,15,15,.88)}
+.lb.open{display:flex}
+.lb img{max-width:min(94vw,1500px);max-height:calc(100vh - 110px);object-fit:contain;display:block;background:#fff}
+.lb-cap{font-size:12px;letter-spacing:.04em;color:#ddd;text-align:center}
+.lb-close{position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;font-size:22px;line-height:1;cursor:none}
+.lb-close:hover{background:rgba(255,255,255,.12)}
 .ic-notes .cs-annot-text{font-size:12px}
 
 /* design-cycle explorer (hub) */
@@ -1006,6 +1055,7 @@ body.nav-scrolled .cs-back{top:14px}
   .cs-media .ph-phone{width:56%}
   .cs-gal{grid-template-columns:1fr 1fr}
   .trk-grid,.pc-grid,.loop{grid-template-columns:1fr}
+  .loop-cell,.loop-cell:nth-child(n+5){grid-column:auto}
   .tl-row{grid-template-columns:64px 1fr;gap:14px}
   .tl-yr{font-size:18px}
   .cyc{grid-template-columns:1fr 1fr}
@@ -2612,8 +2662,21 @@ body.nav-scrolled .cs-back{top:14px}
     </div>
   </header>
   <div class="cs-hero-visual">
-    <div class="ph-stage wide">
-      <div class="ph"><p class="ph-k">Photo · 21:9</p><p class="ph-t">Workshop wall — idea cards, dots and post-its</p></div>
+    <div class="hero-slider" data-hero-slider role="region" aria-roledescription="carousel" aria-label="Vision workshop photos">
+      <div class="hero-slider-viewport">
+        <div class="hero-slider-track">
+          <div class="hero-slider-slide"><img src="assets/img/iscep/workshop-1.jpg" alt="Workshop participants around a long table while two facilitators present idea cards on a whiteboard covered in sticky notes" width="2000" height="1125"></div>
+          <div class="hero-slider-slide"><img src="assets/img/iscep/workshop-2.jpg" alt="Full boardroom during the workshop, with printed idea boards on the blue wall and the opening slide on screen" width="2000" height="1178" loading="lazy"></div>
+          <div class="hero-slider-slide"><img src="assets/img/iscep/workshop-3.jpg" alt="Two facilitators presenting a prioritisation matrix on screen to workshop participants" width="1500" height="2000" loading="lazy" style="object-position:50% 52%"></div>
+        </div>
+      </div>
+      <button class="hero-slider-nav prev" type="button" aria-label="Previous photo">‹</button>
+      <button class="hero-slider-nav next" type="button" aria-label="Next photo">›</button>
+      <div class="hero-slider-dots">
+        <button class="hero-slider-dot active" type="button" aria-label="Go to photo 1"></button>
+        <button class="hero-slider-dot" type="button" aria-label="Go to photo 2"></button>
+        <button class="hero-slider-dot" type="button" aria-label="Go to photo 3"></button>
+      </div>
     </div>
   </div>
 
@@ -2622,10 +2685,8 @@ body.nav-scrolled .cs-back{top:14px}
       <ul class="cs-snav-list" id="snav-iscep-vision">
         <li class="cs-snav-item active" data-sec="iv-overview"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iv-overview">Overview</a></li>
         <li class="cs-snav-item" data-sec="iv-loop"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iv-loop">The annual loop</a></li>
-        <li class="cs-snav-item" data-sec="iv-evolution"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iv-evolution">How it evolved</a></li>
         <li class="cs-snav-item" data-sec="iv-day"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iv-day">The workshop day</a></li>
         <li class="cs-snav-item" data-sec="iv-handoff"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iv-handoff">Ideas to roadmap</a></li>
-        <li class="cs-snav-item" data-sec="iv-2027"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iv-2027">The 2027 edition</a></li>
         <li class="cs-snav-item" data-sec="iv-reflection"><span class="cs-snav-dot"></span><a class="cs-snav-link" href="#iv-reflection">Reflection</a></li>
       </ul>
     </aside>
@@ -2634,67 +2695,55 @@ body.nav-scrolled .cs-back{top:14px}
       <section class="cs-sec" id="iv-overview">
         <p class="cs-sec-eye">Overview</p>
         <h2 class="cs-h2">Where the roadmap <em>comes from.</em></h2>
-        <p class="cs-p">Every year, İşbank's digital banking team and Commencis run a vision cycle to decide where İşCep goes next. It starts with a focus — a set of questions the bank wants to explore in depth. Past focuses have included hyper-personalisation and İşCep for everyone; the constant thread is making the app as personal as possible and using AI to transform digital banking.</p>
-        <p class="cs-p">The output isn't a deck that gets filed. Ideas that come out of the cycle feed the next year's product roadmap, which makes it the front door of annual planning — and, once the ideas become projects, the front door of the product development cycle too.</p>
+        <p class="cs-p">Every year, İşbank's digital banking team and Commencis run a vision cycle to decide where İşCep goes next. It starts with a focus — a set of questions the bank wants to explore in depth. Past focuses have included hyper-personalisation, İşCep for everyone, Maximum card brand identity communication through İşCep and personal data orientedness for all; the constant thread is making the app as personal as possible and using capabilities of AI to transform digital banking.</p>
+        <p class="cs-p">We treat every vision process as a small-scale design project. From the very beginning, we take an end-to-end approach; building a deep understanding of the product’s current state, its users, and relevant industry and technology trends. These insights help us uncover opportunity areas and identify the key challenges to address. The output isn't a deck that gets filed. Ideas that come out of the cycle feed the next year's product roadmap, which makes it the front door of annual planning — and, once the ideas become projects, the front door of the product development cycle too.</p>
         <div class="cs-stats">
-          <div class="cs-stat"><div class="cs-stat-num">14</div><div class="cs-stat-label">Idea cards in the workshop for the 2023 roadmap</div></div>
-          <div class="cs-stat"><div class="cs-stat-num">12</div><div class="cs-stat-label">Ideas scored and handed off for the 2026 roadmap</div></div>
-          <div class="cs-stat"><div class="cs-stat-num">8</div><div class="cs-stat-label">Squads in the latest edition, for 2027</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">8</div><div class="cs-stat-label">Vision workshops conducted</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">27</div><div class="cs-stat-label">Ideas implemented</div></div>
+          <div class="cs-stat"><div class="cs-stat-num">2.5</div><div class="cs-stat-label">Months — average preparation time</div></div>
         </div>
       </section>
 
       <section class="cs-sec" id="iv-loop">
         <p class="cs-sec-eye">The annual loop</p>
-        <h2 class="cs-h2">Six steps, <em>every year.</em></h2>
-        <p class="cs-p">The squad structure and the timings change from one year to the next. The shape doesn't: research first, then a workshop, then a handoff that turns ideas into work.</p>
+        <h2 class="cs-h2">Seven steps, <em>every year.</em></h2>
+        <p class="cs-p">The research and/or design squad structure and the timings change from one year to the next. The shape doesn't: research and design first, then a workshop, then a handoff that turns ideas into work. Steps 1 and 2 can swap places — if the bank has no specific topic in mind, research comes first and helps surface the focus. I lead and facilitate the whole process and the vision days while maintaining hands-on contribution to squad's work.</p>
         <div class="loop">
-          <div class="loop-cell"><div class="loop-n">1</div><p class="loop-t">Focus</p><p class="loop-d">The bank and the design team agree on the year's focus areas and research questions.</p></div>
-          <div class="loop-cell"><div class="loop-n">2</div><p class="loop-t">Research</p><p class="loop-d">Squads work in parallel for weeks: trends and benchmarks, what customers say, ideation.</p></div>
-          <div class="loop-cell"><div class="loop-n">3</div><p class="loop-t">Vision day</p><p class="loop-d">Idea cards go on the wall; participants review, score and detail them together.</p></div>
-          <div class="loop-cell"><div class="loop-n">4</div><p class="loop-t">Prioritise</p><p class="loop-d">Ideas are scored on user impact, vision fit, metric impact and feasibility.</p></div>
-          <div class="loop-cell"><div class="loop-n">5</div><p class="loop-t">Hand off</p><p class="loop-d">Each prioritised idea is transferred to the teams who will own it, with a project plan.</p></div>
-          <div class="loop-cell"><div class="loop-n">6</div><p class="loop-t">Roadmap</p><p class="loop-d">Ideas enter next year's İşCep roadmap and the product development cycle picks them up.</p></div>
+          <div class="loop-cell"><div class="loop-n">1</div><p class="loop-t">Focus &amp; Plan</p><p class="loop-d">The bank and the design team agree on the year's focus areas and research questions. Once the focus is set, we also prepare the plan and run the weekly planning of the process.</p></div>
+          <div class="loop-cell"><div class="loop-n">2</div><p class="loop-t">Research</p><p class="loop-d">Looking inside and outside: a current-state analysis of the app through quantitative and qualitative data, alongside trend analysis, benchmarking and more.</p></div>
+          <div class="loop-cell"><div class="loop-n">3</div><p class="loop-t">Conceptualisation</p><p class="loop-d">Defining design directions in light of the findings, and anticipating how those directions speak to each other.</p></div>
+          <div class="loop-cell"><div class="loop-n">4</div><p class="loop-t">Detailed design</p><p class="loop-d">Telling the ideas through UX flows, storyboards and prototypes, and anticipating the impact each one will have.</p></div>
+          <div class="loop-cell"><div class="loop-n">5</div><p class="loop-t">Vision day</p><p class="loop-d">Presenting the outputs of the process and exposing participants to the ideas.</p></div>
+          <div class="loop-cell"><div class="loop-n">6</div><p class="loop-t">Prioritise</p><p class="loop-d">Participants evaluate the ideas and prioritise them together.</p></div>
+          <div class="loop-cell"><div class="loop-n">7</div><p class="loop-t">Roadmap &amp; projects</p><p class="loop-d">Prioritised ideas enter next year's İşCep roadmap and are turned into projects, handed to the teams who will own them.</p></div>
         </div>
         <div class="loop-foot">↺ What ships informs the next year's research</div>
-      </section>
-
-      <section class="cs-sec" id="iv-evolution">
-        <p class="cs-sec-eye">How it evolved</p>
-        <h2 class="cs-h2">From post-its on a wall to <em>working demos.</em></h2>
-        <p class="cs-p">Three editions show the shift: from a one-day event with research behind it, to structured prioritisation and transfer, to a seven-week sprint whose output is something you can tap.</p>
-        <div class="cs-table-wrap">
-          <table class="cs-table">
-            <thead>
-              <tr>
-                <th></th>
-                <th>For 2023<small>Held Aug 2022</small></th>
-                <th>For 2026<small>Held 2025</small></th>
-                <th>For 2027<small>Held 2026</small></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Setup</td><td>Three research tracks feeding one workshop day</td><td>A workshop plus a formal transfer to product teams</td><td>Eight squads: four by segment, three by idea, one for process and AI transformation</td></tr>
-              <tr><td>Research</td><td>Trends and benchmarks · what users say, qualitative and quantitative · ideation, over about six weeks</td><td>Research around the year's focus areas</td><td>Seven weeks with product-team meetings, benchmarks, data requests, user interviews and senior design reviews</td></tr>
-              <tr><td>Ideas</td><td>14 idea cards</td><td>12 ideas</td><td>One chosen concept per squad</td></tr>
-              <tr><td>Decision</td><td>Gallery walk, scoring, top four, round-robin detailing</td><td>Participants score four criteria</td><td>Six Thinking Hats session with each product team</td></tr>
-              <tr><td>Output</td><td>Detailed idea cards and a draft roadmap poster</td><td>Handoff deck: framing question, key considerations, project plan</td><td>Working demos at Vision Day on 1 September</td></tr>
-            </tbody>
-          </table>
-        </div>
+        <figure class="cs-fig">
+          <div class="cs-figma-wrap iv-figjam-wrap">
+            <div class="cs-figma-overlay" id="iv-figjam-overlay">
+              <div class="cs-figma-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M4 10h16M10 10v10"/></svg>
+              </div>
+              <p class="cs-figma-sub">Explore the board — the plan and early research behind a vision cycle</p>
+              <button class="cs-figma-btn" type="button" onclick="loadFigma('iv-figjam-frame','iv-figjam-overlay')">Open FigJam board</button>
+            </div>
+            <iframe id="iv-figjam-frame" src="" data-src="https://www.figma.com/embed?embed_host=share&amp;url=https%3A%2F%2Fwww.figma.com%2Fboard%2FQ4Wy8O0XJLxceKklf2SZ7x%2FCommencis_%25C4%25B0%25C5%259FCep-2027-Vizyon%3Fnode-id%3D2051-109" title="İşCep 2027 vision FigJam board" allowfullscreen></iframe>
+          </div>
+          <figcaption class="cs-fig-cap"><a class="cs-fig-link" href="https://www.figma.com/board/Q4Wy8O0XJLxceKklf2SZ7x/Commencis_%C4%B0%C5%9FCep-2027-Vizyon?node-id=2051-109" target="_blank" rel="noopener">Example from a vision Figjam</a>: outcomes of Focus &amp; Plan and partial Research phase</figcaption>
+        </figure>
       </section>
 
       <section class="cs-sec" id="iv-day">
         <p class="cs-sec-eye">The workshop day</p>
         <h2 class="cs-h2">Designed for <em>leaving with something.</em></h2>
-        <p class="cs-p">The workshop's manifesto is one line: be goal- and output-focused — we want to leave with something in our hands. That's why it's physical: printed cards, wall space, stickers, and a designer facilitating every group.</p>
+        <p class="cs-p">The workshop's manifesto is one line: be goal- and output-focused — we want to leave with something in our hands. That's why there's a physical aspect to it: printed cards, use of wall space, stickers, and a designer facilitating every group to explain how the user and business impact will be achieved through the idea presented.</p>
         <div class="ic-wrap">
-          <div class="ic">
-            <div class="ic-h"><p class="ic-k" style="margin-bottom:4px"><b>1</b>Idea name</p><span>[Area] — [Innovative idea]</span></div>
-            <div class="ph"><p class="ph-k">Concept visual</p><p class="ph-t">Flow sketch and competitor screens</p></div>
-            <div class="ic-sec"><p class="ic-k"><b>2</b>Value</p>Business value: volume, profitability, customers · User value: evidence from customer comments</div>
-            <div class="ic-sec"><p class="ic-k"><b>3</b>AARRR</p><div class="ic-chips"><span>Acquisition</span><span>Activation</span><span>Retention</span><span>Referral</span><span>Revenue</span></div></div>
-            <div class="ic-sec"><p class="ic-k"><b>4</b>Goals</p>Detailed success metrics</div>
-          </div>
+          <figure class="ic-fig">
+            <button class="zoomable" type="button" data-zoom="assets/img/iscep/workshop-day-idea-card.jpg" data-zoom-cap="An example from an idea card" aria-label="Enlarge: An example from an idea card">
+              <img src="assets/img/iscep/workshop-day-idea-card.jpg" alt="An example idea card, Station 5 Daily Summary: concept screens with evidence, target metric, benefit and considerations" width="2380" height="1684" loading="lazy">
+            </button>
+            <figcaption class="cs-fig-cap">An example from an idea card</figcaption>
+          </figure>
           <div class="ic-notes">
             <p class="cs-sec-eye" style="margin-bottom:0">Anatomy of an idea card</p>
             <div class="cs-annot-row"><div class="cs-annot-num">1</div><p class="cs-annot-text"><strong>Name and concept.</strong> One idea per card, with a sketch and competitor examples so it reads without a presenter.</p></div>
@@ -2704,14 +2753,23 @@ body.nav-scrolled .cs-back{top:14px}
           </div>
         </div>
         <div class="cs-gal">
-          <figure><div class="ph"><p class="ph-k">Photo</p><p class="ph-t">Gallery walk</p></div><figcaption>Idea cards on the wall</figcaption></figure>
-          <figure><div class="ph"><p class="ph-k">Photo</p><p class="ph-t">Dot voting</p></div><figcaption>Voting on concept screens</figcaption></figure>
-          <figure><div class="ph"><p class="ph-k">Photo</p><p class="ph-t">Roadmap poster</p></div><figcaption>Idea slices placed by timeframe</figcaption></figure>
+          <figure>
+            <button class="zoomable" type="button" data-zoom="assets/img/iscep/workshop-day-1.jpg" data-zoom-cap="Gallery walk in front of the idea cards" aria-label="Enlarge: Gallery walk in front of the idea cards"><img src="assets/img/iscep/workshop-day-1.jpg" alt="Participants gathered at the blue wall reading printed idea cards during the gallery walk" loading="lazy"></button>
+            <figcaption>Gallery walk in front of the idea cards</figcaption>
+          </figure>
+          <figure>
+            <button class="zoomable" type="button" data-zoom="assets/img/iscep/workshop-day-2.jpg" data-zoom-cap="Scoring ideas on prioritisation cards" aria-label="Enlarge: Scoring ideas on prioritisation cards"><img src="assets/img/iscep/workshop-day-2.jpg" alt="A facilitator points at handwritten scores on prioritisation cards under concept screens on the wall" loading="lazy"></button>
+            <figcaption>Scoring ideas on prioritisation cards</figcaption>
+          </figure>
+          <figure>
+            <button class="zoomable" type="button" data-zoom="assets/img/iscep/workshop-day-3.jpg" data-zoom-cap="Sorting ideas by readiness" aria-label="Enlarge: Sorting ideas by readiness"><img src="assets/img/iscep/workshop-day-3.jpg" alt="A large printed sheet sorted into ready to apply, needs further evaluation and not applicable, with idea tags and sticky notes" loading="lazy"></button>
+            <figcaption>Sorting ideas by readiness</figcaption>
+          </figure>
         </div>
         <div class="pt" id="iv-pt" style="margin-top:36px">
-          <div class="pt-item"><div class="pt-dot">01</div><div class="pt-body"><p class="pt-lbl">45 minutes</p><p class="pt-title">Review and prioritise</p><p class="pt-text">A gallery walk of the idea cards, individual scoring on six criteria from 1 to 10, and the top four chosen by the room.</p></div></div>
-          <div class="pt-item"><div class="pt-dot">02</div><div class="pt-body"><p class="pt-lbl">55 minutes</p><p class="pt-title">Evaluate and detail</p><p class="pt-text">Dot voting on concept screens and competitor examples, then each group takes one idea through a round-robin: the needs it meets, how people start using it, how it looks, and how to slice and release it.</p></div></div>
-          <div class="pt-item"><div class="pt-dot">03</div><div class="pt-body"><p class="pt-lbl">45 minutes</p><p class="pt-title">Build the roadmap</p><p class="pt-text">Groups place idea slices and user stories on a large printed roadmap and close with the main learnings.</p></div></div>
+          <div class="pt-item"><div class="pt-dot">01</div><div class="pt-body"><p class="pt-lbl">45–90 mins</p><p class="pt-title">Review and detail</p><p class="pt-text">A gallery walk of the ideas through idea cards and/or working prototypes. Participants take notes and/or think aloud while the responsible designer actively listens and facilitates a fruitful conversation.</p></div></div>
+          <div class="pt-item"><div class="pt-dot">02</div><div class="pt-body"><p class="pt-lbl">45–60 mins</p><p class="pt-title">Evaluate and prioritise</p><p class="pt-text">Based on the review, participants score each idea, considering business and user impact as well as its technical requirements. Once everyone has scored, the winning ideas, low-hanging fruits and ideas that need reconsidering become clear.</p></div></div>
+          <div class="pt-item"><div class="pt-dot">03</div><div class="pt-body"><p class="pt-lbl">45–60 mins</p><p class="pt-title">Build the roadmap</p><p class="pt-text">As the workshop facilitator, I pick the winning ideas and slice them into user stories on a large printed and/or digital roadmap, constantly checking with the participants. This surfaces prerequisites, linked ideas and how one outcome will impact another.</p></div></div>
         </div>
         <div class="cs-tags">
           <span class="cs-tag">User problem</span><span class="cs-tag">Reach</span><span class="cs-tag">Metric impact</span>
@@ -2722,59 +2780,38 @@ body.nav-scrolled .cs-back{top:14px}
       <section class="cs-sec" id="iv-handoff">
         <p class="cs-sec-eye">Ideas to roadmap</p>
         <h2 class="cs-h2">The workshop ends. The <em>work</em> starts.</h2>
-        <p class="cs-p">A separate transfer session — held in October or November with the bank's digital banking team, Commencis design and the AI team — turns each prioritised idea into a project. The workshop day isn't part of it; the handoff is its own event. Every idea gets the same three-part treatment:</p>
+        <p class="cs-p">Once the vision day is over, I prepare a report that summarises the outcomes for each idea. Afterwards, a separate transfer session — held in October or November with the bank's digital banking team and Commencis design and development teams — turns each prioritised idea into a project. The workshop day isn't part of it; the handoff is its own event. Every idea gets the same three-part treatment:</p>
         <div class="trk-grid">
           <div class="trk"><div class="trk-num">01</div><p class="trk-title">The idea slide</p><p class="trk-text">One "how might we…" sentence and, where there is one, a concept visual.</p></div>
           <div class="trk"><div class="trk-num">02</div><p class="trk-title">Key considerations</p><p class="trk-text">Grouped into experience and infrastructure grounding, concerns needing further evaluation, and user impact.</p></div>
           <div class="trk"><div class="trk-num">03</div><p class="trk-title">The project plan</p><p class="trk-text">Activities, purpose, owners and dates — with the date left open until the transfer meeting settles it.</p></div>
         </div>
-        <p class="cs-p">Every plan ends with the same line: an ongoing loop that hands the idea to the İşCep product development cycle.</p>
-        <p class="cs-p">Ideas are scored on four criteria — user impact, fit with the vision, impact on metrics, and feasibility — and the total decides the order they're taken up.</p>
-      </section>
-
-      <section class="cs-sec" id="iv-2027">
-        <p class="cs-sec-eye">The 2027 edition</p>
-        <h2 class="cs-h2">Eight squads, seven weeks, <em>one demo day.</em></h2>
-        <p class="cs-p">The latest edition changed the unit of work. Instead of ideas competing on a wall, eight squads worked in parallel — each with UX, UI, business analysis, development, sometimes a writer, and the bank's own experience-design and channel owners in the same team.</p>
-        <div class="cs-cards">
-          <div class="cs-card"><div class="cs-card-num">4</div><p class="cs-card-title">Segment squads</p><p class="cs-card-text">Own a customer segment, decide who to focus on, and supply research the other squads build on.</p></div>
-          <div class="cs-card"><div class="cs-card-num">3</div><p class="cs-card-title">Idea squads</p><p class="cs-card-text">Design how one concept works across the segments it touches.</p></div>
-          <div class="cs-card"><div class="cs-card-num">1</div><p class="cs-card-title">Process &amp; transformation</p><p class="cs-card-text">Rethinks how the bank itself decides and operates, and what an AI-native app looks like. Its output sets the ground for the others.</p></div>
-          <div class="cs-card"><div class="cs-card-num">∞</div><p class="cs-card-title">Room to flex</p><p class="cs-card-text">The plan guides; it doesn't prescribe. Squads choose their own methods and artefacts.</p></div>
-        </div>
-        <div class="tl">
-          <div class="tl-row"><div class="tl-yr">W1</div><div><p class="tl-title">Squads form, kickoff</p><p class="tl-text">Roles are set, the research brief is read together, and an open-questions list starts.</p></div></div>
-          <div class="tl-row"><div class="tl-yr">W2</div><div><p class="tl-title">First product-team meeting (M1)</p><p class="tl-text">Knowledge handover and research scope; data requests go out. Squads share across teams for the first time.</p></div></div>
-          <div class="tl-row"><div class="tl-yr">W3</div><div><p class="tl-title">Benchmarks, data, interviews</p><p class="tl-text">Research is synthesised, separating surprising findings from expected ones.</p></div></div>
-          <div class="tl-row"><div class="tl-yr">W4</div><div><p class="tl-title">Brainstorming day and M2</p><p class="tl-text">Findings and concept ideas go to the product team, evaluated with the six thinking hats.</p></div></div>
-          <div class="tl-row"><div class="tl-yr">W5</div><div><p class="tl-title">Concept development and senior review</p><p class="tl-text">A developer feasibility checkpoint decides what becomes code and what stays a prototype; senior designers review as a working session, not a presentation.</p></div></div>
-          <div class="tl-row"><div class="tl-yr">W6</div><div><p class="tl-title">Design review (M3) and developer handoff</p><p class="tl-text">Detailed design, KPIs and the demo scenario are agreed; developers start building.</p></div></div>
-          <div class="tl-row"><div class="tl-yr">W7</div><div><p class="tl-title">Build, QA and rehearsal</p><p class="tl-text">Design QA, edge cases and a final rehearsal where every squad presents to the others. Vision Day follows on 1 September.</p></div></div>
-        </div>
-        <p class="cs-p">In M2, each product team wore the six thinking hats over every concept and left with a Concept Evaluation Card: strengths, weaknesses, open questions and a direction.</p>
-        <div class="hats">
-          <span class="hat"><i style="background:#fff"></i>White · data</span>
-          <span class="hat"><i style="background:#d94b4b;border-color:#d94b4b"></i>Red · intuition</span>
-          <span class="hat"><i style="background:#141412;border-color:#141412"></i>Black · risk</span>
-          <span class="hat"><i style="background:#e8b931;border-color:#e8b931"></i>Yellow · opportunity</span>
-          <span class="hat"><i style="background:#4caf7a;border-color:#4caf7a"></i>Green · alternatives</span>
-          <span class="hat"><i style="background:#3b6fd4;border-color:#3b6fd4"></i>Blue · decision</span>
-        </div>
-        <div class="cs-gal">
-          <figure><div class="ph"><p class="ph-k">Image</p><p class="ph-t">Squad board</p></div><figcaption>A squad's working board</figcaption></figure>
-          <figure><div class="ph"><p class="ph-k">Image</p><p class="ph-t">Concept evaluation card</p></div><figcaption>Six-hats output</figcaption></figure>
-          <figure><div class="ph"><p class="ph-k">Image</p><p class="ph-t">Demo on device</p></div><figcaption>A working demo at Vision Day</figcaption></figure>
+        <div class="cs-gal doc">
+          <figure>
+            <button class="zoomable" type="button" data-zoom="assets/img/iscep/transfer-1.jpg" data-zoom-cap="Report: purpose and goal" aria-label="Enlarge: Report: purpose and goal"><img src="assets/img/iscep/transfer-1.jpg" alt="Report page titled Purpose and Goal, describing the outputs and analyses of the idea evaluation for the İşCep 2027 Vision Workshop" width="1190" height="1684" loading="lazy"></button>
+            <figcaption>Report: purpose and goal</figcaption>
+          </figure>
+          <figure>
+            <button class="zoomable" type="button" data-zoom="assets/img/iscep/transfer-2.jpg" data-zoom-cap="Idea prioritisation matrix" aria-label="Enlarge: Idea prioritisation matrix"><img src="assets/img/iscep/transfer-2.jpg" alt="Idea Prioritization Matrix plotting ideas by value and applicability into Quick Win, Prioritize, Reconsider and Grow in Roadmap quadrants" width="1190" height="1684" loading="lazy"></button>
+            <figcaption>Idea prioritisation matrix</figcaption>
+          </figure>
+          <figure>
+            <button class="zoomable" type="button" data-zoom="assets/img/iscep/transfer-3.jpg" data-zoom-cap="Idea page: scores and evaluation" aria-label="Enlarge: Idea page: scores and evaluation"><img src="assets/img/iscep/transfer-3.jpg" alt="Idea page with value, applicability and impact scores, an evaluation section and three concept screens" width="1190" height="1684" loading="lazy"></button>
+            <figcaption>Idea page: scores and evaluation</figcaption>
+          </figure>
         </div>
       </section>
 
       <section class="cs-sec" id="iv-reflection">
         <p class="cs-sec-eye">Reflection</p>
         <h2 class="cs-h2">What the cycle <em>keeps teaching.</em></h2>
-        <p class="cs-p">Vision work fails when it ends at a slide. The version I trust most is the one whose output is tested by the people who will have to build it — which is why the format moved from cards on a wall to squads with developers in them and something to click at the end.</p>
-        <p class="cs-p">The other lesson is about consistency: the same four scoring criteria, the same handoff shape, and the same line at the end of every plan let the bank compare an idea from this year to one from three years ago.</p>
-        <div class="cs-reflection">
-          <p class="cs-reflection-eye">Key takeaway</p>
-          <p class="cs-reflection-text">"A vision is only as good as the roadmap it changes. Design the handoff as carefully as the workshop."</p>
+        <p class="cs-p">Five things I take into every cycle.</p>
+        <div class="cs-annotated">
+          <div class="cs-annot-row"><div class="cs-annot-num">1</div><p class="cs-annot-text"><strong>Team facilitation.</strong> Everyone has to run the same plan with the same shared understanding. That makes staying in touch with the responsible designer in each squad, reviewing their outputs and giving guidance when needed the most important part of the job.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">2</div><p class="cs-annot-text"><strong>Keep stakeholders in the loop.</strong> Share interim outputs as decks or reports and, where possible, hold 45-minute sessions to walk through them with room for Q&amp;A. It's what makes stakeholders own the process.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">3</div><p class="cs-annot-text"><strong>Vision day: as tangible and as thorough as possible.</strong> Participants should relate directly to the ideas, so we use every artefact that helps. Business and user impact have to be made concrete and talked through, not just listed.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">4</div><p class="cs-annot-text"><strong>The designer as catalyst.</strong> After working this closely with the data and getting to know the product, I can also support the bank in turning ideas into projects and planning them. That speeds the whole process up.</p></div>
+          <div class="cs-annot-row"><div class="cs-annot-num">5</div><p class="cs-annot-text"><strong>In 2027, AI made us about 3× faster.</strong> We created skills and markdown files for the repeatable steps of the vision cycle. Every squad had its own project structure, all continuously fed by an umbrella project. The whole team experienced vibe coding, and in two months we vibe-coded all of İşCep's individual, commercial and investor flows.</p></div>
         </div>
         <div class="cs-next" onclick="openCS('iscep')">
           <div><p class="cs-next-lbl">Back to</p><p class="cs-next-title">İşCep — designing user and organization level interactions</p></div>
@@ -2913,6 +2950,11 @@ body.nav-scrolled .cs-back{top:14px}
   </div>
 </div><!-- /page-research -->
 
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Enlarged image" hidden>
+  <button class="lb-close" type="button" aria-label="Close">×</button>
+  <img id="lb-img" src="" alt="">
+  <p class="lb-cap" id="lb-cap"></p>
+</div>
 <script>
 // ── CURSOR ──────────────────────────────────────────────
 const cur=document.getElementById('cur'),curR=document.getElementById('curR');
@@ -3055,6 +3097,56 @@ function uhGoTo(i){
   uhSlideIdx=i;
   uhRender();
 }
+
+// ── LIGHTBOX ─────────────────────────────────────────────
+(function(){
+  const lb=document.getElementById('lb'),img=document.getElementById('lb-img'),cap=document.getElementById('lb-cap');
+  let last=null;
+  const open=b=>{
+    last=b;
+    img.src=b.dataset.zoom;
+    img.alt=b.querySelector('img')?.alt||'';
+    cap.textContent=b.dataset.zoomCap||'';
+    lb.hidden=false;lb.classList.add('open');
+    document.body.style.overflow='hidden';
+    lb.querySelector('.lb-close').focus();
+  };
+  const close=()=>{
+    lb.classList.remove('open');lb.hidden=true;img.src='';
+    document.body.style.overflow='';
+    if(last)last.focus();
+  };
+  document.addEventListener('click',e=>{
+    const b=e.target.closest('.zoomable');
+    if(b){open(b);return}
+    if(lb.classList.contains('open')&&(e.target===lb||e.target.closest('.lb-close')))close();
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lb.classList.contains('open'))close()});
+})();
+
+// ── HERO PHOTO SLIDERS ───────────────────────────────────
+document.querySelectorAll('[data-hero-slider]').forEach(el=>{
+  const track=el.querySelector('.hero-slider-track');
+  const dots=[...el.querySelectorAll('.hero-slider-dot')];
+  const n=dots.length;
+  let i=0;
+  const go=k=>{
+    i=(k+n)%n;
+    track.style.transform=`translateX(-${i*100}%)`;
+    dots.forEach((d,j)=>d.classList.toggle('active',j===i));
+  };
+  el.querySelector('.hero-slider-nav.prev').addEventListener('click',()=>go(i-1));
+  el.querySelector('.hero-slider-nav.next').addEventListener('click',()=>go(i+1));
+  dots.forEach((d,j)=>d.addEventListener('click',()=>go(j)));
+  let x0=null;
+  track.addEventListener('touchstart',e=>{x0=e.touches[0].clientX},{passive:true});
+  track.addEventListener('touchend',e=>{
+    if(x0===null)return;
+    const dx=e.changedTouches[0].clientX-x0;
+    x0=null;
+    if(Math.abs(dx)>40)go(i+(dx<0?1:-1));
+  },{passive:true});
+});
 
 // ── DEVICE SCREENS: hide the scroll hint after first use ──
 document.querySelectorAll('.dev-scroll').forEach(el=>{
